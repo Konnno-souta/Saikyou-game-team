@@ -313,7 +313,7 @@ MonoBehaviour:
   runSpeed: 50
   maxStamina: 100
   currentStamina: 100
-  staminaDecreasePerMove: 25
+  staminaDecreasePerUse: 25
   staminaRecoveryPerTick: 25
   recoveryInterval: 0.3
   barPosition: {x: 10, y: 10}
@@ -1108,13 +1108,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c4b30656f8b05b44a25848dc57ebea9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 3
-  runSpeed: 5
+  walkSpeed: 1
+  runSpeed: 10
   maxStamina: 100
   currentStamina: 100
-  staminaDecreasePerMove: 25
+  staminaDecreasePerUse: 25
   staminaRecoveryPerTick: 25
-  recoveryInterval: 3
+  recoveryInterval: 5
   barPosition: {x: 10, y: 10}
   barSize: {x: 200, y: 25}
 --- !u!114 &1726090484
@@ -1124,7 +1124,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1726090473}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4bfdb84b4da07b4aa80f7d288ea5f4e, type: 3}
   m_Name: 
