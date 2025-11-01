@@ -905,11 +905,13 @@ GameObject:
   - component: {fileID: 1726090475}
   - component: {fileID: 1726090474}
   - component: {fileID: 1726090481}
+  - component: {fileID: 1726090486}
+  - component: {fileID: 1726090485}
   - component: {fileID: 1726090484}
   - component: {fileID: 1726090483}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1084,7 +1086,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1726090473}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1ba0c63c5528fc4daae2ef147e81d54, type: 3}
   m_Name: 
@@ -1093,10 +1095,56 @@ MonoBehaviour:
   runSpeed: 10
   maxStamina: 100
   currentStamina: 100
-  staminaDecreasePerStep: 25
-  staminaRecoveryPerTick: 25
-  staminaConsumeInterval: 0.4
-  recoveryInterval: 3
+  staminaDecreasePerStep: 10
+  staminaRecoveryPerTick: 10
+  staminaConsumeInterval: 0.5
+  recoveryInterval: 1
+  staminaSlider: {fileID: 1942996959}
+  staminaFill: {fileID: 1417922072}
+  staminaText: {fileID: 216156560}
+--- !u!114 &1726090485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726090473}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db134b695d6e86846bb9cf711d482e7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSpeed: 5
+  runSpeed: 10
+  maxStamina: 100
+  currentStamina: 100
+  staminaDecreasePerSecond: 25
+  staminaRecoveryRate: 10
+  recoveryDelay: 3
+  staminaSlider: {fileID: 1942996959}
+  staminaFill: {fileID: 1417922072}
+  staminaText: {fileID: 216156560}
+--- !u!114 &1726090486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726090473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a70f7114d5c2f2d418d7bf2cbeec79a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSpeed: 5
+  runSpeed: 10
+  maxStamina: 100
+  currentStamina: 100
+  staminaDecreasePerSecond: 25
+  staminaRecoveryRate: 10
+  rapidRecoveryRate: 200
+  recoveryDelay: 0.5
+  exhaustedMotionTime: 3
   staminaSlider: {fileID: 1942996959}
   staminaFill: {fileID: 1417922072}
   staminaText: {fileID: 216156560}

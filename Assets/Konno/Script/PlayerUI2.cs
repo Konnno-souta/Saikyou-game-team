@@ -20,15 +20,15 @@ public class PlayerUI2 : MonoBehaviour  //  プレイヤーの移動とスタミナ管理を行う
     [Header("スタミナ設定")] 
     public float maxStamina = 100f; //  最大スタミナ
     public float currentStamina = 100f; //  現在のスタミナ
-    public float staminaDecreasePerStep = 25f;  //  スタミナ消費量
-    public float staminaRecoveryPerTick = 25f;  //  スタミナ回復量
-    public float staminaConsumeInterval = 0.4f; //  スタミナ消費間隔
-    public float recoveryInterval = 3.0f;   //  スタミナ回復間隔
+    public float staminaDecreasePerStep = 10f;  //  スタミナ消費量
+    public float staminaRecoveryPerTick = 10f;  //  スタミナ回復量
+    public float staminaConsumeInterval = 0.5f; //  スタミナ消費間隔
+    public float recoveryInterval = 5.0f;   //  スタミナ回復間隔
 
     [Header("UI参照")]
     public Slider staminaSlider;    //  スタミナバー
     public Image staminaFill;   //  スタミナバーの塗りつぶし部分
-    public TextMeshProUGUI staminaText; //  スタミナ数値表示
+    public TextMeshProUGUI staminaText; //  スタミナ数値表
 
     private bool canMove = true;    //  移動可能フラグ
     private bool isRunning = false; //  ダッシュ中フラグ
@@ -52,37 +52,65 @@ public class PlayerUI2 : MonoBehaviour  //  プレイヤーの移動とスタミナ管理を行う
         HandleStamina();    //  スタミナ処理
         UpdateUI();         //  UI更新
     }
-
-    void HandleMovement()   //  移動処理
+    void HandleMovement()
     {
-        if (!canMove) return;   //  移動不可なら処理終了
+        if (!canMove) return;
 
-        float moveX = Input.GetAxisRaw("Horizontal");   //  水平方向の入力取得  // -1:左, 0:停止, 1:右
-        bool shiftHeld = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);   //  シフトキーが押されているか
-        isRunning = shiftHeld && moveX != 0 && currentStamina > 0;  //  ダッシュ中フラグ設定//  シフトキーが押されていて、移動中で、スタミナがある場合のみダッシュ
+        float moveX = Input.GetAxisRaw("Horizontal");
+        bool shiftHeld = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+        isRunning = shiftHeld && moveX != 0 && currentStamina > 0;
 
-        float speed = isRunning ? runSpeed : walkSpeed; //  移動速度設定
-        transform.Translate(Vector3.right * moveX * speed * Time.deltaTime);    //  移動処理
+        float speed = isRunning ? runSpeed : walkSpeed;
+        transform.Translate(Vector3.right * moveX * speed * Time.deltaTime);
 
-        // スタミナ消費
-        if (isRunning)  //  ダッシュ中のみスタミナ消費
+        // ▼ スタミナ消費処理を「徐々に減少」に変更 ▼
+        if (isRunning)
         {
-            consumeTimer += Time.deltaTime; //  タイマー加算
-            if (consumeTimer >= staminaConsumeInterval) //  消費間隔到達時
-            {
-                consumeTimer = 0f;  //  タイマーリセット
-                currentStamina -= staminaDecreasePerStep;   //  スタミナ減少
-                if (currentStamina < 0) currentStamina = 0; //  0未満にしない
+            // 1秒間にstaminaDecreasePerStepずつ減少するように
+            currentStamina -= staminaDecreasePerStep * Time.deltaTime;
 
-                if (currentStamina <= 0)    //  スタミナが0以下になった場合
-                    canMove = false;    //  移動不可にする
+            if (currentStamina <= 0)
+            {
+                currentStamina = 0;
+                canMove = false;
             }
         }
         else
         {
-            consumeTimer = 0f;  //  ダッシュしていない場合はタイマーリセット
+            consumeTimer = 0f; // ダッシュしていないときはタイマーリセット
         }
     }
+
+    //void HandleMovement()   //  移動処理
+    //{
+    //    if (!canMove) return;   //  移動不可なら処理終了
+
+    //    float moveX = Input.GetAxisRaw("Horizontal");   //  水平方向の入力取得  // -1:左, 0:停止, 1:右
+    //    bool shiftHeld = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);   //  シフトキーが押されているか
+    //    isRunning = shiftHeld && moveX != 0 && currentStamina > 0;  //  ダッシュ中フラグ設定//  シフトキーが押されていて、移動中で、スタミナがある場合のみダッシュ
+
+    //    float speed = isRunning ? runSpeed : walkSpeed; //  移動速度設定
+    //    transform.Translate(Vector3.right * moveX * speed * Time.deltaTime);    //  移動処理
+
+    //    // スタミナ消費
+    //    if (isRunning)  //  ダッシュ中のみスタミナ消費
+    //    {
+    //        consumeTimer += Time.deltaTime; //  タイマー加算
+    //        if (consumeTimer >= staminaConsumeInterval) //  消費間隔到達時
+    //        {
+    //            consumeTimer = 0f;  //  タイマーリセット
+    //            currentStamina -= staminaDecreasePerStep;   //  スタミナ減少
+    //            if (currentStamina < 0) currentStamina = 0; //  0未満にしない
+
+    //            if (currentStamina <= 0)    //  スタミナが0以下になった場合
+    //                canMove = false;    //  移動不可にする
+    //        }
+    //    }
+    //    else
+    //    {
+    //        consumeTimer = 0f;  //  ダッシュしていない場合はタイマーリセット
+    //    }
+    //}
 
     void HandleStamina()    //  スタミナ回復処理
     {
