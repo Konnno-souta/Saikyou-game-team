@@ -9,9 +9,11 @@ public class SpawnManager : MonoBehaviour
     public GameObject sphere2;
     public GameObject sphere3;
     int num = 0;
+    private Vector3 sphPos;
 
     void Start()
     {
+        sphPos = transform.position;
         StartCoroutine(SpawnCoroutine());
 
         Debug.Log("SpawnManager Start called");
@@ -32,7 +34,7 @@ public class SpawnManager : MonoBehaviour
             float randamZ = Random.Range(-16f, 4f);
             GameObject[] spheres = { sphere1, sphere2, sphere3 };
             GameObject selectedSphere = spheres[Random.Range(0, spheres.Length)];
-            Instantiate(selectedSphere, new Vector3(-3, 8, randamZ), Quaternion.identity);
+            Instantiate(selectedSphere, new Vector3(sphPos.x+ Random.Range(-8f, 9f), sphPos.y, sphPos.z), Quaternion.identity);
             yield return new WaitForSeconds(1.0f);
         }
 
