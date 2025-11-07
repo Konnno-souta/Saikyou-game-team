@@ -1183,8 +1183,6 @@ GameObject:
   - component: {fileID: 1726090474}
   - component: {fileID: 1726090481}
   - component: {fileID: 1726090486}
-  - component: {fileID: 1726090485}
-  - component: {fileID: 1726090484}
   - component: {fileID: 1726090487}
   m_Layer: 0
   m_Name: Player
@@ -1295,7 +1293,7 @@ Transform:
   m_GameObject: {fileID: 1726090473}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -5.84}
+  m_LocalPosition: {x: 0, y: 1, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1334,51 +1332,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1726090484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1726090473}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1ba0c63c5528fc4daae2ef147e81d54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkSpeed: 5
-  runSpeed: 10
-  maxStamina: 100
-  currentStamina: 100
-  staminaDecreasePerStep: 10
-  staminaRecoveryPerTick: 10
-  staminaConsumeInterval: 0.5
-  recoveryInterval: 1
-  staminaSlider: {fileID: 1942996959}
-  staminaFill: {fileID: 1417922072}
-  staminaText: {fileID: 216156560}
---- !u!114 &1726090485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1726090473}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db134b695d6e86846bb9cf711d482e7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkSpeed: 5
-  runSpeed: 10
-  maxStamina: 100
-  currentStamina: 100
-  staminaDecreasePerSecond: 25
-  staminaRecoveryRate: 10
-  recoveryDelay: 3
-  staminaSlider: {fileID: 1942996959}
-  staminaFill: {fileID: 1417922072}
-  staminaText: {fileID: 216156560}
 --- !u!114 &1726090486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1388,19 +1341,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1726090473}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a70f7114d5c2f2d418d7bf2cbeec79a6, type: 3}
+  m_Script: {fileID: 11500000, guid: f963e16cd3b9574409ce9c1bcdb3cf79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 5
   runSpeed: 10
   maxStamina: 100
   currentStamina: 100
-  staminaDecreasePerStep: 25
-  staminaRecoveryPerTick: 25
-  staminaConsumeInterval: 0.4
-  recoveryInterval: 0.3
-  barPosition: {x: 10, y: 500}
-  barSize: {x: 500, y: 500}
+  staminaDecreasePerSecond: 25
+  staminaRecoveryRate: 10
+  rapidRecoveryRate: 200
+  recoveryDelay: 0.5
+  exhaustedMotionTime: 5
+  staminaSlider: {fileID: 1942996959}
+  staminaFill: {fileID: 1417922072}
+  staminaText: {fileID: 216156560}
 --- !u!114 &1726090487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1515,7 +1470,7 @@ Transform:
   m_GameObject: {fileID: 1742551232}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.16, y: 0, z: -6}
+  m_LocalPosition: {x: -5, y: 0, z: -7}
   m_LocalScale: {x: 20, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
