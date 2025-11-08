@@ -31,10 +31,10 @@ public class SpawnManager : MonoBehaviour
         Debug.Log("SpawnCoroutine started");
         while (true)
         {
-            float randamZ = Random.Range(-16f, 4f);
+            float randamX = Random.Range(-16f, 4f);
             GameObject[] spheres = { sphere1, sphere2, sphere3 };
             GameObject selectedSphere = spheres[Random.Range(0, spheres.Length)];
-            Instantiate(selectedSphere, new Vector3(sphPos.x+ Random.Range(-8f, 9f), sphPos.y, sphPos.z), Quaternion.identity);
+            Instantiate(selectedSphere, new Vector3(randamX, sphPos.y, sphPos.z), Quaternion.identity);
             yield return new WaitForSeconds(1.0f);
         }
 
