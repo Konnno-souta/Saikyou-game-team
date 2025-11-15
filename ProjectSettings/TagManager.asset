@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Ball
+  - RedBall
+  - GoldBall
+  - GreenBall
   layers:
   - Default
   - TransparentFX
