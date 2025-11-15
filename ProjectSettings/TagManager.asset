@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Ball
   - Ground
+  - RedBall
+  - GoldBall
+  - GreenBall
   layers:
   - Default
   - TransparentFX
