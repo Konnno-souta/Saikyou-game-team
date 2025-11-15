@@ -2,6 +2,7 @@ using UnityEngine;
  
 public class UvScrollTest : MonoBehaviour
 {
+    [SerializeField]ScrollDirectionSet sds;
     public float scrollSpeedX = 0.1f; // 横方向のスクロール速度
     public float scrollSpeedY = 0.0f; // 縦方向のスクロール速度
 
@@ -10,16 +11,23 @@ public class UvScrollTest : MonoBehaviour
 
     void Start()
     {
+      
         // このオブジェクトのRendererを取得
         rend = GetComponent<Renderer>();
     }
 
     void Update()
     {
-        // 時間に合わせてUVをずらす
-        offset.x += scrollSpeedX * Time.deltaTime;
-        offset.y += scrollSpeedY * Time.deltaTime;
-
+        if (sds.scL)
+        {
+            offset.x -= scrollSpeedX * Time.deltaTime;
+            offset.y += scrollSpeedY * Time.deltaTime;
+        }
+        if (sds.scR)
+        {
+            offset.x += scrollSpeedX * Time.deltaTime;
+            offset.y += scrollSpeedY * Time.deltaTime;
+        }
         // マテリアルのメインテクスチャのオフセットを設定
         rend.material.mainTextureOffset = offset;
     }
