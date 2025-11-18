@@ -2,9 +2,19 @@ using UnityEngine;
 
 public class Playerkari : MonoBehaviour
 {
-    [Header("ステップ移動")]
-    public float stepDistance = 1f;        // 左右への1マス移動距離
-    public float stepCooldown = 0.15f;     // 連続移動防止クールタイム
+    public float moveSpeed = 5f;
+    private float defaultSpeed;
+    private float speedUpTimer = 0f;
+
+    
+
+    public void AddSpeed(float amount)
+    {
+        moveSpeed += amount;
+    }
+    //[Header("ステップ移動")]
+   // public float stepDistance = 1f;        // 左右への1マス移動距離
+    //public float stepCooldown = 0.15f;     // 連続移動防止クールタイム
 
     [Header("ジャンプ設定")]
     public float jumpForce = 7f;           // ジャンプ力
@@ -23,46 +33,67 @@ public class Playerkari : MonoBehaviour
 
     void Update()
     {
-        HandleStepMove();
-        HandleJump();
-    }
+        float h = Input.GetAxis("Horizontal");
+        Vector3 move = new Vector3(h, 0);
+        transform.Translate(move * moveSpeed * Time.deltaTime);
 
-    // ===============================
-    //  左右のステップ移動（マス移動）
-    // ===============================
-    void HandleStepMove()
-    {
-        if (Time.time - lastStepTime < stepCooldown) return;
+        if (speedUpTimer > 0)
+        {
+            speedUpTimer -= Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            transform.position += Vector3.left * stepDistance;
-            lastStepTime = Time.time;
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            transform.position += Vector3.right * stepDistance;
-            lastStepTime = Time.time;
-        }
-    }
-
-    // ===============================
-    //            ジャンプ
-    // ===============================
-    void HandleJump()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (jumpCount < maxJumpCount)
+            if (speedUpTimer <= 0)
             {
-                Vector3 velocity = rb.linearVelocity;
-                velocity.y = 0;
-                rb.linearVelocity = velocity;             // 落下中の速さをリセットしてクセなくする
+                moveSpeed = defaultSpeed;
+            }
 
-                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                jumpCount++;
+        }
+        //{
+        //    HandleStepMove();
+        //    HandleJump();
+        //}
+
+        // ===============================
+        //  左右のステップ移動（マス移動）
+        // ===============================
+        //void HandleStepMove()
+        //{
+        //    if (Time.time - lastStepTime < stepCooldown) return;
+
+        //    if (Input.GetKeyDown(KeyCode.A))
+        //    {
+        //        transform.position += Vector3.left * stepDistance;
+        //        lastStepTime = Time.time;
+        //    }
+        //    if (Input.GetKeyDown(KeyCode.D))
+        //    {
+        //        transform.position += Vector3.right * stepDistance;
+        //        lastStepTime = Time.time;
+        //    }
+        //}
+
+        // ===============================
+        //            ジャンプ
+        // ===============================
+        void HandleJump()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (jumpCount < maxJumpCount)
+                {
+                    Vector3 velocity = rb.linearVelocity;
+                    velocity.y = 0;
+                    rb.linearVelocity = velocity;             // 落下中の速さをリセットしてクセなくする
+
+                    rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                    jumpCount++;
+                }
             }
         }
+    }
+    public void SpeedUp(float addSpeed, float duration)
+    {
+        moveSpeed = defaultSpeed + addSpeed;
+        speedUpTimer = duration;
     }
 
     // ===============================
