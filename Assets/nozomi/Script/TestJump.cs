@@ -1,8 +1,7 @@
 using UnityEngine;
 
-public class ScrollTest : MonoBehaviour
+public class TestJump : MonoBehaviour
 {
-    [SerializeField] FloorHitCheck fhc;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -10,12 +9,11 @@ public class ScrollTest : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void FixedUpdate()
+    void Update()
     {
-        if (fhc.fHCheck) 
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            transform.position += new Vector3(-0.1f, 0, 0);
+            transform.position += new Vector3(0,2,0);
         }
-
     }
 }
