@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerTapRun : MonoBehaviour
@@ -22,11 +23,14 @@ public class PlayerTapRun : MonoBehaviour
     private Rigidbody rb;
     private float currentSpeed;
     private float lastTapTime;
+    private float defaultSpeed;
+    private float speedUpTimer = 0f;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        targetX = transform.position.x;
+
+        defaultSpeed = baseSpeed;
         currentSpeed = baseSpeed;
     }
 
@@ -36,6 +40,20 @@ public class PlayerTapRun : MonoBehaviour
         HandleSideInput();
         HandleJumpInput();
         SmoothSideMove();
+        float h = Input.GetAxis("Horizontal");
+        Vector3 move = new Vector3(h, 0);
+        transform.Translate(move * baseSpeed * Time.deltaTime);
+
+        if (speedUpTimer > 0)
+        {
+            speedUpTimer -= Time.deltaTime;
+
+            if (speedUpTimer <= 0)
+            {
+                baseSpeed = defaultSpeed;
+            }
+
+        }
     }
 
     //========================================
@@ -47,15 +65,17 @@ public class PlayerTapRun : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.A))
         {
+            targetX = transform.position.x;
             targetX -= laneWidth;
             tapped = true;
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
+            targetX = transform.position.x;
             targetX += laneWidth;
             tapped = true;
         }
-
+        
         if (tapped)
         {
             float diff = Time.time - lastTapTime;
@@ -120,6 +140,12 @@ public class PlayerTapRun : MonoBehaviour
     // A / D 押された瞬間だけ処理（連打判定用）
     //========================================
     void HandleSideInput() { /* ここは使わないが残してある */ }
+
+    public void SpeedUp(float addSpeed, float duration)
+    {
+        baseSpeed = defaultSpeed + addSpeed;
+        speedUpTimer = duration;
+    }
 }
 
 
