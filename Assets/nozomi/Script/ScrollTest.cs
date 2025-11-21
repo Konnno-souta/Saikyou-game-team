@@ -3,6 +3,7 @@ using UnityEngine;
 public class ScrollTest : MonoBehaviour
 {
     [SerializeField] FloorHitCheck fhc;
+    [SerializeField] PlayerSideSlide playerSideSlide;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -12,7 +13,7 @@ public class ScrollTest : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        if (fhc.fHCheck) 
+        if (fhc.fHCheck && !playerSideSlide.Move) 
         {
             transform.position += new Vector3(-0.1f, 0, 0);
         }

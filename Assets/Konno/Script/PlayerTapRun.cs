@@ -23,8 +23,12 @@ public class PlayerTapRun : MonoBehaviour
     private Rigidbody rb;
     private float currentSpeed;
     private float lastTapTime;
+
+
     private float defaultSpeed;
     private float speedUpTimer = 0f;
+
+    public float baseSp { get { return baseSpeed; } }
 
     void Start()
     {
@@ -36,13 +40,13 @@ public class PlayerTapRun : MonoBehaviour
 
     void Update()
     {
-        HandleTapRun();
-        HandleSideInput();
-        HandleJumpInput();
-        SmoothSideMove();
-        float h = Input.GetAxis("Horizontal");
-        Vector3 move = new Vector3(h, 0);
-        transform.Translate(move * baseSpeed * Time.deltaTime);
+        //HandleTapRun();
+        //HandleSideInput();
+        //HandleJumpInput();
+        //SmoothSideMove();
+        //float h = Input.GetAxis("Horizontal");
+        //Vector3 move = new Vector3(h, 0);
+        //transform.Translate(move * baseSpeed * Time.deltaTime);
 
         if (speedUpTimer > 0)
         {
@@ -75,7 +79,7 @@ public class PlayerTapRun : MonoBehaviour
             targetX += laneWidth;
             tapped = true;
         }
-        
+
         if (tapped)
         {
             float diff = Time.time - lastTapTime;
