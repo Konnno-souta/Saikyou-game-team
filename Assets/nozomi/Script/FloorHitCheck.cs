@@ -5,7 +5,7 @@ public class FloorHitCheck : MonoBehaviour
     private bool floorHit;
     public bool fHCheck { get { return floorHit; } }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {

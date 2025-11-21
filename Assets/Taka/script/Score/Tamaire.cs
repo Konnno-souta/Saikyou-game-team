@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class BottomScoreTrigger : MonoBehaviour
+public class Tamaire : MonoBehaviour
 {
     public ScoreManager scoreManager;
-    public Playerkari player;
+    [SerializeField] PlayerTapRun playerTapRun;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Ball"))
@@ -27,7 +27,7 @@ public class BottomScoreTrigger : MonoBehaviour
                         score = 50;
                         break;
                     case Ball.BallType.SpeedUp:
-                        player.SpeedUp(3f, 5f); // ← 例: +3 のスピードを 5 秒間
+                        playerTapRun.SpeedUp(3f, 5f); // ← 例: +3 のスピードを 5 秒間
                         break;
                 }
 

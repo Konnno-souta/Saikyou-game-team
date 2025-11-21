@@ -182,7 +182,11 @@ PrefabInstance:
     - target: {fileID: 4178756001378171542, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1726090488}
+      objectReference: {fileID: 0}
+    - target: {fileID: 4178756001378171542, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
+      propertyPath: playerTapRun
+      value: 
+      objectReference: {fileID: 1726090490}
     - target: {fileID: 4178756001378171542, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
       propertyPath: scoreManager
       value: 
@@ -190,6 +194,10 @@ PrefabInstance:
     - target: {fileID: 7485322774853431943, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
       propertyPath: m_Name
       value: Basket
+      objectReference: {fileID: 0}
+    - target: {fileID: 7485322774853431943, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1305,6 +1313,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "\u30B9\u30C6\u30FC\u30B8\uFF08\u4EEE)"
       objectReference: {fileID: 0}
+    - target: {fileID: 7890453816195187300, guid: 91918d3aa9b252c4c98fc8f12a3e7e5c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8994496277950993158, guid: 91918d3aa9b252c4c98fc8f12a3e7e5c, type: 3}
       propertyPath: sphere1
       value: 
@@ -1464,7 +1476,7 @@ GameObject:
   - component: {fileID: 1726090486}
   - component: {fileID: 1726090487}
   - component: {fileID: 1726090489}
-  - component: {fileID: 1726090488}
+  - component: {fileID: 1726090490}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1650,21 +1662,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fhc: {fileID: 1726090489}
---- !u!114 &1726090488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1726090473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4862794f397a5764d80ced0636e9e8ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  jumpForce: 6
-  maxJumpCount: 2
 --- !u!114 &1726090489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1677,6 +1674,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8227430ca4205494ba7c46dbe9967b76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1726090490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726090473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64e0e9824ab3fd74293817fd9f1a1feb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseSpeed: 2
+  maxSpeed: 12
+  tapBoost: 2
+  speedDecay: 3
+  tapTimeLimit: 0.3
+  laneWidth: 1
+  sideMoveSmooth: 100
+  jumpForce: 5
+  maxJumps: 2
 --- !u!1 &1742551232
 GameObject:
   m_ObjectHideFlags: 0
