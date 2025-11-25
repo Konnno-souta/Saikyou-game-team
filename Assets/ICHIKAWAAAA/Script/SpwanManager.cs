@@ -36,7 +36,7 @@ public class SpawnManager : MonoBehaviour
             GameObject[] spheres = { sphere1, sphere2, sphere3, sphere4 };
             GameObject selectedSphere = spheres[Random.Range(0, spheres.Length)];
             Instantiate(selectedSphere, new Vector3(randamX, sphPos.y, sphPos.z), Quaternion.identity);
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(5.0f);
         }
 
        
