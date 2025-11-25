@@ -13,7 +13,7 @@ public class ScrollTest : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        if (fhc.fHCheck && !playerSideSlide.Move) 
+        if (fhc.fHCheck) //&& !playerSideSlide.Move
         {
             transform.position += new Vector3(-0.1f, 0, 0);
         }
