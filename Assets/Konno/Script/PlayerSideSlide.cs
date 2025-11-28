@@ -53,7 +53,9 @@ public class PlayerSideSlide : MonoBehaviour
 
         }
 
-        // --- ŠŠ‚ç‚©‚ÉˆÚ“® ---
+
+
+        // //---ŠŠ‚ç‚©‚ÉˆÚ“®---
         transform.position = Vector3.MoveTowards(
             transform.position,
             targetPos,

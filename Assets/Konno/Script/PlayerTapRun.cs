@@ -5,7 +5,7 @@ public class PlayerTapRun : MonoBehaviour
 {
     [Header("連打走行設定")]
     public float baseSpeed = 2f;
-    public float maxSpeed = 12f;
+    public float maxSpeed = 5f;
     public float tapBoost = 2f;
     public float speedDecay = 3f;
     public float tapTimeLimit = 0.3f;
@@ -20,6 +20,13 @@ public class PlayerTapRun : MonoBehaviour
     public int maxJumps = 2;
     private int jumpCount = 0;
 
+
+    [Header("キャラ画像設定")]
+    public Sprite spriteLeft;
+    public Sprite spriteRight;
+    private SpriteRenderer spriteRenderer;
+
+
     private Rigidbody rb;
     private float currentSpeed;
     private float lastTapTime;
@@ -33,6 +40,7 @@ public class PlayerTapRun : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        spriteRenderer = GetComponent<SpriteRenderer>(); // SpriteRenderer取得
 
         defaultSpeed = baseSpeed;
         currentSpeed = baseSpeed;
@@ -47,6 +55,17 @@ public class PlayerTapRun : MonoBehaviour
         //float h = Input.GetAxis("Horizontal");
         //Vector3 move = new Vector3(h, 0);
         //transform.Translate(move * baseSpeed * Time.deltaTime);
+
+        // 画像切り替え処理
+        if (Input.GetKey(KeyCode.A))
+        {
+            spriteRenderer.sprite = spriteLeft; // 左画像
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            spriteRenderer.sprite = spriteRight; // 右画像
+        }
+
 
         if (speedUpTimer > 0)
         {
