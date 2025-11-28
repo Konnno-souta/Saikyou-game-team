@@ -15,7 +15,7 @@ public class ScrollTest : MonoBehaviour
     {
         if (fhc.fHCheck) //&& !playerSideSlide.Move
         {
-            transform.position += new Vector3(-0.1f, 0, 0);
+            transform.position += new Vector3(-0.05f, 0, 0);
         }
 
     }
