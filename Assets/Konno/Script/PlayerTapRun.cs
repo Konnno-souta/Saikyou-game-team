@@ -48,7 +48,7 @@ public class PlayerTapRun : MonoBehaviour
 
     void Update()
     {
-        //HandleTapRun();
+        HandleTapRun();
         //HandleSideInput();
         //HandleJumpInput();
         //SmoothSideMove();
@@ -82,38 +82,38 @@ public class PlayerTapRun : MonoBehaviour
     ////========================================
     ////  A / D 連打で加速
     ////========================================
-    //void HandleTapRun()
-    //{
-    //    bool tapped = false;
+    void HandleTapRun()
+    {
+        bool tapped = false;
 
-    //    if (Input.GetKeyDown(KeyCode.A))
-    //    {
-    //        targetX = transform.position.x;
-    //        targetX -= laneWidth;
-    //        tapped = true;
-    //    }
-    //    else if (Input.GetKeyDown(KeyCode.D))
-    //    {
-    //        targetX = transform.position.x;
-    //        targetX += laneWidth;
-    //        tapped = true;
-    //    }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            targetX = transform.position.x;
+            targetX -= laneWidth;
+            tapped = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            targetX = transform.position.x;
+            targetX += laneWidth;
+            tapped = true;
+        }
 
-    //    if (tapped)
-    //    {
-    //        float diff = Time.time - lastTapTime;
-    //        if (diff <= tapTimeLimit)
-    //            currentSpeed += tapBoost;
-    //        else
-    //            currentSpeed += tapBoost * 0.5f;
+        if (tapped)
+        {
+            float diff = Time.time - lastTapTime;
+            if (diff <= tapTimeLimit)
+                currentSpeed += tapBoost;
+            else
+                currentSpeed += tapBoost * 0.5f;
 
-    //        lastTapTime = Time.time;
-    //    }
+            lastTapTime = Time.time;
+        }
 
-    //    // 自然減速
-    //    currentSpeed -= speedDecay * Time.deltaTime;
-    //    currentSpeed = Mathf.Clamp(currentSpeed, baseSpeed, maxSpeed);
-    //}
+        //    // 自然減速
+        currentSpeed -= speedDecay * Time.deltaTime;
+        currentSpeed = Mathf.Clamp(currentSpeed, baseSpeed, maxSpeed);
+    }
 
     ////========================================
     ////     滑らかな横移動

@@ -266,11 +266,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 397975223514979601, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
       propertyPath: m_LocalScale.x
-      value: 20
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 397975223514979601, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
       propertyPath: m_LocalScale.y
-      value: 15
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 397975223514979601, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
       propertyPath: m_LocalScale.z
@@ -282,11 +282,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 397975223514979601, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 18.9
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 397975223514979601, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 397975223514979601, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
       propertyPath: m_LocalRotation.w
@@ -383,7 +383,7 @@ Transform:
   m_GameObject: {fileID: 128334494}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 19, z: -2.5}
+  m_LocalPosition: {x: -0.5, y: 18.7, z: -2.5}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2466,12 +2466,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64e0e9824ab3fd74293817fd9f1a1feb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpeed: 2.5
-  maxSpeed: 0.6
-  tapBoost: 1
+  baseSpeed: 2
+  maxSpeed: 0.3
+  tapBoost: 0.5
   speedDecay: 3
   tapTimeLimit: 0.3
-  laneWidth: 0.5
+  laneWidth: 1
   sideMoveSmooth: 100
   jumpForce: 5
   maxJumps: 2
@@ -2505,7 +2505,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pTR: {fileID: 2143083865}
   fhc: {fileID: 2143083864}
-  moveSpeed: 25
+  moveSpeed: 20
   jumpForce: 5
   maxJumps: 2
 --- !u!65 &2143083868
