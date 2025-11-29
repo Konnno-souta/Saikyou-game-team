@@ -409,15 +409,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 397975223514979601, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
       propertyPath: m_LocalScale.x
-      value: 16.49
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 397975223514979601, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
       propertyPath: m_LocalScale.y
-      value: 9.87
+      value: 9.5
       objectReference: {fileID: 0}
     - target: {fileID: 397975223514979601, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
       propertyPath: m_LocalScale.z
-      value: 25.88
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 397975223514979601, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
       propertyPath: m_LocalPosition.x
@@ -546,7 +546,7 @@ PrefabInstance:
     - target: {fileID: 4178756001378171542, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
       propertyPath: playerTapRun
       value: 
-      objectReference: {fileID: 1726090490}
+      objectReference: {fileID: 2143083865}
     - target: {fileID: 4178756001378171542, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
       propertyPath: scoreManager
       value: 
@@ -2987,11 +2987,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5372892943001024377, guid: c1fa0103eec93d74992ba086985de6bd, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 500
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 5372892943001024377, guid: c1fa0103eec93d74992ba086985de6bd, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 500
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 5372892943001024377, guid: c1fa0103eec93d74992ba086985de6bd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3023,11 +3023,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5372892943001024377, guid: c1fa0103eec93d74992ba086985de6bd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -700
+      value: -1362
       objectReference: {fileID: 0}
     - target: {fileID: 5372892943001024377, guid: c1fa0103eec93d74992ba086985de6bd, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 268
+      value: 843
       objectReference: {fileID: 0}
     - target: {fileID: 5372892943001024377, guid: c1fa0103eec93d74992ba086985de6bd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3047,11 +3047,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6922624151243376184, guid: c1fa0103eec93d74992ba086985de6bd, type: 3}
       propertyPath: m_FontData.m_FontSize
-      value: 80
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6922624151243376184, guid: c1fa0103eec93d74992ba086985de6bd, type: 3}
       propertyPath: m_FontData.m_Alignment
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922624151243376184, guid: c1fa0103eec93d74992ba086985de6bd, type: 3}
+      propertyPath: m_FontData.m_FontStyle
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3386,8 +3390,6 @@ MonoBehaviour:
   tapTimeLimit: 0.3
   laneWidth: 1
   sideMoveSmooth: 100
-  jumpForce: 6
-  maxJumps: 2
   spriteLeft: {fileID: 0}
   spriteRight: {fileID: 0}
 --- !u!114 &1726090491
@@ -3969,15 +3971,15 @@ GameObject:
   m_Component:
   - component: {fileID: 2143083863}
   - component: {fileID: 2143083862}
-  - component: {fileID: 2143083867}
   - component: {fileID: 2143083866}
+  - component: {fileID: 2143083867}
   - component: {fileID: 2143083865}
   - component: {fileID: 2143083864}
   - component: {fileID: 2143083869}
   - component: {fileID: 2143083868}
   m_Layer: 0
   m_Name: Player C
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4085,8 +4087,6 @@ MonoBehaviour:
   tapTimeLimit: 0.3
   laneWidth: 1
   sideMoveSmooth: 100
-  jumpForce: 5
-  maxJumps: 2
   spriteLeft: {fileID: 21300000, guid: 5736000d5cc8b4b4fa120f2ef1e0c169, type: 3}
   spriteRight: {fileID: 21300000, guid: 40a0fecb1263b00438c9862484848f35, type: 3}
 --- !u!114 &2143083866
@@ -4117,7 +4117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pTR: {fileID: 2143083865}
   fhc: {fileID: 2143083864}
-  moveSpeed: 20
+  moveSpeed: 10
   jumpForce: 5
   maxJumps: 2
 --- !u!65 &2143083868

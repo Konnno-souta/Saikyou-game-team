@@ -15,10 +15,10 @@ public class PlayerTapRun : MonoBehaviour
     public float sideMoveSmooth = 10f;
     private float targetX;
 
-    [Header("ジャンプ設定")]
-    public float jumpForce = 5f;
-    public int maxJumps = 2;
-    private int jumpCount = 0;
+    //[Header("ジャンプ設定")]
+    //public float jumpForce = 5f;
+    //public int maxJumps = 2;
+    //private int jumpCount = 0;
 
 
     [Header("キャラ画像設定")]
@@ -115,6 +115,11 @@ public class PlayerTapRun : MonoBehaviour
         currentSpeed = Mathf.Clamp(currentSpeed, baseSpeed, maxSpeed);
     }
 
+    public void SpeedUp(float addSpeed, float duration)
+    {
+        baseSpeed = defaultSpeed + addSpeed;
+        speedUpTimer = duration;
+    }
     ////========================================
     ////     滑らかな横移動
     ////========================================
@@ -164,11 +169,7 @@ public class PlayerTapRun : MonoBehaviour
     ////========================================
     //void HandleSideInput() { /* ここは使わないが残してある */ }
 
-    public void SpeedUp(float addSpeed, float duration)
-    {
-        baseSpeed = defaultSpeed + addSpeed;
-        speedUpTimer = duration;
-    }
+
 }
 
 
