@@ -3,8 +3,8 @@ using UnityEngine;
 public class UvScrollTest : MonoBehaviour
 {
     [SerializeField]ScrollDirectionSet sds;
-    public float scrollSpeedX = 0.1f; // 横方向のスクロール速度
-    public float scrollSpeedY = 0.0f; // 縦方向のスクロール速度
+    private float scrollSpeedX = 2.5f; // 横方向のスクロール速度
+    private float scrollSpeedY = 0.0f; // 縦方向のスクロール速度
 
     private Renderer rend;
     private Vector2 offset = Vector2.zero;
@@ -16,7 +16,7 @@ public class UvScrollTest : MonoBehaviour
         rend = GetComponent<Renderer>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (sds.scL)
         {

@@ -16,17 +16,20 @@ public class ScrollDirectionSet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            Debug.Log("u");
-            scrollLeft = true;
-            scrollRight = false;
-        }
+        scrollLeft = true;
+        scrollRight = false;
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            scrollLeft = false;
-            scrollRight = true;
-        }
+
+        //if (Input.GetKeyDown(KeyCode.LeftArrow))
+        //{
+        //    scrollLeft = true;
+        //    scrollRight = false;
+        //}
+
+        //if (Input.GetKeyDown(KeyCode.RightArrow))
+        //{
+        //    scrollLeft = false;
+        //    scrollRight = true;
+        //}
     }
 }
