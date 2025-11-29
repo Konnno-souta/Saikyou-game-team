@@ -5,16 +5,18 @@ using System.Collections;
 
 public class Countdown60 : MonoBehaviour
 {
-    public Image tensImage;        // 十の位用
-    public Image onesImage;        // 一の位用
-    public Sprite[] numberSprites; // 0〜9のスプライトを登録（配列サイズ10）
+    public Image tensImage;
+    public Image onesImage;
+    public Sprite[] numberSprites;
 
-    private int timeLeft = 15;     // カウントダウンの秒数
-    private bool isBlinking = false; // 点滅中フラグ
+    private int timeLeft = 60;
+    private bool isBlinking = false;
+
+    private Coroutine countdownCoroutine;
 
     void Start()
     {
-        StartCoroutine(Countdown());
+        countdownCoroutine = StartCoroutine(Countdown());
     }
 
     IEnumerator Countdown()
@@ -33,7 +35,6 @@ public class Countdown60 : MonoBehaviour
             timeLeft--;
         }
 
-        // カウント終了時
         tensImage.enabled = false;
         onesImage.enabled = false;
         Debug.Log("Time up!");
@@ -51,19 +52,34 @@ public class Countdown60 : MonoBehaviour
     {
         isBlinking = true;
 
-        while (timeLeft > 0) // 残り0になるまで点滅
+        while (timeLeft > 0)
         {
-            // 画像を非表示に
             tensImage.enabled = false;
             onesImage.enabled = false;
             yield return new WaitForSeconds(0.3f);
 
-            // 再表示
             tensImage.enabled = true;
             onesImage.enabled = true;
             yield return new WaitForSeconds(0.3f);
         }
 
         isBlinking = false;
+    }
+
+    
+    public void AddTime(int addSeconds)
+    {
+        timeLeft += addSeconds;
+
+        // 追加後に 10秒以上になったら点滅を止める
+        if (timeLeft > 10 && isBlinking)
+        {
+            isBlinking = false;
+            tensImage.enabled = true;
+            onesImage.enabled = true;
+        }
+
+        // 表示を即更新
+        UpdateNumberImages(timeLeft);
     }
 }
