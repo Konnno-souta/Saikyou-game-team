@@ -3,7 +3,8 @@ using UnityEngine;
 public class Tamaire : MonoBehaviour
 {
     public ScoreManager scoreManager;
-    [SerializeField] PlayerTapRun playerTapRun;
+    [SerializeField] Playertap playertap;
+    [SerializeField] Countdown60 countdown60;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Ball"))
@@ -27,8 +28,15 @@ public class Tamaire : MonoBehaviour
                         score = 50;
                         break;
                     case Ball.BallType.SpeedUp:
-                        playerTapRun.SpeedUp(3f, 5f); // ← 例: +3 のスピードを 5 秒間
+                        playertap.SpeedUp(3f, 5f); // ← 例: +3 のスピードを 5 秒間
                         break;
+                    case Ball.BallType.Time:       // ← 追加！！
+                        countdown60.AddTime(5);      // 5 秒追加
+                        break;
+                    //case Ball.BallType.Bomb:         // ← 追加！
+                    //    playertap.Bomb(2f);        // 2秒間動けない
+                    //    break;
+
                 }
 
                     // スコアを追加
