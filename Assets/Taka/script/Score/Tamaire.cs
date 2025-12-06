@@ -33,9 +33,7 @@ public class Tamaire : MonoBehaviour
                     case Ball.BallType.Time:       // Å© í«â¡ÅIÅI
                         countdown60.AddTime(5);      // 5 ïbí«â¡
                         break;
-                    //case Ball.BallType.Bomb:         // Å© í«â¡ÅI
-                    //    playertap.Bomb(2f);        // 2ïbä‘ìÆÇØÇ»Ç¢
-                    //    break;
+                    
 
                 }
 
