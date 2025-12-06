@@ -8,28 +8,35 @@ public class ScrollDirectionSet : MonoBehaviour
     public bool scL { get { return scrollLeft; } }
     public bool scR { get { return scrollRight; } }
 
+    float scroolTimer = 0;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        scrollLeft = true;
+        scrollRight = false;
+
+        scroolTimer = 15f;//n<=x<z
     }
 
     // Update is called once per frame
     void Update()
     {
-        scrollLeft = true;
-        scrollRight = false;
+        scroolTimer-=Time.deltaTime;
+  
+        if (scrollLeft && scroolTimer <= 0)
+        {
+            scrollLeft = false;
+            scrollRight = true;
+            scroolTimer = 15f;
+        }
 
-
-        //if (Input.GetKeyDown(KeyCode.LeftArrow))
-        //{
-        //    scrollLeft = true;
-        //    scrollRight = false;
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.RightArrow))
-        //{
-        //    scrollLeft = false;
-        //    scrollRight = true;
-        //}
+        if (scrollRight && scroolTimer <= 0)
+        {
+            scrollLeft = true;
+            scrollRight = false;
+            scroolTimer = 15f;
+        }
+ 
     }
 }
