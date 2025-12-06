@@ -9,6 +9,8 @@ public class UvScrollTest : MonoBehaviour
     private Renderer rend;
     private Vector2 offset = Vector2.zero;
 
+    [SerializeField] Material[]mat = new Material[2];
+
     void Start()
     {
       
@@ -22,11 +24,13 @@ public class UvScrollTest : MonoBehaviour
         {
             offset.x -= scrollSpeedX * Time.deltaTime;
             offset.y += scrollSpeedY * Time.deltaTime;
+            this.GetComponent<MeshRenderer>().material=mat[0];
         }
         if (sds.scR)
         {
             offset.x += scrollSpeedX * Time.deltaTime;
             offset.y += scrollSpeedY * Time.deltaTime;
+            this.GetComponent<MeshRenderer>().material = mat[1];
         }
         // マテリアルのメインテクスチャのオフセットを設定
         rend.material.mainTextureOffset = offset;

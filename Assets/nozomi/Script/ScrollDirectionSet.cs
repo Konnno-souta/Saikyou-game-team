@@ -8,7 +8,7 @@ public class ScrollDirectionSet : MonoBehaviour
     public bool scL { get { return scrollLeft; } }
     public bool scR { get { return scrollRight; } }
 
-    float scroolTimer = 0;
+    float scroolTimer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
