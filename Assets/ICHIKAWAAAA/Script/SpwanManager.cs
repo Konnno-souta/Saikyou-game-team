@@ -5,10 +5,19 @@ using System.Collections.Generic;
 
 public class SpawnManager : MonoBehaviour
 {
-    public GameObject sphere1;
-    public GameObject sphere2;
-    public GameObject sphere3;
-    public GameObject sphere4;
+    public GameObject RedBall;
+    public GameObject BlueBall;
+    public GameObject GreenBall;
+    public GameObject Bom;
+    public GameObject SpeedUpBall;
+    public GameObject SpeedDownBall; 
+    public GameObject JumpUpBall;
+    public GameObject JumpDownBall;
+    public GameObject InvincibleBall;
+    public GameObject BigBasketBall;
+    public GameObject MinusScoreBall;
+    public GameObject MinusTimeBall;
+
     int num = 0;
     private Vector3 sphPos;
 
@@ -33,7 +42,7 @@ public class SpawnManager : MonoBehaviour
         while (true)
         {
             float randamX = Random.Range(-16f, 4f);
-            GameObject[] spheres = { sphere1, sphere2, sphere3, sphere4 };
+            GameObject[] spheres = { RedBall, BlueBall, GreenBall, Bom, SpeedUpBall, SpeedDownBall, JumpUpBall, JumpDownBall, InvincibleBall, BigBasketBall, MinusScoreBall, MinusTimeBall };
             GameObject selectedSphere = spheres[Random.Range(0, spheres.Length)];
             Instantiate(selectedSphere, new Vector3(randamX, sphPos.y, sphPos.z), Quaternion.identity);
             yield return new WaitForSeconds(5.0f);
