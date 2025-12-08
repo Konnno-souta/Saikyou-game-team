@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PlayerTapRun : MonoBehaviour
+public class PlayerMovement: MonoBehaviour
 {
     [Header("連打走行設定")]
     public float baseSpeed = 2f;
@@ -14,12 +14,6 @@ public class PlayerTapRun : MonoBehaviour
     public float laneWidth = 1f;
     public float sideMoveSmooth = 10f;
     private float targetX;
-
-    //[Header("ジャンプ設定")]
-    //public float jumpForce = 5f;
-    //public int maxJumps = 2;
-    //private int jumpCount = 0;
-
 
     [Header("キャラ画像設定")]
     public Sprite spriteLeft;
@@ -56,15 +50,15 @@ public class PlayerTapRun : MonoBehaviour
         //Vector3 move = new Vector3(h, 0);
         //transform.Translate(move * baseSpeed * Time.deltaTime);
 
-        // 画像切り替え処理
-        if (Input.GetKey(KeyCode.A))
-        {
-            spriteRenderer.sprite = spriteLeft; // 左画像
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            spriteRenderer.sprite = spriteRight; // 右画像
-        }
+        //// 画像切り替え処理
+        //if (Input.GetKey(KeyCode.A))
+        //{
+        //    spriteRenderer.sprite = spriteLeft; // 左画像
+        //}
+        //else if (Input.GetKey(KeyCode.D))
+        //{
+        //    spriteRenderer.sprite = spriteRight; // 右画像
+        //}
 
 
         if (speedUpTimer > 0)
