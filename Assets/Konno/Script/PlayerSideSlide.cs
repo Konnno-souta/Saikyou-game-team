@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerSideSlide : MonoBehaviour
 {
-    [SerializeField] PlayerTapRun pTR;
+    [SerializeField] PlayerMovement pTR;
     [SerializeField] FloorHitCheck fhc;
 
     private float stepDistance;   // 1回のサイドステップ量
@@ -20,8 +20,12 @@ public class PlayerSideSlide : MonoBehaviour
     bool move;
     public bool Move{ get { return move; } }
 
+    [Header("キャラ画像設定")]
+    public Sprite spriteLeft;
+    public Sprite spriteRight;
+    private SpriteRenderer spriteRenderer;
 
-
+    //public float baseSp { get { return baseSpeed; } }
 
     void Start()
     {
@@ -62,6 +66,26 @@ public class PlayerSideSlide : MonoBehaviour
             moveSpeed * Time.deltaTime
         );
         Check();
+
+        // 画像切り替え処理
+        if (Input.GetKey(KeyCode.A))
+        {
+            spriteRenderer.sprite = spriteLeft; // 左画像
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            spriteRenderer.sprite = spriteRight; // 右画像
+        }
+
+        //if (speedUpTimer > 0)
+        //{
+        //    speedUpTimer -= Time.deltaTime;
+
+        //    if (speedUpTimer <= 0)
+        //    {
+        //        baseSpeed = defaultSpeed;
+        //    }
+        //}
     }
 
     void Check()

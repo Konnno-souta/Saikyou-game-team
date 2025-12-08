@@ -569,7 +569,7 @@ MonoBehaviour:
   maxSpeed: 5
   tapBoost: 2
   speedDecay: 5
-  tapTimeLimit: 0.3
+  tapTimeLimit: 0.4
   laneWidth: 1
   sideMoveSmooth: 10
   spriteLeft: {fileID: 21300000, guid: 5736000d5cc8b4b4fa120f2ef1e0c169, type: 3}
