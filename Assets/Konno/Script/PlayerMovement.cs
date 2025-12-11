@@ -50,15 +50,15 @@ public class PlayerMovement: MonoBehaviour
         //Vector3 move = new Vector3(h, 0);
         //transform.Translate(move * baseSpeed * Time.deltaTime);
 
-        //// 画像切り替え処理
-        //if (Input.GetKey(KeyCode.A))
-        //{
-        //    spriteRenderer.sprite = spriteLeft; // 左画像
-        //}
-        //else if (Input.GetKey(KeyCode.D))
-        //{
-        //    spriteRenderer.sprite = spriteRight; // 右画像
-        //}
+        // 画像切り替え処理
+        if (Input.GetKey(KeyCode.A))
+        {
+            spriteRenderer.sprite = spriteLeft; // 左画像
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            spriteRenderer.sprite = spriteRight; // 右画像
+        }
 
 
         if (speedUpTimer > 0)

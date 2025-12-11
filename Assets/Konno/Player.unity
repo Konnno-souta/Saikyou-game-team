@@ -459,6 +459,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1127896448862422694, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416341104382755705, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2098699534706036402, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2098699534706036402, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -536,6 +548,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3311608217700508149, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3311608217700508149, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -554,6 +570,10 @@ PrefabInstance:
     - target: {fileID: 7485322774853431943, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
       propertyPath: m_Name
       value: Basket
+      objectReference: {fileID: 0}
+    - target: {fileID: 7485322774853431943, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7485322774853431943, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
       propertyPath: m_IsActive
@@ -578,7 +598,7 @@ GameObject:
   m_Component:
   - component: {fileID: 128334495}
   - component: {fileID: 128334496}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2669,7 +2689,7 @@ PrefabInstance:
       objectReference: {fileID: 376629132}
     - target: {fileID: 4926487188256275635, guid: 91918d3aa9b252c4c98fc8f12a3e7e5c, type: 3}
       propertyPath: m_VersionIndex
-      value: 5808
+      value: 5814
       objectReference: {fileID: 0}
     - target: {fileID: 6203219577008889488, guid: 91918d3aa9b252c4c98fc8f12a3e7e5c, type: 3}
       propertyPath: m_IsActive
@@ -3409,8 +3429,7 @@ MonoBehaviour:
   moveSpeed: 25
   jumpForce: 5
   maxJumps: 2
-  spriteLeft: {fileID: 0}
-  spriteRight: {fileID: 0}
+  airControl: 0.4
 --- !u!1 &1742551232
 GameObject:
   m_ObjectHideFlags: 0
@@ -3973,13 +3992,14 @@ GameObject:
   m_Component:
   - component: {fileID: 2143083863}
   - component: {fileID: 2143083862}
+  - component: {fileID: 2143083870}
   - component: {fileID: 2143083866}
   - component: {fileID: 2143083867}
   - component: {fileID: 2143083865}
   - component: {fileID: 2143083864}
   - component: {fileID: 2143083869}
   - component: {fileID: 2143083868}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player C
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -4077,7 +4097,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2143083861}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 64e0e9824ab3fd74293817fd9f1a1feb, type: 3}
   m_Name: 
@@ -4119,11 +4139,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pTR: {fileID: 2143083865}
   fhc: {fileID: 2143083864}
-  moveSpeed: 10
-  jumpForce: 5
+  moveSpeed: 5
+  jumpForce: 7
   maxJumps: 2
-  spriteLeft: {fileID: 21300000, guid: 5736000d5cc8b4b4fa120f2ef1e0c169, type: 3}
-  spriteRight: {fileID: 21300000, guid: 40a0fecb1263b00438c9862484848f35, type: 3}
+  airControl: 0.3
 --- !u!65 &2143083868
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4172,6 +4191,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
+--- !u!114 &2143083870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2143083861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32646f533807ca442861ad3d57a8faf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseSpeed: 1.5
+  maxSpeed: 3
+  tapBoost: 1
+  speedDecay: 3
+  tapTimeLimit: 0.3
+  laneWidth: 1
+  sideMoveSmooth: 10
+  spriteLeft: {fileID: 21300000, guid: 5736000d5cc8b4b4fa120f2ef1e0c169, type: 3}
+  spriteRight: {fileID: 21300000, guid: 40a0fecb1263b00438c9862484848f35, type: 3}
+  jumpForce: 7
+  maxJumps: 2
+  airControl: 0.4
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
