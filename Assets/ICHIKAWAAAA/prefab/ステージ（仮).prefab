@@ -154,10 +154,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1972c94279672b9459eb246e4d620f9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sphere1: {fileID: 7400714608267190863, guid: 1e415552f4c47cb42a2f4d6c16bac6dc, type: 3}
-  sphere2: {fileID: 6042448594525399487, guid: 75caa8098a9d8b742af3e98589a16114, type: 3}
-  sphere3: {fileID: 6042448594525399487, guid: 5ee5a784468df594c915f55ab63842b5, type: 3}
-  sphere4: {fileID: 0}
+  RedBall: {fileID: 0}
+  BlueBall: {fileID: 0}
+  GreenBall: {fileID: 0}
+  Bom: {fileID: 0}
+  SpeedUpBall: {fileID: 0}
+  SpeedDownBall: {fileID: 0}
+  JumpUpBall: {fileID: 0}
+  JumpDownBall: {fileID: 0}
+  InvincibleBall: {fileID: 0}
+  BigBasketBall: {fileID: 0}
+  MinusScoreBall: {fileID: 0}
+  MinusTimeBall: {fileID: 0}
 --- !u!1 &3249276242416403342
 GameObject:
   m_ObjectHideFlags: 0

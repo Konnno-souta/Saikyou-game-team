@@ -48,8 +48,8 @@ public class PlayerKari1 : MonoBehaviour
     void Update()
     {
         HandleTapRun();
-        HandleSideMove();
-        HandleJumpInput();
+        //HandleSideMove();
+        //HandleJumpInput();
         SmoothSideMove();
         UpdateSprite();
     }
@@ -90,41 +90,41 @@ public class PlayerKari1 : MonoBehaviour
     //========================================
     // 横移動（ボタンで位置だけ更新）
     //========================================
-    void HandleSideMove()
-    {
-        // 空中は移動弱く
-        float smooth = isGrounded ? sideMoveSmooth : sideMoveSmooth * airControl;
+    //void HandleSideMove()
+    //{
+    //    // 空中は移動弱く
+    //    float smooth = isGrounded ? sideMoveSmooth : sideMoveSmooth * airControl;
 
-        float newX = Mathf.Lerp(transform.position.x, targetX, smooth * Time.deltaTime);
+    //    float newX = Mathf.Lerp(transform.position.x, targetX, smooth * Time.deltaTime);
 
-        transform.position = new Vector3(newX, transform.position.y, transform.position.z);
-    }
+    //    transform.position = new Vector3(newX, transform.position.y, transform.position.z);
+    //}
 
     //========================================
     // ジャンプ入力
     //========================================
-    void HandleJumpInput()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (jumpCount < maxJumps)
-            {
-                Jump();
-                jumpCount++;
-            }
-        }
-    }
+    //void HandleJumpInput()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Space))
+    //    {
+    //        if (jumpCount < maxJumps)
+    //        {
+    //            Jump();
+    //            jumpCount++;
+    //        }
+    //    }
+    //}
 
-    void Jump()
-    {
-        Vector3 vel = rb.linearVelocity;
-        vel.y = 0;    // ジャンプ2段目の挙動を安定
-        rb.linearVelocity = vel;
+    //void Jump()
+    //{
+    //    Vector3 vel = rb.linearVelocity;
+    //    vel.y = 0;    // ジャンプ2段目の挙動を安定
+    //    rb.linearVelocity = vel;
 
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    //    rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 
-        isGrounded = false;
-    }
+    //    isGrounded = false;
+    //}
 
     //========================================
     // 着地判定
