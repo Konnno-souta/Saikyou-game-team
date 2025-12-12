@@ -17,20 +17,13 @@ public class PlayerSideSlide : MonoBehaviour
     public float jumpForce = 5f;
     public int maxJumps = 2;
     private int jumpCount = 0;
-    public float airControl = 0.4f;   // 空中横移動の効き具合
+    //public float airControl = 0.4f;   // 空中横移動の効き具合
 
     private Rigidbody rb;
     bool move;
     private float sideMoveSmooth;
-    private float targetX;
-    private bool isGrounded;
 
     public bool Move{ get { return move; } }
-
-    //[Header("キャラ画像設定")]
-    //public Sprite spriteLeft;
-    //public Sprite spriteRight;
-    //private SpriteRenderer spriteRenderer;
 
     //public float baseSp { get { return baseSpeed; } }
 
@@ -41,13 +34,12 @@ public class PlayerSideSlide : MonoBehaviour
         msFirst = moveSpeed;
 
         rb = GetComponent<Rigidbody>();
-        targetX = transform.position.x;
     }
 
     void Update()
     {
         HandleJumpInput();
-        HandleSideMove();
+        //HandleSideMove();
         stepDistance = pTR.baseSp;
         if(!move)
             targetPos = transform.position;
@@ -75,16 +67,6 @@ public class PlayerSideSlide : MonoBehaviour
         );
         Check();
 
-        //// 画像切り替え処理
-        //if (Input.GetKey(KeyCode.A))
-        //{
-        //    spriteRenderer.sprite = spriteLeft; // 左画像
-        //}
-        //else if (Input.GetKey(KeyCode.D))
-        //{
-        //    spriteRenderer.sprite = spriteRight; // 右画像
-        //}
-
         //if (speedUpTimer > 0)
         //{
         //    speedUpTimer -= Time.deltaTime;
@@ -108,15 +90,15 @@ public class PlayerSideSlide : MonoBehaviour
         }
     }
 
-    void HandleSideMove()
-    {
-        // 空中は移動弱く
-        float smooth = isGrounded ? sideMoveSmooth : sideMoveSmooth * airControl;
+    //void HandleSideMove()
+    //{
+    //    // 空中は移動弱く
+    //    float smooth = isGrounded ? sideMoveSmooth : sideMoveSmooth * airControl;
 
-        float newX = Mathf.Lerp(transform.position.x, targetX, smooth * Time.deltaTime);
+    //    float newX = Mathf.Lerp(transform.position.x, targetX, smooth * Time.deltaTime);
 
-        transform.position = new Vector3(newX, transform.position.y, transform.position.z);
-    }
+    //    transform.position = new Vector3(newX, transform.position.y, transform.position.z);
+    //}
 
     void HandleJumpInput()
     {
@@ -131,22 +113,13 @@ public class PlayerSideSlide : MonoBehaviour
     }
 
     // ジャンプ処理 本体
-    //void Jump()
-    //{
-    //    Vector3 vel = rb.linearVelocity;
-    //    vel.y = 0;                  // 2段目で加算が暴れないように
-    //    rb.linearVelocity = vel;
-
-    //    rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-    //}
-    void Jump() // 実験
+    void Jump()
     {
         Vector3 vel = rb.linearVelocity;
-        vel.y = 0;    // ジャンプ2段目の挙動を安定
+        vel.y = 0;                  // 2段目で加算が暴れないように
         rb.linearVelocity = vel;
 
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        isGrounded = false;
     }
 
     //========================================
@@ -155,7 +128,7 @@ public class PlayerSideSlide : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
-            isGrounded = true;
+            //isGrounded = true;
             jumpCount = 0;
     }
 
