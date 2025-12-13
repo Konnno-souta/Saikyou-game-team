@@ -1,43 +1,74 @@
-//using UnityEngine;
-//using static Ball;
+﻿using UnityEngine;
 
-//public class Player : MonoBehaviour
-//{
-//    public int power = 0;
-//    public float speed = 5f;
-//    public int hp = 100;
+public class Player : MonoBehaviour
+{
 
-//    private void OnTriggerEnter(Collider other)
-//    {
-//        Ball ball = other.GetComponent<Ball>();
-//        if (ball != null && !ball.isCollected)
-//        {
-//            ball.isCollected = true;
-//            ApplyBallEffect(ball.ballType);
-//            Destroy(ball.gameObject);
-//        }
-//    }
+    [Header("ステータス")]
+    public float baseSpeed = 5f;
+    public float speed = 5f;
+    public float jump = 2f;
 
-//    private void ApplyBallEffect(BallType type)
-//    {
-//        switch (type)
-//        {
-//            case BallType.PowerUp:
-//                power++;
-//                Debug.Log("Power Up! ���݂̃p���[: " + power);
-//                break;
-//            case BallType.SpeedUp:
-//                speed += 2f;
-//                Debug.Log("Speed Up! ���݂̃X�s�[�h: " + speed);
-//                break;
-//            case BallType.Heal:
-//                hp += 20;
-//                Debug.Log("Heal! ���݂�HP: " + hp);
-//                break;
-//            case BallType.Special:
-//                Debug.Log("Special Effect �����I");
-//                // ���ꏈ��
-//                break;
-//        }
-//    }
-//}
+
+    private void ApplyBallEffect(string tagName)
+    {
+        switch (tagName)
+        {
+            case "SpeedUp":
+                speed += 2f;
+                Debug.Log("Speed Up! 現在のスピード: " + speed);
+                break;
+
+            case "SpeedDown":
+                speed -= 2f;
+                Debug.Log("Speed Down😢　現在のスピード:" + speed);
+                break;
+
+            case "JumpUp":
+                jump += 1f;
+                Debug.Log("Jump Up!!!! 現在のジャンプ力:" + jump);
+                break;
+
+            case "JumpDown":
+                jump -= 1f;
+                Debug.Log("Jump Down😢 現在のジャンプ力:" + jump);
+                break;
+
+
+            case "Invincible":
+                // ２回攻撃防ぐ（デバフ）
+                break;
+
+            case "BigBasket":
+                //　カゴ大きくなる
+                break;
+
+            case "MinusScore":
+                //　スコアダウン
+                break;
+
+            case "MInusTime":
+                //　タイム減る
+                break;
+
+            case "Bom":
+                //　操作不可
+                break;
+
+            default:
+                Debug.LogWarning("未対応のタグ: " + tagName);
+                break;
+
+        }
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // タグで判定
+        ApplyBallEffect(other.tag);
+
+        // ボールを削除
+        Destroy(other.gameObject);
+    }
+
+}
