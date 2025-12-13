@@ -9,6 +9,16 @@ TagManager:
   - RedBall
   - GoldBall
   - GreenBall
+  - BlueBall
+  - BigBasket
+  - SpeedDown
+  - JumpUp
+  - JumoDown
+  - SpeedUp
+  - Invincible
+  - MinusScore
+  - ' MinusTime'
+  - Bom
   layers:
   - Default
   - TransparentFX
