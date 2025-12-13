@@ -1438,9 +1438,14 @@ MonoBehaviour:
   BlueBall: {fileID: 6042448594525399487, guid: 75caa8098a9d8b742af3e98589a16114, type: 3}
   GreenBall: {fileID: 6042448594525399487, guid: 5ee5a784468df594c915f55ab63842b5, type: 3}
   Bom: {fileID: 8573777519304046317, guid: 81ffe4094f05476498a83f0c0c474880, type: 3}
-  sphere5: {fileID: 0}
-  sphere6: {fileID: 0}
-  sphere7: {fileID: 0}
+  SpeedUpBall: {fileID: 3325127841765246281, guid: 4c94e697282b0c8469772956cb591a77, type: 3}
+  SpeedDownBall: {fileID: 3325127841765246281, guid: 4197f44075fe15748bffd5a014abb596, type: 3}
+  JumpUpBall: {fileID: 3325127841765246281, guid: 6b11b9b026c0f3f49a7602747bf95445, type: 3}
+  JumpDownBall: {fileID: 3325127841765246281, guid: eb775d2bb557aa34397e013fd8db794f, type: 3}
+  InvincibleBall: {fileID: 3325127841765246281, guid: 1a9839ae71efe3c4ea4ddc1f4dba5659, type: 3}
+  BigBasketBall: {fileID: 3325127841765246281, guid: f52d396994822ba4aa9149f41ad7da5f, type: 3}
+  MinusScoreBall: {fileID: 3325127841765246281, guid: 163709872f3d59d4c857878646201fe1, type: 3}
+  MinusTimeBall: {fileID: 3325127841765246281, guid: 09341f496e702054498683ea0256f1ec, type: 3}
 --- !u!1001 &2176222606825128763
 PrefabInstance:
   m_ObjectHideFlags: 0
