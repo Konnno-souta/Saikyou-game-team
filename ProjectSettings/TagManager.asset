@@ -13,12 +13,12 @@ TagManager:
   - BigBasket
   - SpeedDown
   - JumpUp
-  - JumoDown
   - SpeedUp
   - Invincible
   - MinusScore
   - ' MinusTime'
   - Bom
+  - JumpDown
   layers:
   - Default
   - TransparentFX

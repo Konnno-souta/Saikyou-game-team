@@ -1,53 +1,68 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
-
 
 public class SpawnManager : MonoBehaviour
 {
-    public GameObject RedBall;
-    public GameObject BlueBall;
-    public GameObject GreenBall;
-    public GameObject Bom;
-    public GameObject SpeedUpBall;
-    public GameObject SpeedDownBall; 
-    public GameObject JumpUpBall;
-    public GameObject JumpDownBall;
-    public GameObject InvincibleBall;
-    public GameObject BigBasketBall;
-    public GameObject MinusScoreBall;
-    public GameObject MinusTimeBall;
+    // Inspectorで管理するためのクラス
+    [System.Serializable]
+    public class BallData
+    {
+        public GameObject prefab;   // 出すボールのPrefab
+        [Range(0, 100)]
+        public float probability;   // 出現確率（％）
+    }
 
-    int num = 0;
-    private Vector3 sphPos;
+    // Inspectorに表示される配列
+    public BallData[] balls;
+
+    private Vector3 spawnPos;
 
     void Start()
     {
-        sphPos = transform.position;
+        spawnPos = transform.position;
         StartCoroutine(SpawnCoroutine());
-
-        Debug.Log("SpawnManager Start called");
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-       
     }
 
     IEnumerator SpawnCoroutine()
     {
-        Debug.Log("SpawnCoroutine started");
         while (true)
         {
             float randamX = Random.Range(-16f, 4f);
-            GameObject[] spheres = { RedBall, BlueBall, GreenBall, Bom, SpeedUpBall, SpeedDownBall, JumpUpBall, JumpDownBall, InvincibleBall, BigBasketBall, MinusScoreBall, MinusTimeBall };
-            GameObject selectedSphere = spheres[Random.Range(0, spheres.Length)];
-            Instantiate(selectedSphere, new Vector3(randamX, sphPos.y, sphPos.z), Quaternion.identity);
+
+            // 確率に基づいてボールを選択
+            GameObject selectedBall = GetRandomBall();
+
+            // 生成したオブジェクトを変数に入れる
+            GameObject spawned = Instantiate(
+                selectedBall,
+                new Vector3(randamX, spawnPos.y, spawnPos.z),
+                Quaternion.identity
+            );
+
+            // ここでログを出す
+            Debug.Log("Spawned Ball: " + spawned.name + " (Tag: " + spawned.tag + ")");
+
             yield return new WaitForSeconds(5.0f);
         }
+    }
 
-       
+    // 重み付きランダムでボールを選ぶ
+    private GameObject GetRandomBall()
+    {
+        float total = 0;
+        foreach (var b in balls) total += b.probability;
+
+        float randomPoint = Random.value * total;
+
+        foreach (var b in balls)
+        {
+            if (randomPoint < b.probability)
+                return b.prefab;
+            else
+                randomPoint -= b.probability;
+        }
+
+        // 保険で最後のボールを返す
+        return balls[balls.Length - 1].prefab;
     }
 }
