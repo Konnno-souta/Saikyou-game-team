@@ -7,7 +7,8 @@ public class Player : MonoBehaviour
     [Header("ステータス")]
     public float baseSpeed = 5f;
     public float speed = 5f;
-    public float jump = 2f;
+    public float baseJump = 2f;
+    public float Jump = 2f;
 
     private Rigidbody rb;
     private bool isGrounded = false;
@@ -51,7 +52,7 @@ public class Player : MonoBehaviour
         // Spaceキー（ジャンプ）
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
+            rb.AddForce(Vector3.up * baseJump, ForceMode.Impulse);
             isGrounded = false; // 空中にいる間はジャンプ不可
         }
 
@@ -71,13 +72,11 @@ public class Player : MonoBehaviour
                 break;
 
             case "JumpUp":
-                jump += 1f;
-                Debug.Log("Jump Up!!!! 現在のジャンプ力:" + jump);
+                StartCoroutine(JumpUp(3f)); //　ジャンプ力アップ
                 break;
 
             case "JumpDown":
-                jump -= 1f;
-                Debug.Log("Jump Down😢 現在のジャンプ力:" + jump);
+                StartCoroutine(JumpDown(3f)); //　ジャンプ力アップ
                 break;
 
 
@@ -107,7 +106,7 @@ public class Player : MonoBehaviour
 
         }
     }
-
+    // SpeedUpのやつ
     private IEnumerator SpeedUp(float duration)
     {
         float originalSpeed = baseSpeed;       // 元の速度を保存
@@ -120,7 +119,7 @@ public class Player : MonoBehaviour
         Debug.Log("Speed 戻った: " + speed);
 
     }
-
+    //　SpeedDwonのやつ
     private IEnumerator SpeedDown(float duration)
     {
         float originalSpeed = baseSpeed;       // 元の速度を保存
@@ -131,6 +130,31 @@ public class Player : MonoBehaviour
 
         speed = originalSpeed;             // 元に戻す
         Debug.Log("Speed 戻った: " + speed);
+
+    }
+    private IEnumerator JumpUp(float duration)
+    {
+        float originalJump = baseJump;       // 元の速度を保存
+        Jump = baseJump + 2f;            // 一時的に上げるます
+        Debug.Log("Jump Up! 現在のジャンプ力: " + Jump);
+
+        yield return new WaitForSeconds(duration); // duration秒待つ
+
+        Jump = originalJump;             // 元に戻す
+        Debug.Log("Jump 戻った: " + Jump);
+
+    }
+
+    private IEnumerator JumpDown(float duration)
+    {
+        float originalJump = baseJump;       // 元の速度を保存
+        Jump = baseJump - 2f;            // 一時的に上げるます
+        Debug.Log("Jump Down! 現在のジャンプ力: " + Jump);
+
+        yield return new WaitForSeconds(duration); // duration秒待つ
+
+        Jump = originalJump;             // 元に戻す
+        Debug.Log("Jump 戻った: " + Jump);
 
     }
     private void OnCollisionEnter(Collision collision)
