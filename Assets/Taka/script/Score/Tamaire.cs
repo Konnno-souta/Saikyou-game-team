@@ -1,10 +1,15 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Tamaire : MonoBehaviour
 {
     public ScoreManager scoreManager;
     [SerializeField] Playertap playertap;
     [SerializeField] Countdown60 countdown60;
+
+    private bool ballCount;// ボールを数える用
+    public bool bC { get { return ballCount; } }//ballCountを外部（他シート）から参照する用
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Ball"))
@@ -13,6 +18,7 @@ public class Tamaire : MonoBehaviour
             Ball ball = other.GetComponent<Ball>();
             if (ball != null)
             {
+                ballCount = true;
                 int score = 0;
 
                 // ボールの種類によってスコアを変更
@@ -42,6 +48,10 @@ public class Tamaire : MonoBehaviour
 
                 // ボールを削除
                 Destroy(other.gameObject);
+            }
+            else
+            {
+                ballCount = false;
             }
         }
     }

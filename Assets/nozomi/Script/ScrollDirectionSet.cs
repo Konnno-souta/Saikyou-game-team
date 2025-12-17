@@ -10,6 +10,10 @@ public class ScrollDirectionSet : MonoBehaviour
 
     float scroolTimer;
 
+    [SerializeField] Tamaire tamaire;
+    private int ballCount;
+    private int scrollChangeCount = 2;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -22,20 +26,23 @@ public class ScrollDirectionSet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        scroolTimer-=Time.deltaTime;
-  
-        if (scrollLeft && scroolTimer <= 0)
+        if (tamaire.bC == true)
+        {
+            ballCount++;
+        }
+
+        if (scrollLeft && ballCount % scrollChangeCount == 0)
         {
             scrollLeft = false;
             scrollRight = true;
-            scroolTimer = 15f;
+            ballCount = 0;
         }
 
-        if (scrollRight && scroolTimer <= 0)
+        if (scrollRight && ballCount % scrollChangeCount == 0)
         {
             scrollLeft = true;
             scrollRight = false;
-            scroolTimer = 15f;
+            ballCount = 0;
         }
  
     }
