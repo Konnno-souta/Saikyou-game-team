@@ -19,7 +19,7 @@ public class Tamaire : MonoBehaviour
             if (ball != null)
             {
                 ballCount = true;
-                int score = 0;
+                int score = 0;//ここを消す
 
                 // ボールの種類によってスコアを変更
                 switch (ball.ballType)
@@ -44,7 +44,7 @@ public class Tamaire : MonoBehaviour
                 }
 
                     // スコアを追加
-                    scoreManager.AddScore(score);
+                    scoreManager.AddScore(score);//ここを消す
 
                 // ボールを削除
                 Destroy(other.gameObject);
