@@ -84,7 +84,6 @@ public class PlayerSideSlide : MonoBehaviour
 
         if (distance < 0.05f)
         {
-            Debug.Log("False");
             move = false;
             moveSpeed = msFirst;
         }

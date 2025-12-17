@@ -560,6 +560,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4178756001378171542, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
+      propertyPath: countdown60
+      value: 
+      objectReference: {fileID: 1417337271}
+    - target: {fileID: 4178756001378171542, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
       propertyPath: playerTapRun
       value: 
       objectReference: {fileID: 2143083865}
@@ -1149,6 +1153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2ad935e577323498a1621afb3115c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tamaire: {fileID: 538305422}
 --- !u!4 &289754739
 Transform:
   m_ObjectHideFlags: 0
@@ -1687,6 +1692,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01da1d659b2c14445b3afc3d9f86f60b, type: 3}
+--- !u!114 &538305422 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4178756001378171542, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
+  m_PrefabInstance: {fileID: 107215841}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce928c5fd6e26ff4697145a9ba807d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &588832479
 GameObject:
   m_ObjectHideFlags: 0
@@ -1845,7 +1861,7 @@ PrefabInstance:
     - target: {fileID: 444082253759772681, guid: 9fdd3c0d02775ae4bbf2c83ae50faa2a, type: 3}
       propertyPath: scoreText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1346965133}
     - target: {fileID: 2032993702561957547, guid: 9fdd3c0d02775ae4bbf2c83ae50faa2a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3014,6 +3030,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1285a49274a62024695adeeba3196f80, type: 3}
+--- !u!114 &1346965133 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1264706920149620979, guid: c5e8c5e2637325e499fe07cd3c38b49f, type: 3}
+  m_PrefabInstance: {fileID: 2134578621}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1386992684
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3152,6 +3179,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01da1d659b2c14445b3afc3d9f86f60b, type: 3}
+--- !u!114 &1417337271 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2050640322202700204, guid: fe98062395d91514bb59425f6c1e214c, type: 3}
+  m_PrefabInstance: {fileID: 1696144153}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d7cddbfcdfa5834aab080ceb703fa1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1417922070
 GameObject:
   m_ObjectHideFlags: 0
@@ -3380,6 +3418,22 @@ PrefabInstance:
       propertyPath: GreenBall
       value: 
       objectReference: {fileID: 6042448594525399487, guid: 5ee5a784468df594c915f55ab63842b5, type: 3}
+    - target: {fileID: 8994496277950993158, guid: 91918d3aa9b252c4c98fc8f12a3e7e5c, type: 3}
+      propertyPath: balls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8994496277950993158, guid: 91918d3aa9b252c4c98fc8f12a3e7e5c, type: 3}
+      propertyPath: balls.Array.data[0].prefab
+      value: 
+      objectReference: {fileID: 2031788537390026227, guid: 814dcc42b9f05fe4a9865273bd3643d5, type: 3}
+    - target: {fileID: 8994496277950993158, guid: 91918d3aa9b252c4c98fc8f12a3e7e5c, type: 3}
+      propertyPath: balls.Array.data[1].prefab
+      value: 
+      objectReference: {fileID: 4318843658469859653, guid: b17792eead26ab9418b3d48330992ccb, type: 3}
+    - target: {fileID: 8994496277950993158, guid: 91918d3aa9b252c4c98fc8f12a3e7e5c, type: 3}
+      propertyPath: balls.Array.data[2].prefab
+      value: 
+      objectReference: {fileID: 8238968385222737260, guid: 550eac56f27770e4e968b16175798123, type: 3}
     - target: {fileID: 9186861796756987016, guid: 91918d3aa9b252c4c98fc8f12a3e7e5c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3
@@ -5017,7 +5071,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 122
+  m_Constraints: 120
   m_CollisionDetection: 0
 --- !u!114 &2143083870
 MonoBehaviour:
