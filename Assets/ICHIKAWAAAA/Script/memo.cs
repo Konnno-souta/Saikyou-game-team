@@ -97,7 +97,7 @@ public class Player : MonoBehaviour
                 break;
 
             case "Bom":
-                //　操作不可
+                StartCoroutine(Bom(2f));//　操作不可
                 break;
 
             default:
@@ -123,8 +123,8 @@ public class Player : MonoBehaviour
     private IEnumerator SpeedDown(float duration)
     {
         float originalSpeed = baseSpeed;       // 元の速度を保存
-        speed = baseSpeed -2f;            // 一時的に上げるます
-        Debug.Log("Speed Up! 現在のスピード: " + speed);
+        speed = baseSpeed -2f;            // 一時的にさげるます
+        Debug.Log("Speed Down! 現在のスピード: " + speed);
 
         yield return new WaitForSeconds(duration); // duration秒待つ
 
@@ -147,8 +147,8 @@ public class Player : MonoBehaviour
 
     private IEnumerator JumpDown(float duration)
     {
-        float originalJump = baseJump;       // 元の速度を保存
-        Jump = baseJump - 2f;            // 一時的に上げるます
+        float originalJump = baseJump;  // 元の速度を保存
+        Jump = baseJump - 2f;            // 一時的にさげるます
         Debug.Log("Jump Down! 現在のジャンプ力: " + Jump);
 
         yield return new WaitForSeconds(duration); // duration秒待つ
@@ -156,6 +156,22 @@ public class Player : MonoBehaviour
         Jump = originalJump;             // 元に戻す
         Debug.Log("Jump 戻った: " + Jump);
 
+    }
+
+    private IEnumerator Bom(float duration)
+    {
+        float originalSpeed = baseSpeed;       // 元の速度を保存
+        float originalJump = baseJump;
+        speed = baseSpeed - 5f;            // 一時的にさげるます
+        Jump = baseJump - 2f;
+        Debug.Log("動けない");
+
+        yield return new WaitForSeconds(duration); // duration秒待つ
+
+        speed = originalSpeed;             // 元に戻す
+        Jump = originalJump;
+        Debug.Log("動ける " + speed);
+        Debug.Log("動ける " + Jump);
     }
     private void OnCollisionEnter(Collision collision)
     {
