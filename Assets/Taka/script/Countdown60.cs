@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Countdown60 : MonoBehaviour
 {
@@ -21,11 +22,11 @@ public class Countdown60 : MonoBehaviour
 
     IEnumerator Countdown()
     {
-        while (timeLeft >= 0)
+        while (timeLeft > 0)
         {
             UpdateNumberImages(timeLeft);
 
-            // 残り10秒になったら点滅開始
+            // 残り10秒で点滅
             if (timeLeft == 10 && !isBlinking)
             {
                 StartCoroutine(BlinkNumbers());
@@ -35,9 +36,15 @@ public class Countdown60 : MonoBehaviour
             timeLeft--;
         }
 
+        // 0表示
+        UpdateNumberImages(0);
+
         tensImage.enabled = false;
         onesImage.enabled = false;
+
         Debug.Log("Time up!");
+
+        GoToResultScene();
     }
 
     void UpdateNumberImages(int number)
@@ -82,4 +89,9 @@ public class Countdown60 : MonoBehaviour
         // 表示を即更新
         UpdateNumberImages(timeLeft);
     }
+
+void GoToResultScene()
+{
+    SceneManager.LoadScene("ResultScene"); // ← リザルトシーン名
+}
 }
