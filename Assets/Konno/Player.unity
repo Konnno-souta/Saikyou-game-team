@@ -571,6 +571,10 @@ PrefabInstance:
       propertyPath: scoreManager
       value: 
       objectReference: {fileID: 1594703002}
+    - target: {fileID: 7049059078819839882, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7485322774853431943, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
       propertyPath: m_Name
       value: Basket
@@ -2763,6 +2767,10 @@ PrefabInstance:
     - target: {fileID: 384452713802150476, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
+      propertyPath: balls.Array.data[0].probability
+      value: 56.8
       objectReference: {fileID: 0}
     - target: {fileID: 5303763094028958359, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
       propertyPath: m_Mesh
