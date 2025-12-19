@@ -9,6 +9,6 @@ public class ResultScore : MonoBehaviour
     void Start()
     {
         resultScoreText.text = "Score: " + ScoreManager.score.ToString();
-        highScoreText.text = "HighScore: " + ScoreManager.highScore.ToString();
+       // highScoreText.text = "HighScore: " + ScoreManager.highScore.ToString();
     }
 }
