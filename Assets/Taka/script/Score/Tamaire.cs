@@ -12,8 +12,11 @@ public class Tamaire : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Trigger Hit: " + other.name);
+
         if (other.CompareTag("Ball"))
         {
+            Debug.Log("Ball detected");
             // Ballスクリプトを取得
             Ball ball = other.GetComponent<Ball>();
             if (ball != null)
