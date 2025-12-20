@@ -18,7 +18,7 @@ public class Tamaire : MonoBehaviour
         {
             Debug.Log("Ball detected");
             // Ballスクリプトを取得
-            bbbb ball = collision.gameObject.GetComponent<bbbb>();
+            ball ball = collision.gameObject.GetComponent<ball>();
             Debug.Log(ball);
             if (ball != null)
             {
@@ -28,19 +28,19 @@ public class Tamaire : MonoBehaviour
                 // ボールの種類によってスコアを変更
                 switch (ball.ballType)
                 {
-                    case bbbb.BallType.Green:
+                    case ball.BallType.Green:
                         score = 10;
                         break;
-                    case bbbb.BallType.Red:
+                    case ball.BallType.Red:
                         score = 30;
                         break;
-                    case bbbb.BallType.Gold:
+                    case ball.BallType.Gold:
                         score = 50;
                         break;
                     //case Ball.BallType.SpeedUp:
                     //    playermain.SpeedUp(3f, 5f); // ← 例: +3 のスピードを 5 秒間
-                        break;
-                    case bbbb.BallType.Time:       // ← 追加！！
+                    
+                    case ball.BallType.Time:       // ← 追加！！
                         countdown60.AddTime(5);      // 5 秒追加
                         break;
                     
