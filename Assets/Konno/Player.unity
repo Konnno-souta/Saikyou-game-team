@@ -409,11 +409,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 397975223514979601, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
       propertyPath: m_LocalScale.x
-      value: 18.7
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 397975223514979601, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
       propertyPath: m_LocalScale.y
-      value: 9.5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 397975223514979601, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
       propertyPath: m_LocalScale.z
@@ -587,6 +587,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7485322774853431943, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 8568864612179896133, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -594,7 +598,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1127896448862422694, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 596395139}
   m_SourcePrefab: {fileID: 100100000, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
 --- !u!224 &111286658 stripped
 RectTransform:
@@ -1536,7 +1543,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4178756001378171542, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
   m_PrefabInstance: {fileID: 107215841}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 596395134}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce928c5fd6e26ff4697145a9ba807d3a, type: 3}
@@ -1679,6 +1686,38 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &596395134 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1127896448862422694, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
+  m_PrefabInstance: {fileID: 107215841}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &596395139
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 596395134}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!4 &608814094 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 397975223514979601, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
@@ -2770,7 +2809,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
       propertyPath: balls.Array.data[0].probability
-      value: 56.8
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
+      propertyPath: balls.Array.data[3].probability
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
+      propertyPath: balls.Array.data[4].probability
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
+      propertyPath: balls.Array.data[5].probability
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
+      propertyPath: balls.Array.data[11].probability
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5303763094028958359, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
       propertyPath: m_Mesh
@@ -3825,11 +3880,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e17c46f14b8e210439dbbdb61ab47464, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pTR: {fileID: 1726090490}
+  pTR: {fileID: 0}
   fhc: {fileID: 1726090489}
   moveSpeed: 25
-  jumpForce: 5
   maxJumps: 2
+  baseSpeed: 5
+  speed: 5
+  baseJump: 2
+  jump: 2
 --- !u!1 &1742551232
 GameObject:
   m_ObjectHideFlags: 0
@@ -4514,6 +4572,7 @@ GameObject:
   - component: {fileID: 2143083863}
   - component: {fileID: 2143083862}
   - component: {fileID: 2143083867}
+  - component: {fileID: 2143083871}
   - component: {fileID: 2143083865}
   - component: {fileID: 2143083864}
   - component: {fileID: 2143083870}
@@ -4617,7 +4676,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2143083861}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 64e0e9824ab3fd74293817fd9f1a1feb, type: 3}
   m_Name: 
@@ -4646,8 +4705,11 @@ MonoBehaviour:
   pTR: {fileID: 2143083865}
   fhc: {fileID: 2143083864}
   moveSpeed: 6
-  jumpForce: 5
   maxJumps: 2
+  baseSpeed: 5
+  speed: 5
+  baseJump: 2
+  jump: 2
 --- !u!65 &2143083868
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4710,6 +4772,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fhc: {fileID: 2143083864}
   sds: {fileID: 289754738}
+--- !u!114 &2143083871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2143083861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20acf26d1f805234e8e2f9e0f30de5ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pTR: {fileID: 2143083865}
+  fhc: {fileID: 2143083864}
+  moveSpeed: 5
+  maxJumps: 2
+  baseSpeed: 5
+  baseJump: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
