@@ -2,7 +2,7 @@ using UnityEngine;
  
 public class UvScrollTest : MonoBehaviour
 {
-    [SerializeField]ScrollDirectionSet sds;
+    private ScrollDirectionSet sds;
     private float scrollSpeedX = 2.5f; // 横方向のスクロール速度
     private float scrollSpeedY = 0.0f; // 縦方向のスクロール速度
 
@@ -13,7 +13,7 @@ public class UvScrollTest : MonoBehaviour
 
     void Start()
     {
-      
+        sds = GameObject.Find("conveyor").GetComponent<ScrollDirectionSet>();
         // このオブジェクトのRendererを取得
         rend = GetComponent<Renderer>();
     }
