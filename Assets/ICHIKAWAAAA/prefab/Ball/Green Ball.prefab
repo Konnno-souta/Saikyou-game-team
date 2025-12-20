@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3892931666542630235}
   - component: {fileID: 46276210107898831}
   - component: {fileID: -2265814758201802818}
+  - component: {fileID: -7002362270303275889}
   m_Layer: 0
   m_Name: Green Ball
   m_TagString: GreenBall
@@ -136,3 +137,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-7002362270303275889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6042448594525399487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7834d0caf0a07f4ebc89a1cf3c6ba77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballType: 1
