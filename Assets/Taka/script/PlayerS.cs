@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerS : MonoBehaviour
 {
-    [SerializeField] Playertap pTR;
+    [SerializeField] Playermain pTR;
     [SerializeField] Floor fhc;
 
     private float stepDistance;   // 1回のサイドステップ量

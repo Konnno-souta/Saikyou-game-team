@@ -2,7 +2,7 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Playertap : MonoBehaviour
+public class Playermain : MonoBehaviour
 {
     [Header("˜A‘Å‘–sİ’è")]
     public float baseSpeed = 2f;
