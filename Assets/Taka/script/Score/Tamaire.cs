@@ -6,9 +6,8 @@ public class Tamaire : MonoBehaviour
     public ScoreManager scoreManager;
     //[SerializeField] Playermain playermain;
     [SerializeField] Countdown60 countdown60;
-
-    private bool ballCount;// ボールを数える用
-    public bool bC { get { return ballCount; } }//ballCountを外部（他シート）から参照する用
+    public ScrollDirectionSet scrollDirectionSet;//スクロール管理のスクリプトを持ってくる
+    [SerializeField] private GameObject obj;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -16,26 +15,35 @@ public class Tamaire : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Ball"))
         {
+            scrollDirectionSet = obj.GetComponent<ScrollDirectionSet>();    
             Debug.Log("Ball detected");
             // Ballスクリプトを取得
             ball ball = collision.gameObject.GetComponent<ball>();
-            Debug.Log(ball);
             if (ball != null)
             {
-                //ballCount = true;
                 int score = 0;//ここを消す
+                if (scrollDirectionSet == null)
+                {
+                    Debug.LogError("ScrollDirectionSet が Inspector で設定されていません");
+                    return;
+                }
 
                 // ボールの種類によってスコアを変更
                 switch (ball.ballType)
                 {
                     case ball.BallType.Green:
                         score = 10;
+                        
+                        //scrollDirectionSet.BallCount = 1; //スクロールで準備してある変数に＋１する
                         break;
                     case ball.BallType.Red:
                         score = 30;
+                        ScrollDirectionSet.ballCount++;
+                        //scrollDirectionSet.BallCount++;
                         break;
                     case ball.BallType.Gold:
                         score = 50;
+                        //scrollDirectionSet.BallCount = 1;//同上
                         break;
                     //case Ball.BallType.SpeedUp:
                     //    playermain.SpeedUp(3f, 5f); // ← 例: +3 のスピードを 5 秒間
@@ -53,10 +61,6 @@ public class Tamaire : MonoBehaviour
                 // ボールを削除
                 Destroy(collision.gameObject.gameObject);
             }
-            //else
-            //{
-            //    ballCount = false;
-            //}
         }
     }
 }

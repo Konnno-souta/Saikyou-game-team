@@ -247,7 +247,7 @@ public class PlayerSideSlide : MonoBehaviour
             ApplyBallEffect(collision.gameObject.tag);
 
             // ƒ{[ƒ‹‚ğíœ
-            Destroy(collision.gameObject);
+            //Destroy(collision.gameObject);
         }
         if (collision.gameObject.CompareTag("Ground"))
             //isGrounded = true;
