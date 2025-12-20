@@ -484,7 +484,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   balls:
   - prefab: {fileID: 7400714608267190863, guid: 1e415552f4c47cb42a2f4d6c16bac6dc, type: 3}
-    probability: 100
+    probability: 0
   - prefab: {fileID: 6042448594525399487, guid: 75caa8098a9d8b742af3e98589a16114, type: 3}
     probability: 0
   - prefab: {fileID: 6042448594525399487, guid: 5ee5a784468df594c915f55ab63842b5, type: 3}
@@ -509,6 +509,8 @@ MonoBehaviour:
     probability: 0
   - prefab: {fileID: 8573777519304046317, guid: 81ffe4094f05476498a83f0c0c474880, type: 3}
     probability: 0
+  - prefab: {fileID: 4343475237441555083, guid: 0342717dd774c9c4f8a499b0200bfbd4, type: 3}
+    probability: 100
 --- !u!1 &4946951356345063447
 GameObject:
   m_ObjectHideFlags: 0
