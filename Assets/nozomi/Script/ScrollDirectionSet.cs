@@ -11,6 +11,8 @@ public class ScrollDirectionSet : MonoBehaviour
 
     [SerializeField] Tamaire tamaire;
     public static int ballCount = 0;
+    public int ballCount2 = 0;
+    public int BC { get { return ballCount2; } set { ballCount2 = value; } }
     private int scrollChangeCount = 2;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -19,6 +21,7 @@ public class ScrollDirectionSet : MonoBehaviour
         scrollLeft = true;
         scrollRight = false;
         ballCount = 0;
+        ballCount2 = 0;
         scroolTimer = 15f;//n<=x<z
     }
 
@@ -27,16 +30,17 @@ public class ScrollDirectionSet : MonoBehaviour
     {
         if (scrollLeft && ballCount % scrollChangeCount == 0 && ballCount != 0)
         {
-            
             scrollRight = true;
-            ballCount = 0;
             scrollLeft = false;
+            ballCount2 += ballCount;
+            ballCount = 0;
         }   
         else if(scrollRight && ballCount % scrollChangeCount == 0 && ballCount != 0)
         {
             scrollLeft = true;
+            scrollRight = false;
+            ballCount2 += ballCount;
             ballCount = 0;
-            scrollRight = false;    
         }
  
     }
