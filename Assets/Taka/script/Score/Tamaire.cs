@@ -33,16 +33,18 @@ public class Tamaire : MonoBehaviour
                 {
                     case ball.BallType.Green:
                         score = 10;
-                        
+                        ScoreManager.AddGreen();
                         //scrollDirectionSet.BallCount = 1; //ÉXÉNÉçÅ[ÉãÇ≈èÄîıÇµÇƒÇ†ÇÈïœêîÇ…Å{ÇPÇ∑ÇÈ
                         break;
                     case ball.BallType.Red:
                         score = 30;
+                        ScoreManager.AddRed();
                         ScrollDirectionSet.ballCount++;
                         //scrollDirectionSet.BallCount++;
                         break;
                     case ball.BallType.Gold:
                         score = 50;
+                        ScoreManager.AddGold();
                         //scrollDirectionSet.BallCount = 1;//ìØè„
                         break;
                     //case Ball.BallType.SpeedUp:
