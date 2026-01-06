@@ -3,10 +3,12 @@ using UnityEngine;
 public class BarrierObjScroll : MonoBehaviour
 {
     private ScrollDirectionSet sds;
+    private ScrollTest2 st2;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         sds= GameObject.Find("conveyor").GetComponent<ScrollDirectionSet>();
+        st2=GameObject.Find("Playermain").GetComponent<ScrollTest2>();
     }
 
     // Update is called once per frame
@@ -14,11 +16,11 @@ public class BarrierObjScroll : MonoBehaviour
     {
         if (sds.scL)
         {
-            transform.position += new Vector3(-0.01f, 0, 0);
+            transform.position += st2.scSL;
         }
         if (sds.scR)
         {
-            transform.position += new Vector3(0.01f, 0, 0);
+            transform.position +=st2.scSR;
         }
     }
 }

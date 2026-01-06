@@ -3,8 +3,8 @@ using UnityEngine;
 public class UvScrollTest : MonoBehaviour
 {
     private ScrollDirectionSet sds;
-    private float scrollSpeedX = 2.5f; // 横方向のスクロール速度
-    private float scrollSpeedY = 0.0f; // 縦方向のスクロール速度
+    private ScrollTest2 st2;
+    private float scrollSpeedX; // 横方向のスクロール速度
 
     private Renderer rend;
     private Vector2 offset = Vector2.zero;
@@ -14,22 +14,23 @@ public class UvScrollTest : MonoBehaviour
     void Start()
     {
         sds = GameObject.Find("conveyor").GetComponent<ScrollDirectionSet>();
+        st2 = GameObject.Find("Playermain").GetComponent<ScrollTest2>();
         // このオブジェクトのRendererを取得
         rend = GetComponent<Renderer>();
+        scrollSpeedX = st2.stN;
     }
 
     void FixedUpdate()
     {
+        scrollSpeedX = st2.stN;
         if (sds.scL)
         {
-            offset.x -= scrollSpeedX * Time.deltaTime;
-            offset.y += scrollSpeedY * Time.deltaTime;
+            offset.x -= (scrollSpeedX * 50) * Time.deltaTime;
             this.GetComponent<MeshRenderer>().material=mat[0];
         }
         if (sds.scR)
         {
-            offset.x += scrollSpeedX * Time.deltaTime;
-            offset.y += scrollSpeedY * Time.deltaTime;
+            offset.x += (scrollSpeedX * 50) * Time.deltaTime;
             this.GetComponent<MeshRenderer>().material = mat[1];
         }
         // マテリアルのメインテクスチャのオフセットを設定
