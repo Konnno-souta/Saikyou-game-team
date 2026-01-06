@@ -34,18 +34,20 @@ public class Tamaire : MonoBehaviour
                     case ball.BallType.Green:
                         score = 10;
                         ScoreManager.AddGreen();
-                        //scrollDirectionSet.BallCount = 1; //スクロールで準備してある変数に＋１する
+                        //ScrollDirectionSet.ballCount++;
+                        //ScrollDirectionSet.ballCount2++;  //スクロールで準備してある変数に＋１する
                         break;
                     case ball.BallType.Red:
                         score = 30;
                         ScoreManager.AddRed();
                         ScrollDirectionSet.ballCount++;
-                        //scrollDirectionSet.BallCount++;
+                        ScrollDirectionSet.ballCount2++;
                         break;
                     case ball.BallType.Gold:
                         score = 50;
                         ScoreManager.AddGold();
-                        //scrollDirectionSet.BallCount = 1;//同上
+                        //ScrollDirectionSet.ballCount++;
+                        //ScrollDirectionSet.ballCount2++;//同上
                         break;
                     //case Ball.BallType.SpeedUp:
                     //    playermain.SpeedUp(3f, 5f); // ← 例: +3 のスピードを 5 秒間

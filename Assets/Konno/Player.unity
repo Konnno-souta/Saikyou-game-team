@@ -1238,7 +1238,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tamaire: {fileID: 538305422}
-  ballCount2: 0
 --- !u!1 &304047831
 GameObject:
   m_ObjectHideFlags: 0
