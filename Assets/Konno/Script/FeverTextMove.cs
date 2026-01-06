@@ -1,14 +1,14 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using TMPro;
 
 public class FeverTextMove : MonoBehaviour
 {
     RectTransform rect;
-    Graphic graphic;   // Text / TMP 共通
+    Graphic graphic;
     Vector3 baseScale;
 
+    [Header("Time")]
     public float moveTime = 3.0f;
     public float stopTime = 0.5f;
 
@@ -16,33 +16,47 @@ public class FeverTextMove : MonoBehaviour
     Vector2 centerPos;
     Vector2 rightPos;
 
-    void Start()
+    [Header("Auto Play")]
+    public bool playOnStart = true;
+
+    void Awake()
     {
         rect = GetComponent<RectTransform>();
-        graphic = GetComponent<Graphic>(); // Text or TMP
+        graphic = GetComponent<Graphic>();
+
         baseScale = rect.localScale;
 
-        float canvasWidth = rect.root.GetComponent<RectTransform>().sizeDelta.x;
+        // Anchorを中央に強制（ズレ防止）
+        rect.anchorMin = rect.anchorMax = new Vector2(0.5f, 0.5f);
+
+        RectTransform canvasRect = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
+        float canvasWidth = canvasRect.sizeDelta.x;
 
         leftPos = new Vector2(-canvasWidth / 2 - rect.sizeDelta.x, 0);
         centerPos = Vector2.zero;
         rightPos = new Vector2(canvasWidth / 2 + rect.sizeDelta.x, 0);
 
         rect.anchoredPosition = leftPos;
+    }
 
+    void Start()
+    {
+        if (playOnStart)
+            Play();
+    }
+
+    // 外部から呼べる
+    public void Play()
+    {
         StartCoroutine(FeverSequence());
     }
 
     IEnumerator FeverSequence()
     {
-        // ① 左 → 中央
-        yield return StartCoroutine(Move(leftPos, centerPos, moveTime));
+        yield return Move(leftPos, centerPos, moveTime);
+        yield return ScaleBlink(stopTime);
+        yield return Move(centerPos, rightPos, moveTime);
 
-        // ② 中央停止中：拡大＋点滅
-        yield return StartCoroutine(ScaleBlink(stopTime));
-
-        // ③ 中央 → 右
-        yield return StartCoroutine(Move(centerPos, rightPos, moveTime));
         Destroy(gameObject);
     }
 
@@ -54,8 +68,6 @@ public class FeverTextMove : MonoBehaviour
         {
             t += Time.deltaTime;
             float rate = Mathf.Clamp01(t / time);
-
-            // Ease
             float ease = Mathf.SmoothStep(0f, 1f, rate);
 
             rect.anchoredPosition = Vector2.Lerp(start, end, ease);
@@ -74,28 +86,19 @@ public class FeverTextMove : MonoBehaviour
             t += Time.deltaTime;
             float rate = t / duration;
 
-            // 拡大（ピョンと）
             float scale = Mathf.Lerp(1.0f, 1.2f, Mathf.Sin(rate * Mathf.PI));
             rect.localScale = baseScale * scale;
 
-            // 点滅（アルファ）
-            float alpha = Mathf.Lerp(0.3f, 1.0f, Mathf.PingPong(rate * 4f, 1f));
             Color c = graphic.color;
-            c.a = alpha;
+            c.a = Mathf.Lerp(0.3f, 1f, Mathf.PingPong(rate * 4f, 1f));
             graphic.color = c;
 
             yield return null;
         }
 
-        // 後始末
         rect.localScale = baseScale;
         Color endColor = graphic.color;
         endColor.a = 1f;
         graphic.color = endColor;
     }
 }
-
-
-
-
-
