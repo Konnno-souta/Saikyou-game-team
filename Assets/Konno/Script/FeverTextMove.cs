@@ -19,14 +19,23 @@ public class FeverTextMove : MonoBehaviour
     [Header("Auto Play")]
     public bool playOnStart = true;
 
+    [Header("Rainbow")]
+    public float rainbowSpeed = 1.5f; // 虹の回転スピード
+
+    void UpdateRainbow(float alpha = 1f)
+    {
+        float hue = Mathf.Repeat(Time.time * rainbowSpeed, 1f);
+        Color c = Color.HSVToRGB(hue, 1f, 1f);
+        c.a = alpha;
+        graphic.color = c;
+    }
+
     void Awake()
     {
         rect = GetComponent<RectTransform>();
         graphic = GetComponent<Graphic>();
-
         baseScale = rect.localScale;
 
-        // Anchorを中央に強制（ズレ防止）
         rect.anchorMin = rect.anchorMax = new Vector2(0.5f, 0.5f);
 
         RectTransform canvasRect = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
@@ -37,7 +46,11 @@ public class FeverTextMove : MonoBehaviour
         rightPos = new Vector2(canvasWidth / 2 + rect.sizeDelta.x, 0);
 
         rect.anchoredPosition = leftPos;
+
+        // 出現した瞬間から虹色
+        UpdateRainbow(1f);
     }
+
 
     void Start()
     {
@@ -71,11 +84,16 @@ public class FeverTextMove : MonoBehaviour
             float ease = Mathf.SmoothStep(0f, 1f, rate);
 
             rect.anchoredPosition = Vector2.Lerp(start, end, ease);
+
+            // 移動中も虹色更新
+            UpdateRainbow(1f);
+
             yield return null;
         }
 
         rect.anchoredPosition = end;
     }
+
 
     IEnumerator ScaleBlink(float duration)
     {
@@ -89,16 +107,14 @@ public class FeverTextMove : MonoBehaviour
             float scale = Mathf.Lerp(1.0f, 1.2f, Mathf.Sin(rate * Mathf.PI));
             rect.localScale = baseScale * scale;
 
-            Color c = graphic.color;
-            c.a = Mathf.Lerp(0.3f, 1f, Mathf.PingPong(rate * 4f, 1f));
-            graphic.color = c;
+            float alpha = Mathf.Lerp(0.3f, 1f, Mathf.PingPong(rate * 4f, 1f));
+            UpdateRainbow(alpha);
 
             yield return null;
         }
 
         rect.localScale = baseScale;
-        Color endColor = graphic.color;
-        endColor.a = 1f;
-        graphic.color = endColor;
+        UpdateRainbow(1f);
     }
+
 }

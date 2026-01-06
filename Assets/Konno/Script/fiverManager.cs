@@ -1,23 +1,89 @@
 using UnityEngine;
+using System.Collections;
 
-public class fiverManager : MonoBehaviour
+public class FeverManager : MonoBehaviour
 {
+    [Header("Fever Condition")]
+    public int feverNeedScoreBall = 10; // ★変更可能
+    int scoreBallCount;
+
+    [Header("Fever Time")]
+    public float feverDuration = 7f;
+
+    [Header("Fever Text")]
     public GameObject feverTextPrefab;
     public Canvas canvas;
 
-    bool fiverOn;
+    [Header("Ball Control")]
+    public BallSpawner normalSpawner;
+    public BallSpawner feverSpawner;   // 金ボール専用
 
-    public void StartFever()
+    //[Header("Pause Targets")]
+    //public GameTimer gameTimer;
+    //public StageScroll stageScroll;
+    //public ObstacleSpawner obstacleSpawner;
+
+    bool isFever;
+    public bool IsFever => isFever;
+
+    // ==============================
+    // スコアボール取得時に呼ぶ
+    // ==============================
+    public void OnCatchScoreBall()
     {
-        if (fiverOn) return;
+        if (isFever) return;
 
-        fiverOn = true;
+        scoreBallCount++;
 
-        Instantiate(feverTextPrefab, canvas.transform);
+        if (scoreBallCount >= feverNeedScoreBall)
+        {
+            StartCoroutine(FeverSequence());
+        }
     }
 
-    public void EndFever()
+    // ==============================
+    // Fever全体シーケンス
+    // ==============================
+    IEnumerator FeverSequence()
     {
-        fiverOn = false;
+        isFever = true;
+        scoreBallCount = 0;
+
+        // ① カットイン
+        Instantiate(feverTextPrefab, canvas.transform);
+
+        // 少し待ってからFever突入（演出用）
+        yield return new WaitForSeconds(0.5f);
+
+        StartFever();
+        yield return new WaitForSeconds(feverDuration);
+        EndFever();
+    }
+
+    // ==============================
+    void StartFever()
+    {
+        // 通常生成停止
+        normalSpawner.isPaused = true;
+
+        // Fever生成開始
+        feverSpawner.isPaused = false;
+
+        // 他システム停止
+        //gameTimer.isPaused = true;
+        //stageScroll.isPaused = true;
+        //obstacleSpawner.isPaused = true;
+    }
+
+    void EndFever()
+    {
+        isFever = false;
+
+        normalSpawner.isPaused = false;
+        feverSpawner.isPaused = true;
+
+        //gameTimer.isPaused = false;
+        //stageScroll.isPaused = false;
+        //obstacleSpawner.isPaused = false;
     }
 }

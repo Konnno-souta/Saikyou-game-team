@@ -19,6 +19,7 @@ TagManager:
   - ' MinusTime'
   - Bom
   - JumpDown
+  - Wall
   layers:
   - Default
   - TransparentFX
