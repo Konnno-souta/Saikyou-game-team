@@ -4,7 +4,7 @@ using System.Collections;
 public class FeverManager : MonoBehaviour
 {
     [Header("Fever Condition")]
-    public int feverNeedScoreBall = 10; // ★変更可能
+    public int feverNeedScoreBall = 10; // 変更可能
     int scoreBallCount;
 
     [Header("Fever Time")]
@@ -25,6 +25,7 @@ public class FeverManager : MonoBehaviour
 
     bool isFever;
     public bool IsFever => isFever;
+    public bool IsF { get { return isFever; } } // 他スクリプト用（プロパティ）
 
     // ==============================
     // スコアボール取得時に呼ぶ
