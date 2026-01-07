@@ -12,7 +12,7 @@ public class BarrierObjScroll : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (sds.scL)
         {
