@@ -60,8 +60,8 @@ public class Tamaire : MonoBehaviour
                 }
 
                     // スコアを追加
-                    scoreManager.AddScore(score);//ここを消す
-
+                    scoreManager.AddScore(score);
+               
                 // ボールを削除
                 Destroy(collision.gameObject.gameObject);
             }
