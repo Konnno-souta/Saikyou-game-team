@@ -10,6 +10,8 @@ public class Countdown60 : MonoBehaviour
     public Image onesImage;
     public Sprite[] numberSprites;
 
+    public ScoreManager scoreManager;
+
     private int timeLeft = 60;
     private bool isBlinking = false;
 
@@ -43,6 +45,9 @@ public class Countdown60 : MonoBehaviour
         onesImage.enabled = false;
 
         Debug.Log("Time up!");
+
+        RankingManager.Instance.AddScore(ScoreManager.score);
+
 
         GoToResultScene();
     }
@@ -92,6 +97,8 @@ public class Countdown60 : MonoBehaviour
 
 void GoToResultScene()
 {
+        RankingManager.Instance.AddScore(ScoreManager.score);
     SceneManager.LoadScene("ResultScene"); // ← リザルトシーン名
-}
+        
+    }
 }
