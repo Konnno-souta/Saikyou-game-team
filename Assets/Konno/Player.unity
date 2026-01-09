@@ -651,6 +651,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1417337271}
     - target: {fileID: 4178756001378171542, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
+      propertyPath: feverManager
+      value: 
+      objectReference: {fileID: 575618538}
+    - target: {fileID: 4178756001378171542, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
       propertyPath: playerTapRun
       value: 
       objectReference: {fileID: 0}
@@ -661,7 +665,7 @@ PrefabInstance:
     - target: {fileID: 4178756001378171542, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
       propertyPath: scrollDirectionSet
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 289754741}
     - target: {fileID: 7049059078819839882, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
       propertyPath: m_IsTrigger
       value: 0
@@ -1425,6 +1429,7 @@ MonoBehaviour:
   barrierSpawnLeft: {fileID: 304047831}
   barrierSpawnRight: {fileID: 691534456}
   sds: {fileID: 289754741}
+  fivermanager: {fileID: 575618538}
 --- !u!114 &289754741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1438,6 +1443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tamaire: {fileID: 538305422}
+  fivermanager: {fileID: 575618538}
 --- !u!1 &304047831
 GameObject:
   m_ObjectHideFlags: 0
@@ -2115,11 +2121,6 @@ MonoBehaviour:
   feverDuration: 7
   feverTextPrefab: {fileID: 7097441575106013543, guid: 72cf0781be51b8241aa401e776d7d4be, type: 3}
   canvas: {fileID: 968769735}
-  normalSpawner: {fileID: 0}
-  feverSpawner: {fileID: 0}
-  Timer: {fileID: 1417337271}
-  Scroll: {fileID: 289754741}
-  Spawner: {fileID: 1297096959}
 --- !u!1 &588832479
 GameObject:
   m_ObjectHideFlags: 0
@@ -3101,6 +3102,10 @@ PrefabInstance:
       propertyPath: sds
       value: 
       objectReference: {fileID: 289754741}
+    - target: {fileID: 739727953685503350, guid: 01da1d659b2c14445b3afc3d9f86f60b, type: 3}
+      propertyPath: fivermanager
+      value: 
+      objectReference: {fileID: 575618538}
     - target: {fileID: 1440075031749386299, guid: 01da1d659b2c14445b3afc3d9f86f60b, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.1
@@ -3185,6 +3190,10 @@ PrefabInstance:
       propertyPath: sds
       value: 
       objectReference: {fileID: 289754741}
+    - target: {fileID: 739727953685503350, guid: 01da1d659b2c14445b3afc3d9f86f60b, type: 3}
+      propertyPath: fivermanager
+      value: 
+      objectReference: {fileID: 575618538}
     - target: {fileID: 1440075031749386299, guid: 01da1d659b2c14445b3afc3d9f86f60b, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.1
@@ -3545,17 +3554,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
---- !u!114 &1297096959 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
-  m_PrefabInstance: {fileID: 1297096958}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1972c94279672b9459eb246e4d620f9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1386992684
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5717,6 +5715,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fhc: {fileID: 2143083864}
   sds: {fileID: 289754741}
+  fivermanager: {fileID: 575618538}
 --- !u!114 &2143083872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5732,6 +5731,7 @@ MonoBehaviour:
   scoreManager: {fileID: 1594703002}
   countdown60: {fileID: 1417337271}
   scrollDirectionSet: {fileID: 0}
+  feverManager: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

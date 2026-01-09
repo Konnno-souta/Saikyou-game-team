@@ -1,11 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
-public class FeverManager : MonoBehaviour
+public class fiverManager : MonoBehaviour
 {
     [Header("Fever Condition")]
     public int feverNeedScoreBall = 10; // 変更可能
-    int scoreBallCount;
+    public static int scoreBallCount = 0;
 
     [Header("Fever Time")]
     public float feverDuration = 7f;
@@ -14,31 +14,26 @@ public class FeverManager : MonoBehaviour
     public GameObject feverTextPrefab;
     public Canvas canvas;
 
-    [Header("Ball Control")]
-    public BallSpawner normalSpawner;
-    public BallSpawner feverSpawner;   // 金ボール専用
+    bool isPaused;
 
-    [Header("停止部分")]
-    public Countdown60 Timer;
-    public ScrollDirectionSet Scroll;
-    public SpawnManager Spawner;
+    public bool IsP { get { return isPaused; } }
 
     bool isFever;
-    public bool IsFever => isFever;
     public bool IsF { get { return isFever; } } // 他スクリプト用（プロパティ）
 
-    // ==============================
-    // スコアボール取得時に呼ぶ
-    // ==============================
-    public void OnCatchScoreBall()
+    private void Start()
     {
-        if (isFever) return;
+        isFever = false;
+        isPaused = false;
+        scoreBallCount = 0;
+    }
 
-        scoreBallCount++;
-
+    void FixedUpdate()
+    {
         if (scoreBallCount >= feverNeedScoreBall)
         {
             StartCoroutine(FeverSequence());
+            Debug.Log(scoreBallCount);
         }
     }
 
@@ -65,26 +60,14 @@ public class FeverManager : MonoBehaviour
     void StartFever()
     {
         // 通常生成停止
-        normalSpawner.isPaused = true;
-
-        // Fever生成開始
-        feverSpawner.isPaused = false;
-
-        // 他システム停止
-        Timer.isPaused = true;
-        Scroll.isPaused = true;
-        Spawner.isPaused = true;
+        isPaused = true;
+        
     }
 
     void EndFever()
     {
         isFever = false;
 
-        normalSpawner.isPaused = false;
-        feverSpawner.isPaused = true;
-
-        Timer.isPaused = false;
-        Scroll.isPaused = false;
-        Spawner.isPaused = false;
+        isPaused = false;
     }
 }

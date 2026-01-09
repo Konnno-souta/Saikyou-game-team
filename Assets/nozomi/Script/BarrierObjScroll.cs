@@ -4,23 +4,32 @@ public class BarrierObjScroll : MonoBehaviour
 {
     private ScrollDirectionSet sds;
     private ScrollTest2 st2;
+    private fiverManager fivermanager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         sds= GameObject.Find("conveyor").GetComponent<ScrollDirectionSet>();
         st2=GameObject.Find("Playermain").GetComponent<ScrollTest2>();
+        fivermanager=GameObject.Find("FiverManager").GetComponent<fiverManager>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (sds.scL)
+        if (!fivermanager.IsF)
         {
-            transform.position += st2.scSL;
+            if (sds.scL)
+            {
+                transform.position += st2.scSL;
+            }
+            if (sds.scR)
+            {
+                transform.position += st2.scSR;
+            }
         }
-        if (sds.scR)
+        else
         {
-            transform.position +=st2.scSR;
+            Destroy(gameObject);
         }
     }
 }
