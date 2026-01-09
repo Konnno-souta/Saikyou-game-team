@@ -43,7 +43,7 @@ public class SpawnManager : MonoBehaviour
             // ‚±‚±‚ÅƒƒO‚ğo‚·
             Debug.Log("Spawned Ball: " + spawned.name + " (Tag: " + spawned.tag + ")");
 
-            yield return new WaitForSeconds(5.0f);
+            yield return new WaitForSeconds(1.5f);
         }
     }
 
