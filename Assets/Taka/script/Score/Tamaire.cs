@@ -7,7 +7,7 @@ public class Tamaire : MonoBehaviour
     //[SerializeField] Playermain playermain;
     [SerializeField] Countdown60 countdown60;
     public ScrollDirectionSet scrollDirectionSet;//スクロール管理のスクリプトを持ってくる
-    [SerializeField] private GameObject obj;
+    //[SerializeField] private GameObject obj;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -15,18 +15,19 @@ public class Tamaire : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Ball"))
         {
-            scrollDirectionSet = obj.GetComponent<ScrollDirectionSet>();    
+            //scrollDirectionSet = obj.GetComponent<ScrollDirectionSet>();    
             Debug.Log("Ball detected");
             // Ballスクリプトを取得
             ball ball = collision.gameObject.GetComponent<ball>();
             if (ball != null)
+                
             {
                 int score = 0;//ここを消す
-                if (scrollDirectionSet == null)
-                {
-                    Debug.LogError("ScrollDirectionSet が Inspector で設定されていません");
-                    return;
-                }
+                //if (scrollDirectionSet == null)
+                //{
+                //    Debug.LogError("ScrollDirectionSet が Inspector で設定されていません");
+                //    return;
+                //}
 
                 // ボールの種類によってスコアを変更
                 switch (ball.ballType)

@@ -16,7 +16,7 @@ public class ScrollTest2 : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        n = 0.05f;
+        n = 0.02f;
         scrollL = new Vector3(-n, 0, 0);
         scrollR = new Vector3(n, 0, 0);
     }
@@ -38,7 +38,7 @@ public class ScrollTest2 : MonoBehaviour
 
         if (sds.BC % scrollSpeedUp == 0 && sds.BC != 0)
         {
-            n += 0.02f;
+            n += 0.005f;
             scrollL = new Vector3(-n, 0, 0);
             scrollR = new Vector3(n, 0, 0);
             sds.BC = 0;
