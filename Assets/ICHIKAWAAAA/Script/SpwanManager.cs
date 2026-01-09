@@ -12,17 +12,42 @@ public class SpawnManager : MonoBehaviour
         public float probability;   // 出現確率（％）
     }
 
-    // Inspectorに表示される配列
-    public BallData[] balls;
+   [Header("Normal Balls")]
+    public BallData[] normalBalls;
+
+    [Header("Fever Balls")]
+    public BallData[] feverBalls;
+
 
     private Vector3 spawnPos;
+    private fiverManager feverManager;
+
     internal bool isPaused;
 
     void Start()
     {
         spawnPos = transform.position;
+        feverManager = FindAnyObjectByType<fiverManager>();
+
         StartCoroutine(SpawnCoroutine());
     }
+    void Update()
+    {
+        // デバッグ用：Fキーでフィーバー発動
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if (feverManager != null)
+            {
+                StartCoroutine(feverManager.FeverSequence());
+                Debug.Log("フィーバー強制発動");
+            }
+            else
+            {
+                Debug.LogError("fiverManager が見つかりません！");
+            }
+        }
+    }
+
 
     IEnumerator SpawnCoroutine()
     {
@@ -47,15 +72,18 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    // 重み付きランダムでボールを選ぶ
+    // ランダムでボールを選ぶ
     private GameObject GetRandomBall()
     {
+        //フィーバー中はフィーバーボールスを使います
+        BallData[] target = feverManager.IsF ? feverBalls : normalBalls;
+
         float total = 0;
-        foreach (var b in balls) total += b.probability;
+        foreach (var b in target) total += b.probability;
 
         float randomPoint = Random.value * total;
 
-        foreach (var b in balls)
+        foreach (var b in target)
         {
             if (randomPoint < b.probability)
                 return b.prefab;
@@ -64,6 +92,6 @@ public class SpawnManager : MonoBehaviour
         }
 
         // 保険で最後のボールを返す
-        return balls[balls.Length - 1].prefab;
+        return target[target.Length - 1].prefab;
     }
 }

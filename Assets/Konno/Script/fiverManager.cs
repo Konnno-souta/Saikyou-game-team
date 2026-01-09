@@ -40,7 +40,7 @@ public class fiverManager : MonoBehaviour
     // ==============================
     // Fever全体シーケンス
     // ==============================
-    IEnumerator FeverSequence()
+    public IEnumerator FeverSequence()
     {
         isFever = true;
         scoreBallCount = 0;

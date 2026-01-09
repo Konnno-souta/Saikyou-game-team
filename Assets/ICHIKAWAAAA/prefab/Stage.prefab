@@ -700,34 +700,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1972c94279672b9459eb246e4d620f9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  balls:
+  normalBalls:
   - prefab: {fileID: 7400714608267190863, guid: 1e415552f4c47cb42a2f4d6c16bac6dc, type: 3}
-    probability: 0
-  - prefab: {fileID: 6042448594525399487, guid: 75caa8098a9d8b742af3e98589a16114, type: 3}
-    probability: 0
-  - prefab: {fileID: 6042448594525399487, guid: 5ee5a784468df594c915f55ab63842b5, type: 3}
-    probability: 0
-  - prefab: {fileID: 3325127841765246281, guid: 4c94e697282b0c8469772956cb591a77, type: 3}
-    probability: 0
-  - prefab: {fileID: 3325127841765246281, guid: 4197f44075fe15748bffd5a014abb596, type: 3}
-    probability: 0
-  - prefab: {fileID: 3325127841765246281, guid: 6b11b9b026c0f3f49a7602747bf95445, type: 3}
-    probability: 0
-  - prefab: {fileID: 3325127841765246281, guid: eb775d2bb557aa34397e013fd8db794f, type: 3}
-    probability: 0
-  - prefab: {fileID: 3325127841765246281, guid: 1a9839ae71efe3c4ea4ddc1f4dba5659, type: 3}
-    probability: 0
-  - prefab: {fileID: 3325127841765246281, guid: f52d396994822ba4aa9149f41ad7da5f, type: 3}
-    probability: 0
-  - prefab: {fileID: 3325127841765246281, guid: 09341f496e702054498683ea0256f1ec, type: 3}
-    probability: 0
-  - prefab: {fileID: 3325127841765246281, guid: 163709872f3d59d4c857878646201fe1, type: 3}
-    probability: 0
-  - prefab: {fileID: 8573777519304046317, guid: 81ffe4094f05476498a83f0c0c474880, type: 3}
-    probability: 0
-  - prefab: {fileID: 8573777519304046317, guid: 81ffe4094f05476498a83f0c0c474880, type: 3}
-    probability: 0
-  - prefab: {fileID: 4343475237441555083, guid: 0342717dd774c9c4f8a499b0200bfbd4, type: 3}
+    probability: 100
+  feverBalls:
+  - prefab: {fileID: 7400714608267190863, guid: bbdacc249102d0e4abbe5b12c3198885, type: 3}
     probability: 100
 --- !u!1 &4946951356345063447
 GameObject:
