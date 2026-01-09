@@ -578,7 +578,7 @@ PrefabInstance:
     - target: {fileID: 4178756001378171542, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
       propertyPath: playerTapRun
       value: 
-      objectReference: {fileID: 2143083865}
+      objectReference: {fileID: 0}
     - target: {fileID: 4178756001378171542, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
       propertyPath: scoreManager
       value: 
@@ -1967,6 +1967,9 @@ MonoBehaviour:
   canvas: {fileID: 968769735}
   normalSpawner: {fileID: 0}
   feverSpawner: {fileID: 0}
+  Timer: {fileID: 1417337271}
+  Scroll: {fileID: 289754741}
+  Spawner: {fileID: 1297096959}
 --- !u!1 &588832479
 GameObject:
   m_ObjectHideFlags: 0
@@ -2467,12 +2470,12 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1124055250}
+  - {fileID: 1511756820}
   - {fileID: 1942996958}
   - {fileID: 216156559}
   - {fileID: 224343949}
   - {fileID: 407922177}
-  - {fileID: 1124055250}
-  - {fileID: 1511756820}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3234,12 +3237,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
       propertyPath: balls.Array.size
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
       propertyPath: balls.Array.data[12].prefab
       value: 
       objectReference: {fileID: 4343475237441555083, guid: 0342717dd774c9c4f8a499b0200bfbd4, type: 3}
+    - target: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
+      propertyPath: balls.Array.data[13].prefab
+      value: 
+      objectReference: {fileID: 6603849557730009170, guid: 9ab8a5753f688c043958af01320ab645, type: 3}
     - target: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
       propertyPath: balls.Array.data[0].probability
       value: 100
@@ -3272,6 +3279,10 @@ PrefabInstance:
       propertyPath: balls.Array.data[12].probability
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
+      propertyPath: balls.Array.data[13].probability
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5303763094028958359, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -3297,6 +3308,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
+--- !u!114 &1297096959 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
+  m_PrefabInstance: {fileID: 1297096958}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1972c94279672b9459eb246e4d620f9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1346965133 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1264706920149620979, guid: c5e8c5e2637325e499fe07cd3c38b49f, type: 3}
@@ -3844,6 +3866,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Timer 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2050640322202700204, guid: fe98062395d91514bb59425f6c1e214c, type: 3}
+      propertyPath: scoreManager
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7409801961523287453, guid: fe98062395d91514bb59425f6c1e214c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4362,6 +4388,8 @@ MonoBehaviour:
   speed: 5
   baseJump: 2
   jump: 2
+  spriteLeft: {fileID: 0}
+  spriteRight: {fileID: 0}
 --- !u!1 &1742551232
 GameObject:
   m_ObjectHideFlags: 0
@@ -5159,8 +5187,6 @@ GameObject:
   - component: {fileID: 2143083863}
   - component: {fileID: 2143083862}
   - component: {fileID: 2143083867}
-  - component: {fileID: 2143083871}
-  - component: {fileID: 2143083865}
   - component: {fileID: 2143083864}
   - component: {fileID: 2143083870}
   - component: {fileID: 2143083869}
@@ -5257,27 +5283,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8227430ca4205494ba7c46dbe9967b76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2143083865
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2143083861}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64e0e9824ab3fd74293817fd9f1a1feb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseSpeed: 2
-  maxSpeed: 3
-  tapBoost: 3
-  speedDecay: 3
-  tapTimeLimit: 0.5
-  laneWidth: 1
-  sideMoveSmooth: 100
-  spriteLeft: {fileID: 21300000, guid: 5736000d5cc8b4b4fa120f2ef1e0c169, type: 3}
-  spriteRight: {fileID: 21300000, guid: 40a0fecb1263b00438c9862484848f35, type: 3}
 --- !u!114 &2143083867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5290,14 +5295,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e17c46f14b8e210439dbbdb61ab47464, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pTR: {fileID: 2143083865}
+  pTR: {fileID: 1726090490}
   fhc: {fileID: 2143083864}
   moveSpeed: 6
   maxJumps: 2
-  baseSpeed: 5
+  baseSpeed: 10
   speed: 5
-  baseJump: 2
-  jump: 2
+  baseJump: 5
+  jump: 8
+  spriteLeft: {fileID: 21300000, guid: 5736000d5cc8b4b4fa120f2ef1e0c169, type: 3}
+  spriteRight: {fileID: 21300000, guid: 40a0fecb1263b00438c9862484848f35, type: 3}
 --- !u!65 &2143083868
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5360,24 +5367,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fhc: {fileID: 2143083864}
   sds: {fileID: 289754741}
---- !u!114 &2143083871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2143083861}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20acf26d1f805234e8e2f9e0f30de5ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pTR: {fileID: 2143083865}
-  fhc: {fileID: 2143083864}
-  moveSpeed: 5
-  maxJumps: 2
-  baseSpeed: 5
-  baseJump: 2
 --- !u!114 &2143083872
 MonoBehaviour:
   m_ObjectHideFlags: 0

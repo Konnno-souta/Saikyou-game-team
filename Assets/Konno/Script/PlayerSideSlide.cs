@@ -25,6 +25,11 @@ public class PlayerSideSlide : MonoBehaviour
     public float jump = 5f;
     //public float airControl = 0.4f;   // 空中横移動の効き具合
 
+    [Header("キャラ画像設定")]
+    public Sprite spriteLeft;
+    public Sprite spriteRight;
+    private SpriteRenderer spriteRenderer;
+
     private Rigidbody rb;
     bool move;
     private float sideMoveSmooth;
@@ -40,6 +45,7 @@ public class PlayerSideSlide : MonoBehaviour
         msFirst = moveSpeed;
 
         rb = GetComponent<Rigidbody>();
+        spriteRenderer = GetComponent<SpriteRenderer>(); // SpriteRenderer取得
         rb.freezeRotation = true; // 全回転を固定
     }
 
@@ -55,13 +61,14 @@ public class PlayerSideSlide : MonoBehaviour
         {
             move = true;
             targetPos += new Vector3(stepDistance, 0f, 0f);
-
+            spriteRenderer.sprite = spriteRight; // 右画像
         }
 
         if (Input.GetKeyDown(KeyCode.A))  // 左へ
         {
             move = true;
             targetPos += new Vector3(-stepDistance, 0f, 0f);
+            spriteRenderer.sprite = spriteLeft; // 左画像
         }
 
         //---滑らかに移動---
@@ -105,7 +112,7 @@ public class PlayerSideSlide : MonoBehaviour
         vel.y = 0;                  // 2段目で加算が暴れないように
         rb.linearVelocity = vel;
 
-        rb.AddForce(Vector3.up * baseJump, ForceMode.Impulse);
+rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
     }
 
     //========================================
@@ -187,7 +194,7 @@ public class PlayerSideSlide : MonoBehaviour
     private IEnumerator JumpUp(float duration)
     {
         float originalJump = baseJump;       // 元の速度を保存
-        jump = baseJump + 2f;            // 一時的に上げるます
+        jump = baseJump + 5f;            // 一時的に上げるます
         Debug.Log("Jump Up! 現在のジャンプ力: " + jump);
 
         yield return new WaitForSeconds(duration); // duration秒待つ
@@ -241,7 +248,7 @@ public class PlayerSideSlide : MonoBehaviour
             collision.gameObject.CompareTag("BigBasket") ||
             collision.gameObject.CompareTag("MinusScore") ||
             collision.gameObject.CompareTag("MinusTime"))
-
+            //collision.gameObject.CompareTag("GoldBall"))
         {
             // プレイヤーに効果を適用
             ApplyBallEffect(collision.gameObject.tag);

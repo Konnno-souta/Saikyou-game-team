@@ -16,6 +16,7 @@ public class SpawnManager : MonoBehaviour
     public BallData[] balls;
 
     private Vector3 spawnPos;
+    internal bool isPaused;
 
     void Start()
     {

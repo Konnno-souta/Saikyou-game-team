@@ -16,6 +16,9 @@ public class Countdown60 : MonoBehaviour
     private bool isBlinking = false;
 
     private Coroutine countdownCoroutine;
+    internal bool isPaused;
+
+    //internal static bool isPaused;
 
     void Start()
     {
