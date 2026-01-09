@@ -14,6 +14,9 @@ public class ScrollDirectionSet : MonoBehaviour
     public static int ballCount2;
     public int BC { get { return ballCount2; } set { ballCount2 = value; } }
     private int scrollChangeCount = 5;
+    internal bool isPaused;
+
+    //internal static bool isPaused;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

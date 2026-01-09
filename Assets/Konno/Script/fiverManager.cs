@@ -18,10 +18,10 @@ public class FeverManager : MonoBehaviour
     public BallSpawner normalSpawner;
     public BallSpawner feverSpawner;   // 金ボール専用
 
-    //[Header("Pause Targets")]
-    //public GameTimer gameTimer;
-    //public StageScroll stageScroll;
-    //public ObstacleSpawner obstacleSpawner;
+    [Header("Pause Targets")]
+    public Countdown60 Timer;
+    public ScrollDirectionSet Scroll;
+    public SpawnManager Spawner;
 
     bool isFever;
     public bool IsFever => isFever;
@@ -71,9 +71,9 @@ public class FeverManager : MonoBehaviour
         feverSpawner.isPaused = false;
 
         // 他システム停止
-        //gameTimer.isPaused = true;
-        //stageScroll.isPaused = true;
-        //obstacleSpawner.isPaused = true;
+        Timer.isPaused = true;
+        Scroll.isPaused = true;
+        Spawner.isPaused = true;
     }
 
     void EndFever()
@@ -83,8 +83,8 @@ public class FeverManager : MonoBehaviour
         normalSpawner.isPaused = false;
         feverSpawner.isPaused = true;
 
-        //gameTimer.isPaused = false;
-        //stageScroll.isPaused = false;
-        //obstacleSpawner.isPaused = false;
+        Timer.isPaused = false;
+        Scroll.isPaused = false;
+        Spawner.isPaused = false;
     }
 }
