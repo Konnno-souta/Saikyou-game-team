@@ -5,6 +5,7 @@ public class ScrollTest2 : MonoBehaviour
 {
     [SerializeField] FloorHitCheck fhc;
     [SerializeField] ScrollDirectionSet sds;
+    [SerializeField]fiverManager fivermanager;
     Vector3 scrollL;
     Vector3 scrollR;
     public Vector3 scSL { get { return scrollL; } }
@@ -26,13 +27,16 @@ public class ScrollTest2 : MonoBehaviour
     {
         if (fhc.fHCheck)
         {
-            if (sds.scL)
+            if(!fivermanager.IsF)
             {
-                transform.position += scrollL;
-            }
-            if (sds.scR)
-            {
-                transform.position += scrollR;
+                if (sds.scL)
+                {
+                    transform.position += scrollL;
+                }
+                if (sds.scR)
+                {
+                    transform.position += scrollR;
+                }
             }
         }
 
