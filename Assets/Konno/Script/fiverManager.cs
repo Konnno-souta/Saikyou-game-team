@@ -18,7 +18,7 @@ public class FeverManager : MonoBehaviour
     public BallSpawner normalSpawner;
     public BallSpawner feverSpawner;   // ‹àƒ{[ƒ‹ê—p
 
-    [Header("Pause Targets")]
+    [Header("’â~•”•ª")]
     public Countdown60 Timer;
     public ScrollDirectionSet Scroll;
     public SpawnManager Spawner;
