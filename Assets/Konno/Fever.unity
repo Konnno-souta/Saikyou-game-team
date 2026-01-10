@@ -169,9 +169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4906c2fd2f31f5e49af65932493c3d2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overlay: {fileID: 264215694}
-  fadeTime: 0.3
-  feverAlpha: 0.6
+  targets: []
+  darkLevel: 0.25
 --- !u!114 &264215694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,7 +261,7 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 0.22606564, g: 1, b: 0, a: 1}
-  m_Intensity: 100
+  m_Intensity: 300
   m_Range: 20
   m_SpotAngle: 30.000004
   m_InnerSpotAngle: 0
@@ -325,7 +324,7 @@ Transform:
   m_GameObject: {fileID: 521962101}
   serializedVersion: 2
   m_LocalRotation: {x: 0.055442955, y: -0.03547825, z: -0.6423861, w: 0.7635493}
-  m_LocalPosition: {x: 3.02, y: 2.2, z: -0.45}
+  m_LocalPosition: {x: 2.14, y: 1.87, z: -0.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -613,7 +612,7 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 1, g: 0.063871056, b: 0, a: 1}
-  m_Intensity: 100
+  m_Intensity: 300
   m_Range: 20
   m_SpotAngle: 30.000004
   m_InnerSpotAngle: 0
@@ -842,7 +841,7 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 1, g: 0.9880785, b: 0, a: 1}
-  m_Intensity: 100
+  m_Intensity: 300
   m_Range: 20
   m_SpotAngle: 30.000004
   m_InnerSpotAngle: 0
@@ -1103,9 +1102,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4906c2fd2f31f5e49af65932493c3d2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overlay: {fileID: 264215694}
-  fadeTime: 0.3
-  feverAlpha: 0.6
+  targets: []
+  darkLevel: 0.25
 --- !u!224 &1156303913 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1594353649721135972, guid: 4b4d037f4f221f1438572c40e1218419, type: 3}
@@ -1587,7 +1585,7 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 0, g: 0.16466069, b: 1, a: 1}
-  m_Intensity: 100
+  m_Intensity: 300
   m_Range: 20
   m_SpotAngle: 30.000004
   m_InnerSpotAngle: 0
@@ -1650,7 +1648,7 @@ Transform:
   m_GameObject: {fileID: 1714643494}
   serializedVersion: 2
   m_LocalRotation: {x: 0.055442955, y: -0.03547825, z: -0.6423861, w: 0.7635493}
-  m_LocalPosition: {x: 5.61, y: 0.01, z: -0.44}
+  m_LocalPosition: {x: 3.86, y: 0.81, z: -0.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

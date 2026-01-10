@@ -3,55 +3,55 @@ using UnityEngine;
 public class ObjectRotTest : MonoBehaviour
 {
     [Header("回転設定")]
-    public float angleRange = 180f;     // 回転範囲（例：180度）
-    public float speed = 60f;           // 回転速度（度/秒）
-    public Vector3 rotationAxis = Vector3.up; // 回転軸（Y軸など）
+    public Vector3 rotationAxis = Vector3.up;   // 回転軸
+    public float rotateAngle = 90f;             // 現在角度から回す量（度）
+    public float speed = 60f;                   // 回転速度（度/秒）
 
     [Header("停止設定")]
-    public float stopTime = 0.5f;       // 端で停止する時間（秒）
+    public float stopTime = 0.5f;               // 端で停止する時間（秒）
 
-    private float currentAngle = 0f;    // 現在の角度
-    private int direction = 1;          // 回転方向（+1 or -1）
-    private float stopTimer = 0f;       // 停止タイマー
-    private bool isStopping = false;    // 停止中フラグ
+    private Quaternion baseRotation;             // 基準回転
+    private float currentAngle = 0f;             // 現在の差分角度
+    private float targetAngle;                   // 目標差分角度
+    private float direction;                   // 回転方向
+    private float stopTimer = 0f;
+    private bool isStopping = false;
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        // 初期回転を保存
+        baseRotation = transform.localRotation;
+
+        targetAngle = rotateAngle;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isStopping)
         {
-            // 停止中ならタイマーを進める
             stopTimer += Time.deltaTime;
             if (stopTimer >= stopTime)
             {
-                // 停止終了 → 再開
-                isStopping = false;
                 stopTimer = 0f;
-                direction *= -1; // 方向反転
+                isStopping = false;
+
+                // 反転して次の目標へ
+                direction = rotateAngle * -1;
+                targetAngle = rotateAngle - targetAngle;
             }
             return;
         }
 
-        // 通常回転
-        currentAngle += direction * speed * Time.deltaTime;
+        float step = speed * Time.deltaTime;
+        currentAngle = Mathf.MoveTowards(currentAngle, targetAngle, step);
 
-        // 範囲チェック
-        if (Mathf.Abs(currentAngle) >= angleRange / 2f)
+        transform.localRotation =
+            baseRotation * Quaternion.AngleAxis(currentAngle, rotationAxis);
+
+        // 停止開始
+        if (Mathf.Approximately(currentAngle, targetAngle))
         {
-            // 端に到達
-            currentAngle = Mathf.Sign(currentAngle) * (angleRange / 2f);
-            isStopping = true; // 停止開始
+            isStopping = true;
         }
-
-        // 実際の回転を適用
-        transform.localRotation = Quaternion.AngleAxis(currentAngle, rotationAxis);
     }
 }
-

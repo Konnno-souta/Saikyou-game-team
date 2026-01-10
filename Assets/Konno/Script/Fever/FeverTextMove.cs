@@ -19,16 +19,7 @@ public class FeverTextMove : MonoBehaviour
     [Header("Auto Play")]
     public bool playOnStart = true;
 
-    [Header("Rainbow")]
-    public float rainbowSpeed = 1.5f; // 虹の回転スピード
-
-    void UpdateRainbow(float alpha = 1f)
-    {
-        float hue = Mathf.Repeat(Time.time * rainbowSpeed, 1f);
-        Color c = Color.HSVToRGB(hue, 1f, 1f);
-        c.a = alpha;
-        graphic.color = c;
-    }
+ 
 
     void Awake()
     {
@@ -47,8 +38,6 @@ public class FeverTextMove : MonoBehaviour
 
         rect.anchoredPosition = leftPos;
 
-        // 出現した瞬間から虹色
-        UpdateRainbow(1f);
     }
 
 
@@ -85,9 +74,6 @@ public class FeverTextMove : MonoBehaviour
 
             rect.anchoredPosition = Vector2.Lerp(start, end, ease);
 
-            // 移動中も虹色更新
-            UpdateRainbow(1f);
-
             yield return null;
         }
 
@@ -108,13 +94,11 @@ public class FeverTextMove : MonoBehaviour
             rect.localScale = baseScale * scale;
 
             float alpha = Mathf.Lerp(0.3f, 1f, Mathf.PingPong(rate * 4f, 1f));
-            UpdateRainbow(alpha);
 
             yield return null;
         }
 
         rect.localScale = baseScale;
-        UpdateRainbow(1f);
     }
 
 }
