@@ -12,6 +12,7 @@ public class fiverManager : MonoBehaviour
 
     [Header("Fever Text")]
     public GameObject feverTextPrefab;
+    public GameObject feverYokoPrefab;
     public Canvas canvas;
 
     bool isPaused;
