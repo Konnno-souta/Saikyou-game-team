@@ -1,38 +1,42 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class RankingUIController : MonoBehaviour
 {
     public RectTransform rankingPanel;
 
     public float showY = 0f;      // 表示位置
-    public float hideY = 800f;    // 非表示位置（画面外）
+    public float hideY = 800f;    // 非表示位置
     public float slideTime = 0.5f;
+
+    public Button firstSelectButton; // ★ 表示後に選択させたいボタン
 
     private Coroutine slideCoroutine;
 
     // ランキング表示（タイトルのボタン用）
     public void ShowRanking()
     {
-        StartSlide(showY);
+        StartSlide(showY, true);
     }
 
     // ランキング非表示（閉じるボタン用）
     public void HideRanking()
     {
-        StartSlide(hideY);
+        StartSlide(hideY, false);
     }
 
-    void StartSlide(float targetY)
+    void StartSlide(float targetY, bool selectAfter)
     {
         if (slideCoroutine != null)
         {
             StopCoroutine(slideCoroutine);
         }
-        slideCoroutine = StartCoroutine(Slide(targetY));
+        slideCoroutine = StartCoroutine(Slide(targetY, selectAfter));
     }
 
-    IEnumerator Slide(float targetY)
+    IEnumerator Slide(float targetY, bool selectAfter)
     {
         float startY = rankingPanel.anchoredPosition.y;
         float elapsed = 0f;
@@ -48,5 +52,12 @@ public class RankingUIController : MonoBehaviour
 
         rankingPanel.anchoredPosition =
             new Vector2(rankingPanel.anchoredPosition.x, targetY);
+
+        // ★ 表示し終わったらボタンを選択
+        if (selectAfter && firstSelectButton != null)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(firstSelectButton.gameObject);
+        }
     }
 }
