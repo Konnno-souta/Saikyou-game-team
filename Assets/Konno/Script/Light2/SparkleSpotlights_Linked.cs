@@ -1,8 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+// ƒƒCƒ“‚¾‚©‚çÁ‚·‚È‚æ
+
 public class SparkleSpotlights_Linked : MonoBehaviour
 {
+    
     [Header("Spot Lights")]
     public Light[] lights;
     public float colorChangeSpeed = 0.15f;

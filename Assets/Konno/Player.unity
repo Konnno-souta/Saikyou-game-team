@@ -222,9 +222,9 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 0, g: 0.16466069, b: 1, a: 1}
-  m_Intensity: 400
-  m_Range: 20
-  m_SpotAngle: 38.86251
+  m_Intensity: 1000
+  m_Range: 15
+  m_SpotAngle: 22.366058
   m_InnerSpotAngle: 0
   m_CookieSize: 10
   m_Shadows:
@@ -857,9 +857,9 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 1, g: 0.063871056, b: 0, a: 1}
-  m_Intensity: 400
-  m_Range: 20
-  m_SpotAngle: 30.000004
+  m_Intensity: 1000
+  m_Range: 15
+  m_SpotAngle: 21.154642
   m_InnerSpotAngle: 0
   m_CookieSize: 10
   m_Shadows:
@@ -3064,7 +3064,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -3503,6 +3503,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1440075031749386299, guid: 01da1d659b2c14445b3afc3d9f86f60b, type: 3}
   m_PrefabInstance: {fileID: 319412817}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1254498664 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 384452713802150476, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
+  m_PrefabInstance: {fileID: 1297096958}
   m_PrefabAsset: {fileID: 0}
 --- !u!43 &1285704642
 Mesh:
@@ -4373,9 +4378,9 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 1, g: 0.9880785, b: 0, a: 1}
-  m_Intensity: 500
-  m_Range: 20
-  m_SpotAngle: 30.000004
+  m_Intensity: 1000
+  m_Range: 15
+  m_SpotAngle: 17.38118
   m_InnerSpotAngle: 0
   m_CookieSize: 10
   m_Shadows:
@@ -5485,6 +5490,7 @@ GameObject:
   - component: {fileID: 1860584292}
   - component: {fileID: 1860584291}
   - component: {fileID: 1860584293}
+  - component: {fileID: 1860584294}
   m_Layer: 0
   m_Name: FeverLightRoot
   m_TagString: Untagged
@@ -5520,8 +5526,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1860584289}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 4.74, z: -5.896921}
+  m_LocalRotation: {x: 0.47829247, y: -0, z: -0, w: 0.87820065}
+  m_LocalPosition: {x: 0.5, y: 3.68, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5530,7 +5536,7 @@ Transform:
   - {fileID: 1891255680}
   - {fileID: 59017140}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 57.148, y: 0, z: 0}
 --- !u!114 &1860584293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5538,7 +5544,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1860584289}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7185c197d6f173647b717229affb3279, type: 3}
   m_Name: 
@@ -5555,6 +5561,29 @@ MonoBehaviour:
   backGround: {fileID: 1724398469}
   darkLevel: 0.1
   colorInfluence: 0.5
+--- !u!114 &1860584294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1860584289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0c24b846aa91b940a840e7d04a002b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lights:
+  - {fileID: 1538659239}
+  - {fileID: 118990191}
+  - {fileID: 1891255678}
+  - {fileID: 59017138}
+  colorChangeSpeed: 0.15
+  directionalLight: {fileID: 1031215040}
+  targetsRoot: {fileID: 1254498664}
+  backGround: {fileID: 1724398469}
+  darkMultiplier: 0.3
+  colorInfluence: 0.15
 --- !u!1001 &1885712649
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5653,9 +5682,9 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 0.22606564, g: 1, b: 0, a: 1}
-  m_Intensity: 400
-  m_Range: 20
-  m_SpotAngle: 30.000004
+  m_Intensity: 1000
+  m_Range: 15
+  m_SpotAngle: 19.703028
   m_InnerSpotAngle: 0
   m_CookieSize: 10
   m_Shadows:
@@ -5739,7 +5768,7 @@ Transform:
   m_GameObject: {fileID: 1891255677}
   serializedVersion: 2
   m_LocalRotation: {x: 0.055442955, y: -0.03547825, z: -0.6423861, w: 0.7635493}
-  m_LocalPosition: {x: 5.6, y: -0.18, z: -15.05}
+  m_LocalPosition: {x: 3.92, y: -0.47, z: -15.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
