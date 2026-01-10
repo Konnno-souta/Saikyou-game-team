@@ -10,7 +10,7 @@ public class SceneChanger : MonoBehaviour
 
     {
 
-        SceneManager.LoadScene("Title");
+        SceneManager.LoadScene("TitleScene");
 
     }
 
