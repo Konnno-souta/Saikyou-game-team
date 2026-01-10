@@ -325,7 +325,7 @@ Transform:
   m_GameObject: {fileID: 521962101}
   serializedVersion: 2
   m_LocalRotation: {x: 0.055442955, y: -0.03547825, z: -0.6423861, w: 0.7635493}
-  m_LocalPosition: {x: 1.8800001, y: 1.4300003, z: -0.6290035}
+  m_LocalPosition: {x: 3.02, y: 2.2, z: -0.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -676,7 +676,7 @@ Transform:
   m_GameObject: {fileID: 918352635}
   serializedVersion: 2
   m_LocalRotation: {x: 0.055442955, y: -0.03547825, z: -0.6423861, w: 0.7635493}
-  m_LocalPosition: {x: -4.41, y: 0.1800003, z: -0.6290035}
+  m_LocalPosition: {x: -4.39, y: 0.04, z: -0.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -905,7 +905,7 @@ Transform:
   m_GameObject: {fileID: 1059484400}
   serializedVersion: 2
   m_LocalRotation: {x: 0.055442955, y: -0.03547825, z: -0.6423861, w: 0.7635493}
-  m_LocalPosition: {x: -1.68, y: -3.8199997, z: -0.6290035}
+  m_LocalPosition: {x: -1.84, y: 1.89, z: -0.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1024,8 +1024,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1082382533}
-  - component: {fileID: 1082382534}
   - component: {fileID: 1082382535}
+  - component: {fileID: 1082382536}
+  - component: {fileID: 1082382537}
   m_Layer: 0
   m_Name: FeverLightRoot
   m_TagString: Untagged
@@ -1052,20 +1053,6 @@ Transform:
   - {fileID: 521962104}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1082382534
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1082382532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42c51a920b5f344a5d994209861bd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  normalIntensity: 20
-  feverIntensity: 0.2
 --- !u!114 &1082382535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1073,7 +1060,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1082382532}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 02f494ab696272f478057e8c00c0d250, type: 3}
   m_Name: 
@@ -1086,6 +1073,39 @@ MonoBehaviour:
   colorChangeSpeed: 0.15
   moveRadius: 2
   moveSpeed: 1
+--- !u!114 &1082382536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082382532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 463ec9598e7810c419c7659a4d23a0b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lights:
+  - {fileID: 1059484402}
+  - {fileID: 918352637}
+  - {fileID: 521962103}
+  - {fileID: 1714643496}
+  colorChangeSpeed: 0.15
+--- !u!114 &1082382537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082382532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4906c2fd2f31f5e49af65932493c3d2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  overlay: {fileID: 264215694}
+  fadeTime: 0.3
+  feverAlpha: 0.6
 --- !u!224 &1156303913 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1594353649721135972, guid: 4b4d037f4f221f1438572c40e1218419, type: 3}
@@ -1630,7 +1650,7 @@ Transform:
   m_GameObject: {fileID: 1714643494}
   serializedVersion: 2
   m_LocalRotation: {x: 0.055442955, y: -0.03547825, z: -0.6423861, w: 0.7635493}
-  m_LocalPosition: {x: 4.16, y: -0.23999977, z: -0.6290035}
+  m_LocalPosition: {x: 5.61, y: 0.01, z: -0.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

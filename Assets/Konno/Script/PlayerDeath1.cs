@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class PlayerDeath1 : MonoBehaviour
 {
     // ゲームオーバーシーン名
-    public string gameOverSceneName = "GameOver";
+    public string gameOverSceneName = "ResultScene";
 
     void OnCollisionEnter(Collision collision)
     {
