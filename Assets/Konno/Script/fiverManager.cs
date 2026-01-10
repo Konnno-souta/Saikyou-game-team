@@ -48,10 +48,6 @@ public class fiverManager : MonoBehaviour
 
         // ① カットイン
         Instantiate(feverTextPrefab, canvas.transform);
-
-        // 少し待ってからFever突入（演出用）
-        yield return new WaitForSeconds(0.5f);
-
         StartFever();
         yield return new WaitForSeconds(feverDuration);
         EndFever();

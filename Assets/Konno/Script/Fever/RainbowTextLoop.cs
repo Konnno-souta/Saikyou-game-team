@@ -18,6 +18,7 @@ public class RainbowTextLoop : MonoBehaviour
     void Start()
     {
         StartCoroutine(RainbowLoop());
+        StartCoroutine(FeverFinish());
     }
 
     IEnumerator RainbowLoop()
@@ -56,5 +57,11 @@ public class RainbowTextLoop : MonoBehaviour
 
             yield return null;
         }
+    }
+    public IEnumerator FeverFinish()
+    {
+        yield return new WaitForSeconds(7f);
+
+        Destroy(gameObject);
     }
 }

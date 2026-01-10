@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SparkleSpotlights_Linked : MonoBehaviour
 {
@@ -7,7 +8,10 @@ public class SparkleSpotlights_Linked : MonoBehaviour
     public float colorChangeSpeed = 0.15f;
 
     [Header("Linked Dark Objects")]
-    public Renderer[] targets;
+    public SpriteRenderer[] targets;
+
+    public RawImage backGround;
+
 
     [Range(0f, 1f)]
     public float darkLevel = 0.25f;     // ベースの暗さ
@@ -44,7 +48,7 @@ public class SparkleSpotlights_Linked : MonoBehaviour
         // オブジェクト側も連動
         Color baseDark = new Color(darkLevel, darkLevel, darkLevel, 1f);
         Color linkedColor = Color.Lerp(baseDark, sparkleColor, colorInfluence);
-
+        backGround.color = baseDark;
         foreach (Renderer r in targets)
         {
             if (r == null) continue;
