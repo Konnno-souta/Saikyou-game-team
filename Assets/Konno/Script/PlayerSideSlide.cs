@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 using static UnityEngine.GraphicsBuffer;
 
 public class PlayerSideSlide : MonoBehaviour
@@ -29,6 +30,10 @@ public class PlayerSideSlide : MonoBehaviour
     public Sprite spriteLeft;
     public Sprite spriteRight;
     private SpriteRenderer spriteRenderer;
+
+    [Header("€–S")]
+    public string gameOverSceneName = "ResultScene";
+    private bool isDead = false;
 
     private Rigidbody rb;
     bool move;
@@ -91,7 +96,20 @@ public class PlayerSideSlide : MonoBehaviour
         }
     }
 
-    
+    void Die()
+    {
+        if (isDead) return;   // ‘½d”»’è–h~
+        isDead = true;
+
+        Debug.Log("GAME OVER");
+
+        // •¨—’â~i–\‚ê–h~j
+        //rb.velocity = Vector3.zero;
+        rb.isKinematic = true;
+
+        SceneManager.LoadScene(gameOverSceneName);
+    }
+
 
     void HandleJumpInput()
     {
@@ -235,8 +253,13 @@ rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log("Õ“ËŒŸ’m: " + collision.gameObject.name + " / Tag: " + collision.gameObject.tag);
-
-
+        
+        // •Ç‚É“–‚½‚Á‚½‚ç‘¦€–S
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            Die();
+            return; // ‘¼‚Ìˆ—‚ğ~‚ß‚é
+        }
 
         // ƒ{[ƒ‹‚É‚Ô‚Â‚©‚Á‚½‚ç
         if (collision.gameObject.CompareTag("SpeedUp") ||
@@ -248,7 +271,6 @@ rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
             collision.gameObject.CompareTag("BigBasket") ||
             collision.gameObject.CompareTag("MinusScore") ||
             collision.gameObject.CompareTag("MinusTime"))
-            //collision.gameObject.CompareTag("GoldBall"))
         {
             // ƒvƒŒƒCƒ„[‚ÉŒø‰Ê‚ğ“K—p
             ApplyBallEffect(collision.gameObject.tag);

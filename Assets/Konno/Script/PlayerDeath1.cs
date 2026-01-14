@@ -12,6 +12,7 @@ public class PlayerDeath1 : MonoBehaviour
         if (collision.gameObject.CompareTag("Wall"))
         {
             Die();
+            Debug.Log("Ž€–S‚µ‚½‚æ");
         }
     }
 

@@ -1221,7 +1221,7 @@ Transform:
   m_GameObject: {fileID: 177859053}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.6, y: 0.75, z: -7.6}
+  m_LocalPosition: {x: -15.499, y: 0.75, z: -7.6}
   m_LocalScale: {x: 1, y: 5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1971,7 +1971,7 @@ Transform:
   m_GameObject: {fileID: 342866472}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.29, y: 0.75, z: -7.6}
+  m_LocalPosition: {x: 5.606, y: 0.75, z: -7.6}
   m_LocalScale: {x: 1, y: 5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3787,6 +3787,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
+      propertyPath: feverBalls.Array.data[0].prefab
+      value: 
+      objectReference: {fileID: 7400714608267190863, guid: bbdacc249102d0e4abbe5b12c3198885, type: 3}
+    - target: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
       propertyPath: balls.Array.data[11].probability
       value: 0
       objectReference: {fileID: 0}
@@ -5256,6 +5260,7 @@ MonoBehaviour:
   jump: 2
   spriteLeft: {fileID: 0}
   spriteRight: {fileID: 0}
+  gameOverSceneName: ResultScene
 --- !u!1 &1742551232
 GameObject:
   m_ObjectHideFlags: 0
@@ -6413,6 +6418,7 @@ MonoBehaviour:
   jump: 8
   spriteLeft: {fileID: 21300000, guid: 5736000d5cc8b4b4fa120f2ef1e0c169, type: 3}
   spriteRight: {fileID: 21300000, guid: 40a0fecb1263b00438c9862484848f35, type: 3}
+  gameOverSceneName: ResultScene
 --- !u!65 &2143083868
 BoxCollider:
   m_ObjectHideFlags: 0
