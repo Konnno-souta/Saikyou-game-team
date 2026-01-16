@@ -4737,9 +4737,13 @@ PrefabInstance:
       value: Timer 1
       objectReference: {fileID: 0}
     - target: {fileID: 2050640322202700204, guid: fe98062395d91514bb59425f6c1e214c, type: 3}
+      propertyPath: fivermanager
+      value: 
+      objectReference: {fileID: 575618538}
+    - target: {fileID: 2050640322202700204, guid: fe98062395d91514bb59425f6c1e214c, type: 3}
       propertyPath: scoreManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1594703002}
     - target: {fileID: 7409801961523287453, guid: fe98062395d91514bb59425f6c1e214c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

@@ -18,6 +18,8 @@ public class Countdown60 : MonoBehaviour
     private Coroutine countdownCoroutine;
     internal bool isPaused;
 
+    [SerializeField] fiverManager fivermanager;//Feverの情報取得用
+
     //internal static bool isPaused;
 
     void Start()
@@ -38,7 +40,10 @@ public class Countdown60 : MonoBehaviour
             }
 
             yield return new WaitForSeconds(1f);
-            timeLeft--;
+            if (!fivermanager.IsF)//Feverでないなら、カウントを進める
+            {
+                timeLeft--;
+            }
         }
 
         // 0表示

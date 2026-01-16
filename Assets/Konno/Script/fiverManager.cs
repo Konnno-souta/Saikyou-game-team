@@ -36,6 +36,10 @@ public class fiverManager : MonoBehaviour
             StartCoroutine(FeverSequence());
             Debug.Log(scoreBallCount);
         }
+        if (isFever)
+        {
+            scoreBallCount = 0;
+        }
     }
 
     // ==============================
