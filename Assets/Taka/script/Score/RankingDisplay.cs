@@ -1,10 +1,10 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 public class RankingDisplay : MonoBehaviour
 {
-    public TMP_Text rankingText;
+    public TMP_Text[] rankingTexts;   // 10å€‹
     public RankingManager rankingManager;
 
     private void Start()
@@ -16,31 +16,37 @@ public class RankingDisplay : MonoBehaviour
     {
         if (rankingManager == null)
         {
-            Debug.LogError("RankingManager ‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
+            Debug.LogError("RankingManager ãŒè¨­å®šã•ã‚Œã¦ã„ã¾ã›ã‚“");
             return;
         }
 
         List<int> ranking = rankingManager.GetRanking();
-        string display = "";
 
-        for (int i = 0; i < rankingManager.maxRank; i++)
+        for (int i = 0; i < rankingTexts.Length; i++)
         {
-            string colorHex = "#FFFFFF"; // ƒfƒtƒHƒ‹ƒg”’
+            string colorHex = "#FFFFFF";
 
             switch (i)
             {
-                case 0: colorHex = "#FFD700"; break; // 1ˆÊFƒS[ƒ‹ƒh
-                case 1: colorHex = "#C0C0C0"; break; // 2ˆÊFƒVƒ‹ƒo[
-                case 2: colorHex = "#CD7F32"; break; // 3ˆÊFƒuƒƒ“ƒY
+                case 0: colorHex = "#FFD700"; break;
+                case 1: colorHex = "#C0C0C0"; break;
+                case 2: colorHex = "#CD7F32"; break;
             }
 
-            string scoreText = (i < ranking.Count) ? $"{ranking[i]}" : "-";
-            //display += $"<color={colorHex}>{i + 1}ˆÊ : {scoreText}“_</color>\n";
-            display += $"<color={colorHex}>{i + 1}th : {scoreText} pts</color>\n";
+            string scoreText = (i < ranking.Count) ? ranking[i].ToString() : "-";
 
+            // 1ã€œ3ä½ã¯ã‚¹ã‚³ã‚¢ã®ã¿è¡¨ç¤º
+            if (i < 3)
+            {
+                rankingTexts[i].text =
+                    $"<color={colorHex}>{scoreText} pts</color>";
+            }
+            else
+            {
+                rankingTexts[i].text =
+                    $"<color={colorHex}>{i + 1} : {scoreText} pts</color>";
+            }
 
         }
-
-        rankingText.text = display;
     }
 }
