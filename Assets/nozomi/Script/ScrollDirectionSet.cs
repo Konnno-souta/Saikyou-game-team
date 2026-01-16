@@ -47,6 +47,13 @@ public class ScrollDirectionSet : MonoBehaviour
                 ballCount = 0;
             }
         }
- 
+
+        if (fivermanager.IsF)
+        {
+            ballCount = 0;
+            ballCount2 = 0;
+        }
+
+
     }
 }

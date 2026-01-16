@@ -34,14 +34,14 @@ public class Tamaire : MonoBehaviour
                 {
                     case ball.BallType.Green:
                         score = 10;
-                        ScoreManager.AddGreen();
+                        ScoreManager.AddGreen();                         
                         ScrollDirectionSet.ballCount++;
-                        ScrollDirectionSet.ballCount2++;  //スクロールで準備してある変数に＋１する
+                        ScrollDirectionSet.ballCount2++; //スクロールで準備してある変数に＋１する
                         fiverManager.scoreBallCount++;
                         break;
                     case ball.BallType.Red:
                         score = 30;
-                        ScoreManager.AddRed();
+                        ScoreManager.AddRed();                  
                         ScrollDirectionSet.ballCount++;
                         ScrollDirectionSet.ballCount2++;
                         fiverManager.scoreBallCount++;
@@ -51,7 +51,6 @@ public class Tamaire : MonoBehaviour
                         ScoreManager.AddGold();
                         ScrollDirectionSet.ballCount++;
                         ScrollDirectionSet.ballCount2++;//同上
-                        fiverManager.scoreBallCount++;
                         break;
                     case ball.BallType.Time:       // ← 追加！！
                         countdown60.AddTime(5);      // 5 秒追加
