@@ -186,23 +186,23 @@ public class Player : MonoBehaviour
         };
 
         // ===== Instant（スロット非占有） =====
-        effectMap["MinusScore"] = new EffectSpec
+        effectMap["-Score"] = new EffectSpec
         {
-            tag = "MinusScore",
+            tag = "-Score",
             layer = EffectLayer.Status,  // どこでもOK（参照しない）
             policy = EffectPolicy.Instant,
             duration = 0f,
-            apply = () => { /* スコア減算 */ Debug.Log("[MinusScore] 即時処理"); },
+            apply = () => { /* スコア減算 */ Debug.Log("[-Score] 即時処理"); },
             cleanup = null
         };
 
-        effectMap["MinusTime"] = new EffectSpec
+        effectMap["-Time"] = new EffectSpec
         {
-            tag = "MinusTime",
+            tag = "-Time",
             layer = EffectLayer.Status,
             policy = EffectPolicy.Instant,
             duration = 0f,
-            apply = () => { /* タイム減少 */ Debug.Log("[MinusTime] 即時処理"); },
+            apply = () => { /* タイム減少 */ Debug.Log("[-Time] 即時処理"); },
             cleanup = null
         };
     }

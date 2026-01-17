@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6042448594525399487
+--- !u!1 &3325127841765246281
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,49 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4463813661177770050}
-  - component: {fileID: 7633265150281834981}
-  - component: {fileID: 3892931666542630235}
-  - component: {fileID: 46276210107898831}
-  - component: {fileID: -4757818537687627034}
-  - component: {fileID: 8276291551578467967}
+  - component: {fileID: 8596648632569119673}
+  - component: {fileID: 7265073626575683494}
+  - component: {fileID: 3979047754754018060}
+  - component: {fileID: 3423215380177115417}
+  - component: {fileID: -8600467170645883035}
   m_Layer: 0
-  m_Name: Blue Ball
-  m_TagString: Ball
+  m_Name: -Time Ball
+  m_TagString: ' MinusTime'
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4463813661177770050
+--- !u!4 &8596648632569119673
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6042448594525399487}
+  m_GameObject: {fileID: 3325127841765246281}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.033618, y: 16.395273, z: -57.620342}
+  m_LocalPosition: {x: -5.7901993, y: 2.020759, z: -9.852933}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7633265150281834981
+--- !u!33 &7265073626575683494
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6042448594525399487}
+  m_GameObject: {fileID: 3325127841765246281}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &3892931666542630235
+--- !u!23 &3979047754754018060
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6042448594525399487}
+  m_GameObject: {fileID: 3325127841765246281}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -67,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 55341e66d33f2f049bdd32e0b1fcb586, type: 2}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -89,13 +88,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &46276210107898831
+--- !u!135 &3423215380177115417
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6042448594525399487}
+  m_GameObject: {fileID: 3325127841765246281}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -110,13 +109,13 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &-4757818537687627034
+--- !u!54 &-8600467170645883035
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6042448594525399487}
+  m_GameObject: {fileID: 3325127841765246281}
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
@@ -137,16 +136,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &8276291551578467967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6042448594525399487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7834d0caf0a07f4ebc89a1cf3c6ba77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ballType: 2
