@@ -20,7 +20,7 @@ public class SpawnManager : MonoBehaviour
 
 
     private Vector3 spawnPos;
-    private feverManager feverManager;
+    private FeverManager feverManager;
 
     internal bool isPaused;
 

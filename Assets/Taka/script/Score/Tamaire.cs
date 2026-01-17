@@ -7,7 +7,7 @@ public class Tamaire : MonoBehaviour
     //[SerializeField] Playermain playermain;
     [SerializeField] Countdown60 countdown60;
     public ScrollDirectionSet scrollDirectionSet;//スクロール管理のスクリプトを持ってくる
-    public fiverManager feverManager;
+    public FeverManager feverManager;
     //[SerializeField] private GameObject obj;
 
     private void OnCollisionEnter(Collision collision)
@@ -37,14 +37,14 @@ public class Tamaire : MonoBehaviour
                         ScoreManager.AddGreen();                         
                         ScrollDirectionSet.ballCount++;
                         ScrollDirectionSet.ballCount2++; //スクロールで準備してある変数に＋１する
-                        fiverManager.scoreBallCount++;
+                        FeverManager.scoreBallCount++;
                         break;
                     case ball.BallType.Red:
                         score = 30;
                         ScoreManager.AddRed();                  
                         ScrollDirectionSet.ballCount++;
                         ScrollDirectionSet.ballCount2++;
-                        fiverManager.scoreBallCount++;
+                        FeverManager.scoreBallCount++;
                         break;
                     case ball.BallType.Gold:
                         score = 50;

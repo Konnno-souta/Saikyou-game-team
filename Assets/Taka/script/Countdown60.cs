@@ -18,7 +18,7 @@ public class Countdown60 : MonoBehaviour
     private Coroutine countdownCoroutine;
     internal bool isPaused;
 
-    [SerializeField] fiverManager fivermanager;//Feverの情報取得用
+    [SerializeField] FeverManager fivermanager;//Feverの情報取得用
 
     //internal static bool isPaused;
 
