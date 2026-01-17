@@ -701,8 +701,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   normalBalls:
+  - prefab: {fileID: 3325127841765246281, guid: 4c94e697282b0c8469772956cb591a77, type: 3}
+    probability: 25
+  - prefab: {fileID: 3325127841765246281, guid: 4197f44075fe15748bffd5a014abb596, type: 3}
+    probability: 25
+  - prefab: {fileID: 8573777519304046317, guid: 81ffe4094f05476498a83f0c0c474880, type: 3}
+    probability: 25
   - prefab: {fileID: 7400714608267190863, guid: 1e415552f4c47cb42a2f4d6c16bac6dc, type: 3}
-    probability: 100
+    probability: 25
   feverBalls:
   - prefab: {fileID: 7400714608267190863, guid: bbdacc249102d0e4abbe5b12c3198885, type: 3}
     probability: 100

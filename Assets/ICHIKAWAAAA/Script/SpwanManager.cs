@@ -20,14 +20,14 @@ public class SpawnManager : MonoBehaviour
 
 
     private Vector3 spawnPos;
-    private fiverManager feverManager;
+    private feverManager feverManager;
 
     internal bool isPaused;
 
     void Start()
     {
         spawnPos = transform.position;
-        feverManager = FindAnyObjectByType<fiverManager>();
+        feverManager = FindAnyObjectByType<FeverManager>();
 
         StartCoroutine(SpawnCoroutine());
     }
@@ -43,7 +43,7 @@ public class SpawnManager : MonoBehaviour
             }
             else
             {
-                Debug.LogError("fiverManager ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñI");
+                Debug.LogError("feverManager ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñI");
             }
         }
     }
