@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class fiverManager : MonoBehaviour
+public class FeverManager : MonoBehaviour
 {
     [Header("Fever Condition")]
     public int feverNeedScoreBall = 10; // •ÏX‰Â”\

@@ -17,13 +17,13 @@ public class PlayerSideSlide : MonoBehaviour
 
     [Header("ジャンプ設定")]
     public int maxJumps = 2;
-    private int jumpCount = 0;
+    private int jumpCount = 2;
 
     [Header("ステータス")]
     public float baseSpeed = 5f;
     public float speed = 5f;
     public float baseJump = 5f;
-    public float jump = 5f;
+    public float jump = 10f;
     //public float airControl = 0.4f;   // 空中横移動の効き具合
 
     [Header("キャラ画像設定")]
