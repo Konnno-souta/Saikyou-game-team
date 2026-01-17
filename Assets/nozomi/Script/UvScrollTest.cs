@@ -10,13 +10,13 @@ public class UvScrollTest : MonoBehaviour
     private Vector2 offset = Vector2.zero;
 
     [SerializeField] Material[]mat = new Material[2];
-    private fiverManager fivermanager;
+    private FeverManager fivermanager;
 
     void Start()
     {
         sds = GameObject.Find("conveyor").GetComponent<ScrollDirectionSet>();
         st2 = GameObject.Find("Playermain").GetComponent<ScrollTest2>();
-        fivermanager = GameObject.Find("FiverManager").GetComponent<fiverManager>();
+        fivermanager = GameObject.Find("FiverManager").GetComponent<FeverManager>();
         // このオブジェクトのRendererを取得
         rend = GetComponent<Renderer>();
         scrollSpeedX = st2.stN;

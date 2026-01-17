@@ -5,7 +5,7 @@ public class ScrollTest2 : MonoBehaviour
 {
     [SerializeField] FloorHitCheck fhc;
     [SerializeField] ScrollDirectionSet sds;
-    [SerializeField]fiverManager fivermanager;
+    [SerializeField]FeverManager fivermanager;
     Vector3 scrollL;
     Vector3 scrollR;
     public Vector3 scSL { get { return scrollL; } }

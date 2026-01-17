@@ -10,7 +10,7 @@ public class ScrollDirectionSet : MonoBehaviour
     float scroolTimer;
 
     [SerializeField] Tamaire tamaire;
-    [SerializeField]fiverManager fivermanager;
+    [SerializeField]FeverManager fevermanager;
     public static int ballCount;
     public static int ballCount2;
     public int BC { get { return ballCount2; } set { ballCount2 = value; } }
@@ -32,7 +32,7 @@ public class ScrollDirectionSet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!fivermanager.IsF)
+        if (!fevermanager.IsF)
         {
             if (scrollLeft && ballCount % scrollChangeCount == 0 && ballCount != 0)
             {
@@ -48,7 +48,7 @@ public class ScrollDirectionSet : MonoBehaviour
             }
         }
 
-        if (fivermanager.IsF)
+        if (fevermanager.IsF)
         {
             ballCount = 0;
             ballCount2 = 0;

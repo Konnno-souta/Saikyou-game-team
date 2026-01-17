@@ -17,7 +17,7 @@ public class timetest : MonoBehaviour
     private Coroutine countdownCoroutine;
     internal bool isPaused;
 
-    [SerializeField] fiverManager fivermanager;
+    [SerializeField] FeverManager fivermanager;
 
     // タイムアップ通知用イベント
     public event Action OnTimeUp;

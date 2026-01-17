@@ -6,7 +6,7 @@ public class BarrierObjSpawn : MonoBehaviour
     [SerializeField] GameObject barrierSpawnLeft;//ç∂
     [SerializeField] GameObject barrierSpawnRight;//âE
     [SerializeField] ScrollDirectionSet sds;
-    [SerializeField] fiverManager fivermanager;
+    [SerializeField] FeverManager fevermanager;
     private float popTimer;
     private int randBarrier;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -19,7 +19,7 @@ public class BarrierObjSpawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!fivermanager.IsF)
+        if (!fevermanager.IsF)
         {
             popTimer -= Time.deltaTime;
 
