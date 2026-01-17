@@ -48,13 +48,16 @@ public class FeverManager : MonoBehaviour
     public IEnumerator FeverSequence()
     {
         isFever = true;
-        scoreBallCount = 0;
+
 
         // ① カットイン
-        Instantiate(feverTextPrefab, canvas.transform);
+        feverTextPrefab.SetActive(true);    
         StartFever();
+
         yield return new WaitForSeconds(feverDuration);
         EndFever();
+        scoreBallCount = 0;
+        feverTextPrefab.SetActive(false);
     }
 
     // ==============================

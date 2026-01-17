@@ -46,6 +46,13 @@ public class Tamaire : MonoBehaviour
                         ScrollDirectionSet.ballCount2++;
                         FeverManager.scoreBallCount++;
                         break;
+                    case ball.BallType.Blue:
+                        score = 50;
+                        ScoreManager.AddGold();
+                        ScrollDirectionSet.ballCount++;
+                        ScrollDirectionSet.ballCount2++;//ìØè„
+                        FeverManager.scoreBallCount++;
+                        break;
                     case ball.BallType.Gold:
                         score = 50;
                         ScoreManager.AddGold();

@@ -2,6 +2,6 @@ using UnityEngine;
 
 public class ball : MonoBehaviour
 {
-    public enum BallType { Red, Green, Gold, SpeedUp, Bomb, Time }
+    public enum BallType { Red, Green, Gold, SpeedUp, Bomb, Time, Blue }
     public BallType ballType;
 }

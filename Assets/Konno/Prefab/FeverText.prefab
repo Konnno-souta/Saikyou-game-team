@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1971762649790634739}
   - component: {fileID: 935781419180364103}
   - component: {fileID: 6222846824709080781}
+  - component: {fileID: -5778144705087327865}
   m_Layer: 5
   m_Name: FeverText
   m_TagString: Untagged
@@ -151,3 +152,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorSpeed: 1
   charDelay: 0.05
+--- !u!114 &-5778144705087327865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7097441575106013543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9da01e4e2d8f7ca4684cf261d0d542f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 200
+  stopTime: 1.5
