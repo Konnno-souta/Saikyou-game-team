@@ -1,7 +1,8 @@
 ﻿
 using System.Collections;
 using UnityEngine;
-using System; // Action を使うため
+using System;
+using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
@@ -14,260 +15,289 @@ public class Player : MonoBehaviour
     private Rigidbody rb;
     private bool isGrounded = false;
 
-    // ========= 単一効果を上書き管理するためのハンドル =========
+    // ====== 効果のレイヤー（系統）分類 ======
+    private enum EffectLayer
+    {
+        Speed,        // 速度系（SpeedUp/Down など）
+        Jump,        // ジャンプ系（JumpUp/Down など）
+        Control,     // 操作不可・操作反転など（Bom）
+        Status,      // 無敵など
+        Basket,      // ゴールサイズなど
+        // ほか必要なら追加…
+    }
+
+    // 効果の適用ポリシー
+    private enum EffectPolicy
+    {
+        Overwrite,   // レイヤーのスロットを占有。既存があれば上書き
+        Instant      // 即時実行後終了。スロットを占有しない
+    }
+
+    // 効果ハンドル（タイマー・後始末）
     private class EffectHandle
     {
-        public Coroutine routine;   // 走っているコルーチン
-        public Action cleanup;      // 値を元に戻す処理
-        public string name;         // デバッグ用
+        public Coroutine routine;
+        public Action cleanup;
+        public string name;
+        public EffectLayer layer;
+        public float endsAt; // デバッグ用（終了予定時刻）
     }
-    private EffectHandle activeEffect; // 現在の効果（常に1つ）
+
+    // アクティブ効果
+    private readonly Dictionary<EffectLayer, EffectHandle> activeByLayer =
+        new Dictionary<EffectLayer, EffectHandle>();
+
+    // 効果定義
+    private class EffectSpec
+    {
+        public string tag;
+        public EffectLayer layer;
+        public EffectPolicy policy;
+        public float duration;       
+        public Action apply;
+        public Action cleanup;      
+    }
+
+    // タグ→定義 の辞書
+    private Dictionary<string, EffectSpec> effectMap;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true; // 全回転を固定
+        rb.freezeRotation = true;
 
-        // 現在値を基礎値で初期化（念のため）
         speed = baseSpeed;
         Jump = baseJump;
+
+        BuildEffectDefinitions();
     }
 
     void Update()
     {
-        // WASD
-
-        // Wキー（前）
+        // WASD 移動
         if (Input.GetKey(KeyCode.W))
-        {
             transform.position += speed * transform.forward * Time.deltaTime;
-        }
 
-        // Sキー（後）
         if (Input.GetKey(KeyCode.S))
-        {
             transform.position -= speed * transform.forward * Time.deltaTime;
-        }
 
-        // Dキー（右）
         if (Input.GetKey(KeyCode.D))
-        {
             transform.position += speed * transform.right * Time.deltaTime;
-        }
 
-        // Aキー（左）
         if (Input.GetKey(KeyCode.A))
-        {
             transform.position -= speed * transform.right * Time.deltaTime;
-        }
 
-        // Spaceキー（ジャンプ）※ ← ここを Jump（現在値）で加算するよう修正
+        // Space ジャンプ（現在値 Jump を使用）
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.AddForce(Vector3.up * Jump, ForceMode.Impulse);
-            isGrounded = false; // 空中にいる間はジャンプ不可
+            isGrounded = false;
         }
     }
 
-    // ==================== 効果の上書き管理（共通ロジック） ====================
-
-    // いま走っている効果を「元に戻してから」停止
-    private void CancelCurrentEffect()
+    // ---------------- 効果定義をまとめる ----------------
+    private void BuildEffectDefinitions()
     {
-        if (activeEffect == null) return;
+        effectMap = new Dictionary<string, EffectSpec>(StringComparer.Ordinal);
 
-        // ① 先に元に戻す（StopCoroutine では後処理が走らないため）
-        try
+        // ===== Move レイヤー =====
+        effectMap["SpeedUp"] = new EffectSpec
         {
-            activeEffect.cleanup?.Invoke();
-        }
-        catch (Exception e)
-        {
-            Debug.LogWarning($"[Effect] cleanup 例外: {e.Message}");
-        }
+            tag = "SpeedUp",
+            layer = EffectLayer.Speed,
+            policy = EffectPolicy.Overwrite,
+            duration = 3f,
+            apply = () => { speed = baseSpeed + 2f; Debug.Log($"[SpeedUp] speed={speed}"); },
+            cleanup = () => { speed = baseSpeed; Debug.Log($"[SpeedUp End] speed={speed}"); }
+        };
 
-        // ② タイマー停止
-        if (activeEffect.routine != null)
+        effectMap["SpeedDown"] = new EffectSpec
         {
-            StopCoroutine(activeEffect.routine);
-        }
+            tag = "SpeedDown",
+            layer = EffectLayer.Speed,
+            policy = EffectPolicy.Overwrite,
+            duration = 3f,
+            apply = () => { speed = Mathf.Max(0f, baseSpeed - 2f); Debug.Log($"[SpeedDown] speed={speed}"); },
+            cleanup = () => { speed = baseSpeed; Debug.Log($"[SpeedDown End] speed={speed}"); }
+        };
 
-        Debug.Log($"[Effect] キャンセル: {activeEffect.name}");
-        activeEffect = null;
+        // ===== Jump レイヤー =====
+        effectMap["JumpUp"] = new EffectSpec
+        {
+            tag = "JumpUp",
+            layer = EffectLayer.Jump,
+            policy = EffectPolicy.Overwrite,
+            duration = 3f,
+            apply = () => { Jump = baseJump + 2f; Debug.Log($"[JumpUp] jump={Jump}"); },
+            cleanup = () => { Jump = baseJump; Debug.Log($"[JumpUp End] jump={Jump}"); }
+        };
+
+        effectMap["JumpDown"] = new EffectSpec
+        {
+            tag = "JumpDown",
+            layer = EffectLayer.Jump,
+            policy = EffectPolicy.Overwrite,
+            duration = 3f,
+            apply = () => { Jump = Mathf.Max(0f, baseJump - 2f); Debug.Log($"[JumpDown] jump={Jump}"); },
+            cleanup = () => { Jump = baseJump; Debug.Log($"[JumpDown End] jump={Jump}"); }
+        };
+
+        // ===== Control レイヤー =====
+        effectMap["Bom"] = new EffectSpec
+        {
+            tag = "Bom",
+            layer = EffectLayer.Control,
+            policy = EffectPolicy.Overwrite,
+            duration = 2f,
+            apply = () =>
+            {
+                speed = Mathf.Max(0f, baseSpeed - 5f);
+                Jump = Mathf.Max(0f, baseJump - 2f);
+                Debug.Log("[Bom] 動けない");
+            },
+            cleanup = () =>
+            {
+                speed = baseSpeed;
+                Jump = baseJump;
+                Debug.Log($"[Bom End] speed={speed}, jump={Jump}");
+            }
+        };
+
+        // ===== Status レイヤー =====
+        effectMap["Invincible"] = new EffectSpec
+        {
+            tag = "Invincible",
+            layer = EffectLayer.Status,
+            policy = EffectPolicy.Overwrite,
+            duration = 3f,
+            apply = () => { /* isInvincible = true; */ Debug.Log("[Invincible] ON"); },
+            cleanup = () => { /* isInvincible = false; */ Debug.Log("[Invincible] OFF"); }
+        };
+
+        // ===== Basket レイヤー =====
+        effectMap["BigBasket"] = new EffectSpec
+        {
+            tag = "BigBasket",
+            layer = EffectLayer.Basket,
+            policy = EffectPolicy.Overwrite,
+            duration = 3f,
+            apply = () => { /* かご拡大 */ Debug.Log("[BigBasket] ON"); },
+            cleanup = () => { /* 元に戻す */ Debug.Log("[BigBasket] OFF"); }
+        };
+
+        // ===== Instant（スロット非占有） =====
+        effectMap["MinusScore"] = new EffectSpec
+        {
+            tag = "MinusScore",
+            layer = EffectLayer.Status,  // どこでもOK（参照しない）
+            policy = EffectPolicy.Instant,
+            duration = 0f,
+            apply = () => { /* スコア減算 */ Debug.Log("[MinusScore] 即時処理"); },
+            cleanup = null
+        };
+
+        effectMap["MinusTime"] = new EffectSpec
+        {
+            tag = "MinusTime",
+            layer = EffectLayer.Status,
+            policy = EffectPolicy.Instant,
+            duration = 0f,
+            apply = () => { /* タイム減少 */ Debug.Log("[MinusTime] 即時処理"); },
+            cleanup = null
+        };
     }
 
-    // 効果開始：既存効果をキャンセルしてから新効果を適用し、タイマーを回す
-    private void StartEffect_Overwrite(string effectName, Action apply, Action cleanup, float duration)
+    // ---------------- レイヤーごとの上書き処理 ----------------
+    private void StartEffectByLayer(EffectSpec spec)
     {
-        // 既存効果を確実に戻してから止める
-        CancelCurrentEffect();
+        if (spec.policy == EffectPolicy.Instant)
+        {
+            // 即時系：スロットを占有せず、その場で適用して終わり
+            try { spec.apply?.Invoke(); }
+            catch (Exception e) { Debug.LogWarning($"[Effect Instant] 例外: {e.Message}"); }
+            return;
+        }
 
-        // 新しい効果の適用
-        apply?.Invoke();
+        // Overwrite 系：同じレイヤー内の既存効果を終了→新規開始
+        CancelLayer(spec.layer);
 
-        // タイマー開始（終了時に必ず cleanup を呼ぶ）
-        var handle = new EffectHandle { name = effectName, cleanup = cleanup };
-        handle.routine = StartCoroutine(RunEffectTimer(handle, duration));
-        activeEffect = handle;
+        // 新規効果適用
+        try { spec.apply?.Invoke(); }
+        catch (Exception e) { Debug.LogWarning($"[Effect Apply] 例外: {e.Message}"); }
 
-        Debug.Log($"[Effect] 開始: {effectName}（{duration:F1}s）");
+        var handle = new EffectHandle
+        {
+            name = spec.tag,
+            cleanup = spec.cleanup,
+            layer = spec.layer,
+            endsAt = Time.time + Mathf.Max(0f, spec.duration)
+        };
+
+        handle.routine = StartCoroutine(RunEffectTimerByLayer(handle, spec.duration));
+        activeByLayer[spec.layer] = handle;
+
+        Debug.Log($"[Effect Start] {spec.tag} layer={spec.layer} dur={spec.duration:F2}s");
     }
 
-    private IEnumerator RunEffectTimer(EffectHandle handle, float duration)
+    private IEnumerator RunEffectTimerByLayer(EffectHandle handle, float duration)
     {
         if (duration > 0f)
-        {
             yield return new WaitForSeconds(duration);
-        }
 
-        // 自分がまだ現役なら終了処理（上書きされていたら activeEffect は別のものになっている）
-        if (activeEffect == handle)
+        // 同じハンドルが現役なら終了
+        if (activeByLayer.TryGetValue(handle.layer, out var current) && current == handle)
         {
-            try
-            {
-                handle.cleanup?.Invoke();
-            }
-            catch (Exception e)
-            {
-                Debug.LogWarning($"[Effect] cleanup 例外: {e.Message}");
-            }
+            try { handle.cleanup?.Invoke(); }
+            catch (Exception e) { Debug.LogWarning($"[Effect Cleanup] 例外: {e.Message}"); }
 
-            Debug.Log($"[Effect] 終了: {handle.name}");
-            activeEffect = null;
+            activeByLayer.Remove(handle.layer);
+            Debug.Log($"[Effect End] {handle.name} layer={handle.layer}");
         }
     }
 
-    // ==================== ボール効果の適用（ここを書き換え） ====================
+    private void CancelLayer(EffectLayer layer)
+    {
+        if (!activeByLayer.TryGetValue(layer, out var handle)) return;
+
+        // 後始末 → コルーチン停止 → 取り消し
+        try { handle.cleanup?.Invoke(); }
+        catch (Exception e) { Debug.LogWarning($"[Effect Cancel Cleanup] 例外: {e.Message}"); }
+
+        if (handle.routine != null)
+            StopCoroutine(handle.routine);
+
+        activeByLayer.Remove(layer);
+        Debug.Log($"[Effect Cancel] {handle.name} layer={layer}");
+    }
+
+    // ---------------- タグから効果を適用 ----------------
     private void ApplyBallEffect(string tagName)
     {
-        switch (tagName)
+        if (!effectMap.TryGetValue(tagName, out var spec))
         {
-            case "SpeedUp":
-                StartEffect_Overwrite(
-                    "SpeedUp",
-                    apply: () => { speed = baseSpeed + 2f; Debug.Log("Speed Up! 現在のスピード: " + speed); },
-                    cleanup: () => { speed = baseSpeed; Debug.Log("Speed 戻った: " + speed); },
-                    duration: 3f
-                );
-                break;
-
-            case "SpeedDown":
-                StartEffect_Overwrite(
-                    "SpeedDown",
-                    apply: () => { speed = Mathf.Max(0f, baseSpeed - 2f); Debug.Log("Speed Down! 現在のスピード: " + speed); },
-                    cleanup: () => { speed = baseSpeed; Debug.Log("Speed 戻った: " + speed); },
-                    duration: 3f
-                );
-                break;
-
-            case "JumpUp":
-                StartEffect_Overwrite(
-                    "JumpUp",
-                    apply: () => { Jump = baseJump + 2f; Debug.Log("Jump Up! 現在のジャンプ力: " + Jump); },
-                    cleanup: () => { Jump = baseJump; Debug.Log("Jump 戻った: " + Jump); },
-                    duration: 3f
-                );
-                break;
-
-            case "JumpDown":
-                StartEffect_Overwrite(
-                    "JumpDown",
-                    apply: () => { Jump = Mathf.Max(0f, baseJump - 2f); Debug.Log("Jump Down! 現在のジャンプ力: " + Jump); },
-                    cleanup: () => { Jump = baseJump; Debug.Log("Jump 戻った: " + Jump); },
-                    duration: 3f
-                );
-                break;
-
-            case "Invincible":
-                StartEffect_Overwrite(
-                    "Invincible",
-                    apply: () => { /* 無敵フラグ ON */ Debug.Log("Invincible!"); },
-                    cleanup: () => { /* 無敵フラグ OFF */ },
-                    duration: 3f
-                );
-                break;
-
-            case "BigBasket":
-                StartEffect_Overwrite(
-                    "BigBasket",
-                    apply: () => { /* かご拡大 */ Debug.Log("BigBasket!"); },
-                    cleanup: () => { /* 元に戻す */ },
-                    duration: 3f
-                );
-                break;
-
-            case "MinusScore":
-                // 即時系は duration 0 でもOK（上書きポリシーに合わせて統一）
-                StartEffect_Overwrite(
-                    "MinusScore",
-                    apply: () => { /* スコア減算 */ Debug.Log("MinusScore!"); },
-                    cleanup: () => { /* 基本なし */ },
-                    duration: 0f
-                );
-                break;
-
-            case "MinusTime":
-                StartEffect_Overwrite(
-                    "MinusTime",
-                    apply: () => { /* タイム減少 */ Debug.Log("MinusTime!"); },
-                    cleanup: () => { /* 基本なし */ },
-                    duration: 0f
-                );
-                break;
-
-            case "Bom":
-                // 例：操作不可にしたい場合はフラグをここでON/OFF
-                StartEffect_Overwrite(
-                    "Bom",
-                    apply: () => {
-                        // ここでは分かりやすく速度・ジャンプを下げる挙動のまま
-                        speed = Mathf.Max(0f, baseSpeed - 5f);
-                        Jump = Mathf.Max(0f, baseJump - 2f);
-                        Debug.Log("動けない");
-                    },
-                    cleanup: () => {
-                        speed = baseSpeed;
-                        Jump = baseJump;
-                        Debug.Log("動ける " + speed);
-                        Debug.Log("動ける " + Jump);
-                    },
-                    duration: 2f
-                );
-                break;
-
-            default:
-                Debug.LogWarning("未対応のタグ: " + tagName);
-                break;
+            Debug.LogWarning($"未対応のタグ: {tagName}");
+            return;
         }
+
+        StartEffectByLayer(spec);
     }
 
-    // ==================== ここから下は衝突処理（ほぼ既存のまま） ====================
+    // ---------------- 衝突処理 ----------------
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("衝突検知: " + collision.gameObject.name + " / Tag: " + collision.gameObject.tag);
-
-        // ★ 簡易：地面に触れたら接地を true に（Ground タグ前提）
+        // Ground に着地
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
         }
 
-        // ボールにぶつかったら
-        if (collision.gameObject.CompareTag("SpeedUp") ||
-            collision.gameObject.CompareTag("SpeedDown") ||
-            collision.gameObject.CompareTag("JumpUp") ||
-            collision.gameObject.CompareTag("JumpDown") ||
-            collision.gameObject.CompareTag("Bom") ||
-            collision.gameObject.CompareTag("Invincible") ||
-            collision.gameObject.CompareTag("BigBasket") ||
-            collision.gameObject.CompareTag("MinusScore") ||
-            collision.gameObject.CompareTag("MinusTime"))
+        // タグが効果辞書に登録済みなら適用
+        string t = collision.gameObject.tag;
+        if (effectMap != null && effectMap.ContainsKey(t))
         {
-            // プレイヤーに効果を適用（★ 上書き）
-            ApplyBallEffect(collision.gameObject.tag);
-
-            // ボールを削除
+            ApplyBallEffect(t);
             Destroy(collision.gameObject);
         }
     }
+    // ごめんねまーちゃんごめんね
 }

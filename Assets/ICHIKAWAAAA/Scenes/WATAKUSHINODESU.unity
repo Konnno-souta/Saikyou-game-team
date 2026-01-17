@@ -570,6 +570,28 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &501973015 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4739139410353432654, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
+  m_PrefabInstance: {fileID: 416152777233152186}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &501973018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501973015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e34197e5fa2013e46864e9829f6a3fd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  feverNeedScoreBall: 10
+  feverDuration: 7
+  feverTextPrefab: {fileID: 0}
+  feverYokoPrefab: {fileID: 0}
+  canvas: {fileID: 0}
 --- !u!1 &549221752
 GameObject:
   m_ObjectHideFlags: 0
@@ -1999,7 +2021,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4739139410353432654, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 501973018}
   m_SourcePrefab: {fileID: 100100000, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
 --- !u!1001 &2136685106524532026
 PrefabInstance:
