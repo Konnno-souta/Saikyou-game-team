@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Taka/Scene/TitleScene.unity
     guid: cc130e481062f5f45a1afe85cb569844
   - enabled: 1
-    path: Assets/Konno/Player.unity
+    path: Assets/Konno/Scene/Player.unity
     guid: 372a00197ce427545b906ad864a33e47
   - enabled: 1
     path: Assets/Taka/Scene/ResultScene.unity
