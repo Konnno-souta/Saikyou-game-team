@@ -1,14 +1,18 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class Tamaire : MonoBehaviour
 {
+
     public ScoreManager scoreManager;
     //[SerializeField] Playermain playermain;
     [SerializeField] Countdown60 countdown60;
     public ScrollDirectionSet scrollDirectionSet;//スクロール管理のスクリプトを持ってくる
     public FeverManager feverManager;
     //[SerializeField] private GameObject obj;
+   
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -61,7 +65,8 @@ public class Tamaire : MonoBehaviour
 
                     // スコアを追加
                     scoreManager.AddScore(score);
-               
+
+                
                 // ボールを削除
                 Destroy(collision.gameObject.gameObject);
             }
