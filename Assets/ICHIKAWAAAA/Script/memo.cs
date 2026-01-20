@@ -12,6 +12,19 @@ public class Player : MonoBehaviour
     public float baseJump = 2f;
     public float Jump = 2f;
 
+    // かご（スケールを変える対象）
+    [Header("Basket (Goal)")]
+    [SerializeField] private Transform basket;              // ここに拡大したいオブジェクトの Transform を割り当て
+    [SerializeField] private float basketScaleMultiplier = 1.5f; // 拡大倍率
+    [SerializeField] private float basketScaleTweenTime = 0.2f;  // 拡大・縮小の補間時間
+
+    // 籠の元スケール
+    private Vector3 basketBaseScale;
+    private Coroutine basketScaleRoutine;
+
+    [Header("Control Effects")]
+    [SerializeField] private bool reverseControls = false; // 操作反転フラグ
+
     private Rigidbody rb;
     private bool isGrounded = false;
 
@@ -20,7 +33,8 @@ public class Player : MonoBehaviour
     {
         Speed,        // 速度系（SpeedUp/Down など）
         Jump,        // ジャンプ系（JumpUp/Down など）
-        Control,     // 操作不可・操作反転など（Bom）
+        ControlLock,     // 操作不可（Bom）
+        ControlReverse, // 操作反転
         Status,      // 無敵など
         Basket,      // ゴールサイズなど
         // ほか必要なら追加…
@@ -58,8 +72,25 @@ public class Player : MonoBehaviour
         public Action cleanup;      
     }
 
+
+    // デバフとみなすタグ
+    private static readonly HashSet<string> DebuffTags = new HashSet<string>(StringComparer.Ordinal)
+    {
+      "SpeedDown", "JumpDown", "Bom", "-Score", "-Time","Reverse"
+    };
+
+
+    // 無敵の状態管理
+    private int invincibleCharges = 0;
+    private bool isInvincible = false;
+
+    // Control 系の合成状態
+    private int lockCount = 0;      // 1以上で操作不可
+    private int reverseCount = 0;   // 奇数で反転、偶数で通常
+
     // タグ→定義 の辞書
     private Dictionary<string, EffectSpec> effectMap;
+
 
     void Start()
     {
@@ -74,25 +105,72 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        // WASD 移動
-        if (Input.GetKey(KeyCode.W))
-            transform.position += speed * transform.forward * Time.deltaTime;
+        bool locked = lockCount > 0;
+        float inv = (reverseCount % 2 == 1) ? -1f : 1f;
 
-        if (Input.GetKey(KeyCode.S))
-            transform.position -= speed * transform.forward * Time.deltaTime;
+        if (!locked)
+        {
+            if (Input.GetKey(KeyCode.W))
+                transform.position += inv * speed * transform.forward * Time.deltaTime;
 
-        if (Input.GetKey(KeyCode.D))
-            transform.position += speed * transform.right * Time.deltaTime;
+            if (Input.GetKey(KeyCode.S))
+                transform.position -= inv * speed * transform.forward * Time.deltaTime;
 
-        if (Input.GetKey(KeyCode.A))
-            transform.position -= speed * transform.right * Time.deltaTime;
+            if (Input.GetKey(KeyCode.D))
+                transform.position += inv * speed * transform.right * Time.deltaTime;
 
-        // Space ジャンプ（現在値 Jump を使用）
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+            if (Input.GetKey(KeyCode.A))
+                transform.position -= inv * speed * transform.right * Time.deltaTime;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !locked)
         {
             rb.AddForce(Vector3.up * Jump, ForceMode.Impulse);
             isGrounded = false;
         }
+    }
+
+
+    // 起動時にベーススケールをキャプチャ
+    void Awake()
+    {
+        if (basket != null)
+        {
+            basketBaseScale = basket.localScale;
+        }
+    }
+
+    // エディタで値を変えた時もベースを更新（任意）
+    void OnValidate()
+    {
+        if (basket != null)
+        {
+            basketBaseScale = basket.localScale;
+        }
+    }
+
+    // かごのやつ
+    private IEnumerator TweenBasketScale(Vector3 target, float time, bool unscaled = false)
+    {
+        if (basket == null) yield break;
+
+        Vector3 start = basket.localScale;
+        if (time <= 0f)
+        {
+            basket.localScale = target;
+            yield break;
+        }
+
+        float t = 0f;
+        while (t < 1f)
+        {
+            float dt = unscaled ? Time.unscaledDeltaTime : Time.deltaTime;
+            t += dt / time;
+            float ease = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(t));
+            basket.localScale = Vector3.LerpUnclamped(start, target, ease);
+            yield return null;
+        }
+        basket.localScale = target;
     }
 
     // ---------------- 効果定義をまとめる ----------------
@@ -106,7 +184,7 @@ public class Player : MonoBehaviour
             tag = "SpeedUp",
             layer = EffectLayer.Speed,
             policy = EffectPolicy.Overwrite,
-            duration = 3f,
+            duration = 5f,
             apply = () => { speed = baseSpeed + 2f; Debug.Log($"[SpeedUp] speed={speed}"); },
             cleanup = () => { speed = baseSpeed; Debug.Log($"[SpeedUp End] speed={speed}"); }
         };
@@ -116,7 +194,7 @@ public class Player : MonoBehaviour
             tag = "SpeedDown",
             layer = EffectLayer.Speed,
             policy = EffectPolicy.Overwrite,
-            duration = 3f,
+            duration = 5f,
             apply = () => { speed = Mathf.Max(0f, baseSpeed - 2f); Debug.Log($"[SpeedDown] speed={speed}"); },
             cleanup = () => { speed = baseSpeed; Debug.Log($"[SpeedDown End] speed={speed}"); }
         };
@@ -146,7 +224,7 @@ public class Player : MonoBehaviour
         effectMap["Bom"] = new EffectSpec
         {
             tag = "Bom",
-            layer = EffectLayer.Control,
+            layer = EffectLayer.ControlLock,
             policy = EffectPolicy.Overwrite,
             duration = 2f,
             apply = () =>
@@ -169,9 +247,19 @@ public class Player : MonoBehaviour
             tag = "Invincible",
             layer = EffectLayer.Status,
             policy = EffectPolicy.Overwrite,
-            duration = 3f,
-            apply = () => { /* isInvincible = true; */ Debug.Log("[Invincible] ON"); },
-            cleanup = () => { /* isInvincible = false; */ Debug.Log("[Invincible] OFF"); }
+            duration = 0f, 
+            apply = () =>
+            {
+                isInvincible = true;
+                invincibleCharges = 2; // ★ 2回分チャージ
+                Debug.Log($"[Invincible] ON (charges={invincibleCharges})");
+            },
+            cleanup = () =>
+            {
+                isInvincible = false;
+                invincibleCharges = 0;
+                Debug.Log("[Invincible] OFF");
+            }
         };
 
         // ===== Basket レイヤー =====
@@ -179,11 +267,40 @@ public class Player : MonoBehaviour
         {
             tag = "BigBasket",
             layer = EffectLayer.Basket,
-            policy = EffectPolicy.Overwrite,
+            policy = EffectPolicy.Overwrite,   // 同効果が来たら上書き開始（Refresh/Extendにしたいなら後述）
             duration = 3f,
-            apply = () => { /* かご拡大 */ Debug.Log("[BigBasket] ON"); },
-            cleanup = () => { /* 元に戻す */ Debug.Log("[BigBasket] OFF"); }
+            apply = () =>
+            {
+                if (basket == null)
+                {
+                    Debug.LogWarning("[BigBasket] basket が未割り当てです");
+                    return;
+                }
+
+                // 多重起動対策：前の補間を止める
+                if (basketScaleRoutine != null)
+                    StopCoroutine(basketScaleRoutine);
+
+                // 目標スケール（ベース×倍率）
+                Vector3 target = basketBaseScale * basketScaleMultiplier;
+
+                // 補間で拡大（TimeScaleの影響を受けたくない場合は第3引数 true）
+                basketScaleRoutine = StartCoroutine(TweenBasketScale(target, basketScaleTweenTime, false));
+                Debug.Log("[BigBasket] ON");
+            },
+            cleanup = () =>
+            {
+                if (basket == null) return;
+
+                if (basketScaleRoutine != null)
+                    StopCoroutine(basketScaleRoutine);
+
+                // 元のサイズへ戻す
+                basketScaleRoutine = StartCoroutine(TweenBasketScale(basketBaseScale, basketScaleTweenTime, false));
+                Debug.Log("[BigBasket] OFF");
+            }
         };
+
 
         // ===== Instant（スロット非占有） =====
         effectMap["-Score"] = new EffectSpec
@@ -203,6 +320,45 @@ public class Player : MonoBehaviour
             policy = EffectPolicy.Instant,
             duration = 0f,
             apply = () => { /* タイム減少 */ Debug.Log("[-Time] 即時処理"); },
+            cleanup = null
+        };
+
+        effectMap["ScrollStop"] = new EffectSpec
+        {
+            tag = "ScrollStop",
+            layer = EffectLayer.Status,
+            policy = EffectPolicy.Instant,
+            duration = 3f,
+            apply = () => { Debug.Log("ScrollStop"); },
+            cleanup = null
+        };
+
+        // ===== Control レイヤー =====
+        effectMap["Reverse"] = new EffectSpec
+        {
+            tag = "Reverse",
+            layer = EffectLayer.ControlReverse,       // ← Status ではなく Control レイヤーに
+            policy = EffectPolicy.Overwrite,   // 同効果を再入手でタイマーをリセットしたい（延長なら Extend/Refresh運用）
+            duration = 3f,                     // 反転の継続秒数
+            apply = () =>
+            {
+                reverseControls = true;
+                Debug.Log("[Reverse] 操作反転 ON");
+            },
+            cleanup = () =>
+            {
+                reverseControls = false;
+                Debug.Log("[Reverse] 操作反転 OFF");
+            }
+        };
+
+        effectMap["しかいせまくなる"] = new EffectSpec
+        {
+            tag = "???",
+            layer = EffectLayer.Status,
+            policy = EffectPolicy.Instant,
+            duration = 3f,
+            apply = () => { Debug.Log("???"); },
             cleanup = null
         };
     }
