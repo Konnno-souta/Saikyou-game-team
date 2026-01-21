@@ -18,25 +18,25 @@ public class PlayerSideSlide : MonoBehaviour
     private Vector3 targetPos;
 
 
-    [Header("�W�����v�ݒ�")]
+    [Header("ジャンプ")]
     public int maxJumps = 2;
     private int jumpCount = 0;
     //private int jumpCount = 0;
 
 
-    [Header("�X�e�[�^�X")]
+    [Header("ステータス")]
     public float baseSpeed = 10f;
     public float speed = 5f;
     public float baseJump = 5f;
     public float jump = 10f;
     //public float airControl = 0.4f;   // �󒆉��ړ��̌����
 
-    [Header("�L�����摜�ݒ�")]
+    [Header("�キャラ画像設定")]
     public Sprite spriteLeft;
     public Sprite spriteRight;
     private SpriteRenderer spriteRenderer;
 
-    [Header("���S")]
+    [Header("壁死亡")]
     public string gameOverSceneName = "ResultScene";
     private bool isDead = false;
 
@@ -60,22 +60,22 @@ public class PlayerSideSlide : MonoBehaviour
     //}
 
 
-    // �����i�X�P�[����ς���Ώہj
+    // かご（スケールを変える対象）
     [Header("Basket (Goal)")]
-    [SerializeField] private Transform basket;              // �����Ɋg�債�����I�u�W�F�N�g�� Transform �����蓖��
-    [SerializeField] private float basketScaleMultiplier = 1.5f; // �g��{��
-    [SerializeField] private float basketScaleTweenTime = 0.2f;  // �g��E�k���̕�Ԏ���
+    [SerializeField] private Transform basket;              // 拡大したいオブジェクトの Transform
+    [SerializeField] private float basketScaleMultiplier = 1.5f; // 拡大倍率
+    [SerializeField] private float basketScaleTweenTime = 0.2f;  // 拡大・縮小の補間時間
 
-    // �Ă̌��X�P�[��
+    // 効果のレイヤー（系統）分類
     private Vector3 basketBaseScale;
     private Coroutine basketScaleRoutine;
 
     [Header("Control Effects")]
-    [SerializeField] private bool reverseControls = false; // ���씽�]�t���O
+    [SerializeField] private bool reverseControls = false; // デバフとみなすタグ
 
     private bool isGrounded = false;
 
-    // ====== ���ʂ̃��C���[�i�n���j���� ======
+    // ====== 無敵の状態管理 ======
     private enum EffectLayer
     {
         Speed,        // ���x�n�iSpeedUp/Down �Ȃǁj
