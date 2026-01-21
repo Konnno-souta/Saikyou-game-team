@@ -59,12 +59,16 @@ public class Tamaire : MonoBehaviour
                     case ball.BallType.Time:       // ← 追加！！
                         countdown60.AddTime(5);      // 5 秒追加
                         break;
-                    
+                    case ball.BallType.Minus:
+                        score = -30;                 // ← マイナス30点
+                                                     // 必要ならカウントしない／別処理も可能
+                        break;
+
 
                 }
 
-                    // スコアを追加
-                    scoreManager.AddScore(score);
+                // スコアを追加
+                scoreManager.AddScore(score);
 
                 
                 // ボールを削除
