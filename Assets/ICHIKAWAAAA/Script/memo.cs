@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
         ControlReverse, // 操作反転
         Status,      // 無敵など
         Basket,      // ゴールサイズなど
+        Debafu,      // スコア、タイムのマイナス効果
         // ほか必要なら追加…
     }
 
@@ -247,7 +248,7 @@ public class Player : MonoBehaviour
             tag = "Invincible",
             layer = EffectLayer.Status,
             policy = EffectPolicy.Overwrite,
-            duration = 0f, 
+            duration = Mathf.Infinity,
             apply = () =>
             {
                 isInvincible = true;
@@ -306,7 +307,7 @@ public class Player : MonoBehaviour
         effectMap["-Score"] = new EffectSpec
         {
             tag = "-Score",
-            layer = EffectLayer.Status,  // どこでもOK（参照しない）
+            layer = EffectLayer.Debafu,  // どこでもOK（参照しない）
             policy = EffectPolicy.Instant,
             duration = 0f,
             apply = () => { /* スコア減算 */ Debug.Log("[-Score] 即時処理"); },
@@ -316,7 +317,7 @@ public class Player : MonoBehaviour
         effectMap["-Time"] = new EffectSpec
         {
             tag = "-Time",
-            layer = EffectLayer.Status,
+            layer = EffectLayer.Debafu,  // どこでもOK（参照しない）
             policy = EffectPolicy.Instant,
             duration = 0f,
             apply = () => { /* タイム減少 */ Debug.Log("[-Time] 即時処理"); },
@@ -337,20 +338,21 @@ public class Player : MonoBehaviour
         effectMap["Reverse"] = new EffectSpec
         {
             tag = "Reverse",
-            layer = EffectLayer.ControlReverse,       // ← Status ではなく Control レイヤーに
-            policy = EffectPolicy.Overwrite,   // 同効果を再入手でタイマーをリセットしたい（延長なら Extend/Refresh運用）
-            duration = 3f,                     // 反転の継続秒数
+            layer = EffectLayer.ControlReverse,
+            policy = EffectPolicy.Overwrite,
+            duration = 3f,
             apply = () =>
             {
-                reverseControls = true;
-                Debug.Log("[Reverse] 操作反転 ON");
+                reverseCount++;
+                Debug.Log($"[Reverse] ON (count={reverseCount})");
             },
             cleanup = () =>
             {
-                reverseControls = false;
-                Debug.Log("[Reverse] 操作反転 OFF");
+                reverseCount = Mathf.Max(0, reverseCount - 1);
+                Debug.Log($"[Reverse] OFF (count={reverseCount})");
             }
         };
+
 
         effectMap["しかいせまくなる"] = new EffectSpec
         {
@@ -447,13 +449,31 @@ public class Player : MonoBehaviour
             isGrounded = true;
         }
 
-        // タグが効果辞書に登録済みなら適用
         string t = collision.gameObject.tag;
+
+        // ★ 無敵チェック（デバフ無効化）
+        if (isInvincible && DebuffTags.Contains(t))
+        {
+            invincibleCharges--;
+            Debug.Log($"[Invincible] Block {t} (remain={invincibleCharges})");
+
+            if (invincibleCharges <= 0)
+            {
+                isInvincible = false;
+                Debug.Log("[Invincible] Charges exhausted");
+            }
+
+            Destroy(collision.gameObject);
+            return; // ← ここで処理終了（効果は適用しない）
+        }
+
+        // 通常の効果処理
         if (effectMap != null && effectMap.ContainsKey(t))
         {
             ApplyBallEffect(t);
             Destroy(collision.gameObject);
         }
     }
+
     // ごめんねまーちゃんごめんね
 }
