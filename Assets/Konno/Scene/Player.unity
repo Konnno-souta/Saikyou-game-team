@@ -5615,6 +5615,10 @@ MonoBehaviour:
   spriteLeft: {fileID: 0}
   spriteRight: {fileID: 0}
   gameOverSceneName: ResultScene
+  basket: {fileID: 0}
+  basketScaleMultiplier: 1.5
+  basketScaleTweenTime: 0.2
+  reverseControls: 0
 --- !u!1 &1742551232
 GameObject:
   m_ObjectHideFlags: 0
@@ -6768,11 +6772,15 @@ MonoBehaviour:
   maxJumps: 2
   baseSpeed: 10
   speed: 5
-  baseJump: 10
-  jump: 10
+  baseJump: 8
+  jump: 5
   spriteLeft: {fileID: 21300000, guid: 5736000d5cc8b4b4fa120f2ef1e0c169, type: 3}
   spriteRight: {fileID: 21300000, guid: 40a0fecb1263b00438c9862484848f35, type: 3}
   gameOverSceneName: ResultScene
+  basket: {fileID: 608814094}
+  basketScaleMultiplier: 1.5
+  basketScaleTweenTime: 0.2
+  reverseControls: 1
 --- !u!65 &2143083868
 BoxCollider:
   m_ObjectHideFlags: 0
