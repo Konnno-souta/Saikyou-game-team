@@ -11,32 +11,32 @@ public class PlayerSideSlide : MonoBehaviour
     [SerializeField] PlayerMovement pTR;
     [SerializeField] FloorHitCheck fhc;
 
-    private float stepDistance;   // 1‰ñ‚ÌƒTƒCƒhƒXƒeƒbƒv—Ê
-    public float moveSpeed;      // ˆÚ“®‘¬“xi‘å‚«‚¢‚Ù‚Ç‘‚­ŠŠ‚ç‚©‚É“’Bj
+    private float stepDistance;   // 1ï¿½ï¿½ÌƒTï¿½Cï¿½hï¿½Xï¿½eï¿½bï¿½vï¿½ï¿½
+    public float moveSpeed;      // ï¿½Ú“ï¿½ï¿½ï¿½ï¿½xï¿½iï¿½å‚«ï¿½ï¿½ï¿½Ù‚Ç‘ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç‚©ï¿½É“ï¿½ï¿½Bï¿½j
     private float msFirst;
 
     private Vector3 targetPos;
 
 
-    [Header("ƒWƒƒƒ“ƒvİ’è")]
+    [Header("ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½vï¿½İ’ï¿½")]
     public int maxJumps = 2;
     private int jumpCount = 0;
     //private int jumpCount = 0;
 
 
-    [Header("ƒXƒe[ƒ^ƒX")]
+    [Header("ï¿½Xï¿½eï¿½[ï¿½^ï¿½X")]
     public float baseSpeed = 10f;
     public float speed = 5f;
     public float baseJump = 5f;
     public float jump = 10f;
-    //public float airControl = 0.4f;   // ‹ó’†‰¡ˆÚ“®‚ÌŒø‚«‹ï‡
+    //public float airControl = 0.4f;   // ï¿½ó’†‰ï¿½ï¿½Ú“ï¿½ï¿½ÌŒï¿½ï¿½ï¿½ï¿½ï‡
 
-    [Header("ƒLƒƒƒ‰‰æ‘œİ’è")]
+    [Header("ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½æ‘œï¿½İ’ï¿½")]
     public Sprite spriteLeft;
     public Sprite spriteRight;
     private SpriteRenderer spriteRenderer;
 
-    [Header("€–S")]
+    [Header("ï¿½ï¿½ï¿½S")]
     public string gameOverSceneName = "ResultScene";
     private bool isDead = false;
 
@@ -55,61 +55,61 @@ public class PlayerSideSlide : MonoBehaviour
     //    msFirst = moveSpeed;
 
     //    rb = GetComponent<Rigidbody>();
-    //    spriteRenderer = GetComponent<SpriteRenderer>(); // SpriteRendereræ“¾
-    //    rb.freezeRotation = true; // ‘S‰ñ“]‚ğŒÅ’è
+    //    spriteRenderer = GetComponent<SpriteRenderer>(); // SpriteRendererï¿½æ“¾
+    //    rb.freezeRotation = true; // ï¿½Sï¿½ï¿½]ï¿½ï¿½ï¿½Å’ï¿½
     //}
 
 
-    // ‚©‚²iƒXƒP[ƒ‹‚ğ•Ï‚¦‚é‘ÎÛj
+    // ï¿½ï¿½ï¿½ï¿½ï¿½iï¿½Xï¿½Pï¿½[ï¿½ï¿½ï¿½ï¿½Ï‚ï¿½ï¿½ï¿½ÎÛj
     [Header("Basket (Goal)")]
-    [SerializeField] private Transform basket;              // ‚±‚±‚ÉŠg‘å‚µ‚½‚¢ƒIƒuƒWƒFƒNƒg‚Ì Transform ‚ğŠ„‚è“–‚Ä
-    [SerializeField] private float basketScaleMultiplier = 1.5f; // Šg‘å”{—¦
-    [SerializeField] private float basketScaleTweenTime = 0.2f;  // Šg‘åEk¬‚Ì•âŠÔŠÔ
+    [SerializeField] private Transform basket;              // ï¿½ï¿½ï¿½ï¿½ï¿½ÉŠgï¿½å‚µï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ Transform ï¿½ï¿½ï¿½ï¿½ï¿½è“–ï¿½ï¿½
+    [SerializeField] private float basketScaleMultiplier = 1.5f; // ï¿½gï¿½ï¿½{ï¿½ï¿½
+    [SerializeField] private float basketScaleTweenTime = 0.2f;  // ï¿½gï¿½ï¿½Eï¿½kï¿½ï¿½ï¿½Ì•ï¿½Ôï¿½ï¿½ï¿½
 
-    // âÄ‚ÌŒ³ƒXƒP[ƒ‹
+    // ï¿½Ä‚ÌŒï¿½ï¿½Xï¿½Pï¿½[ï¿½ï¿½
     private Vector3 basketBaseScale;
     private Coroutine basketScaleRoutine;
 
     [Header("Control Effects")]
-    [SerializeField] private bool reverseControls = false; // ‘€ì”½“]ƒtƒ‰ƒO
+    [SerializeField] private bool reverseControls = false; // ï¿½ï¿½ï¿½ì”½ï¿½]ï¿½tï¿½ï¿½ï¿½O
 
     private bool isGrounded = false;
 
-    // ====== Œø‰Ê‚ÌƒŒƒCƒ„[iŒn“j•ª—Ş ======
+    // ====== ï¿½ï¿½ï¿½Ê‚Ìƒï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½iï¿½nï¿½ï¿½ï¿½jï¿½ï¿½ï¿½ï¿½ ======
     private enum EffectLayer
     {
-        Speed,        // ‘¬“xŒniSpeedUp/Down ‚È‚Çj
-        Jump,        // ƒWƒƒƒ“ƒvŒniJumpUp/Down ‚È‚Çj
-        ControlLock,     // ‘€ì•s‰ÂiBomj
-        ControlReverse, // ‘€ì”½“]
-        Status,      // –³“G‚È‚Ç
-        Basket,      // ƒS[ƒ‹ƒTƒCƒY‚È‚Ç
-        Debafu,      // ƒXƒRƒAAƒ^ƒCƒ€‚Ìƒ}ƒCƒiƒXŒø‰Ê
-        // ‚Ù‚©•K—v‚È‚ç’Ç‰Ác
+        Speed,        // ï¿½ï¿½ï¿½xï¿½nï¿½iSpeedUp/Down ï¿½È‚Çj
+        Jump,        // ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½vï¿½nï¿½iJumpUp/Down ï¿½È‚Çj
+        ControlLock,     // ï¿½ï¿½ï¿½ï¿½sï¿½ÂiBomï¿½j
+        ControlReverse, // ï¿½ï¿½ï¿½ì”½ï¿½]
+        Status,      // ï¿½ï¿½ï¿½Gï¿½È‚ï¿½
+        Basket,      // ï¿½Sï¿½[ï¿½ï¿½ï¿½Tï¿½Cï¿½Yï¿½È‚ï¿½
+        Debafu,      // ï¿½Xï¿½Rï¿½Aï¿½Aï¿½^ï¿½Cï¿½ï¿½ï¿½Ìƒ}ï¿½Cï¿½iï¿½Xï¿½ï¿½ï¿½ï¿½
+        // ï¿½Ù‚ï¿½ï¿½Kï¿½vï¿½È‚ï¿½Ç‰ï¿½ï¿½c
     }
 
-    // Œø‰Ê‚Ì“K—pƒ|ƒŠƒV[
+    // ï¿½ï¿½ï¿½Ê‚Ì“Kï¿½pï¿½|ï¿½ï¿½ï¿½Vï¿½[
     private enum EffectPolicy
     {
-        Overwrite,   // ƒŒƒCƒ„[‚ÌƒXƒƒbƒg‚ğè—LBŠù‘¶‚ª‚ ‚ê‚Îã‘‚«
-        Instant      // ‘¦ÀsŒãI—¹BƒXƒƒbƒg‚ğè—L‚µ‚È‚¢
+        Overwrite,   // ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ÌƒXï¿½ï¿½ï¿½bï¿½gï¿½ï¿½ï¿½Lï¿½Bï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îã‘ï¿½ï¿½
+        Instant      // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½Iï¿½ï¿½ï¿½Bï¿½Xï¿½ï¿½ï¿½bï¿½gï¿½ï¿½ï¿½Lï¿½ï¿½ï¿½È‚ï¿½
     }
 
-    // Œø‰Êƒnƒ“ƒhƒ‹iƒ^ƒCƒ}[EŒãn––j
+    // ï¿½ï¿½ï¿½Êƒnï¿½ï¿½ï¿½hï¿½ï¿½ï¿½iï¿½^ï¿½Cï¿½}ï¿½[ï¿½Eï¿½ï¿½nï¿½ï¿½ï¿½j
     private class EffectHandle
     {
         public Coroutine routine;
         public Action cleanup;
         public string name;
         public EffectLayer layer;
-        public float endsAt; // ƒfƒoƒbƒO—piI—¹—\’èj
+        public float endsAt; // ï¿½fï¿½oï¿½bï¿½Oï¿½pï¿½iï¿½Iï¿½ï¿½ï¿½\ï¿½èï¿½ï¿½ï¿½j
     }
 
-    // ƒAƒNƒeƒBƒuŒø‰Ê
+    // ï¿½Aï¿½Nï¿½eï¿½Bï¿½uï¿½ï¿½ï¿½ï¿½
     private readonly Dictionary<EffectLayer, EffectHandle> activeByLayer =
         new Dictionary<EffectLayer, EffectHandle>();
 
-    // Œø‰Ê’è‹`
+    // ï¿½ï¿½ï¿½Ê’ï¿½`
     private class EffectSpec
     {
         public string tag;
@@ -121,22 +121,22 @@ public class PlayerSideSlide : MonoBehaviour
     }
 
 
-    // ƒfƒoƒt‚Æ‚İ‚È‚·ƒ^ƒO
+    // ï¿½fï¿½oï¿½tï¿½Æ‚İ‚È‚ï¿½ï¿½^ï¿½O
     private static readonly HashSet<string> DebuffTags = new HashSet<string>(StringComparer.Ordinal)
     {
       "SpeedDown", "JumpDown", "Bom", "-Score", "-Time","Reverse"
     };
 
 
-    // –³“G‚Ìó‘ÔŠÇ—
+    // ï¿½ï¿½ï¿½Gï¿½Ìï¿½ÔŠÇ—ï¿½
     private int invincibleCharges = 0;
     private bool isInvincible = false;
 
-    // Control Œn‚Ì‡¬ó‘Ô
-    private int lockCount = 0;      // 1ˆÈã‚Å‘€ì•s‰Â
-    private int reverseCount = 0;   // Šï”‚Å”½“]A‹ô”‚Å’Êí
+    // Control ï¿½nï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    private int lockCount = 0;      // 1ï¿½Èï¿½Å‘ï¿½ï¿½ï¿½sï¿½ï¿½
+    private int reverseCount = 0;   // ï¿½ï”ï¿½Å”ï¿½ï¿½]ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½Å’Êï¿½
 
-    // ƒ^ƒO¨’è‹` ‚Ì«‘
+    // ï¿½^ï¿½Oï¿½ï¿½ï¿½ï¿½` ï¿½Ìï¿½ï¿½ï¿½
     private Dictionary<string, EffectSpec> effectMap;
 
 
@@ -165,34 +165,34 @@ public class PlayerSideSlide : MonoBehaviour
             if (Input.GetKey(KeyCode.D))
             {
                 transform.position += inv * speed * transform.right * Time.deltaTime;
-                spriteRenderer.sprite = spriteRight; // ‰E‰æ‘œ
+                spriteRenderer.sprite = spriteRight; // ï¿½Eï¿½æ‘œ
             }
             if (Input.GetKey(KeyCode.A))
             {
                 transform.position -= inv * speed * transform.right * Time.deltaTime;
-                spriteRenderer.sprite = spriteLeft; // ¶‰æ‘œ
+                spriteRenderer.sprite = spriteLeft; // ï¿½ï¿½ï¿½æ‘œ
             }
-            //// --- “ü—Íó•t ---
-            //if (Input.GetKeyDown(KeyCode.D))  // ‰E‚Ö
+            //// --- ï¿½ï¿½ï¿½Íï¿½t ---
+            //if (Input.GetKeyDown(KeyCode.D))  // ï¿½Eï¿½ï¿½
             //{
             //    move = true;
             //    targetPos += Vector3.right * stepDistance;
             //    //targetPos += new Vector3(stepDistance, 0f, 0f);
-            //    spriteRenderer.sprite = spriteRight; // ‰E‰æ‘œ
+            //    spriteRenderer.sprite = spriteRight; // ï¿½Eï¿½æ‘œ
             //}
 
-            //if (Input.GetKeyDown(KeyCode.A))  // ¶‚Ö
+            //if (Input.GetKeyDown(KeyCode.A))  // ï¿½ï¿½ï¿½ï¿½
             //{
             //    move = true;
             //    targetPos += Vector3.left * stepDistance;
             //    //targetPos += new Vector3(-stepDistance, 0f, 0f);
-            //    spriteRenderer.sprite = spriteLeft; // ¶‰æ‘œ
+            //    spriteRenderer.sprite = spriteLeft; // ï¿½ï¿½ï¿½æ‘œ
             //}
         }
 
 
 
-        //---ŠŠ‚ç‚©‚ÉˆÚ“®---
+        //---ï¿½ï¿½ï¿½ç‚©ï¿½ÉˆÚ“ï¿½---
         transform.position = Vector3.MoveTowards(
             transform.position,
             targetPos,
@@ -214,12 +214,12 @@ public class PlayerSideSlide : MonoBehaviour
 
     void Die()
     {
-        if (isDead) return;   // ‘½d”»’è–h~
+        if (isDead) return;   // ï¿½ï¿½ï¿½dï¿½ï¿½ï¿½ï¿½hï¿½~
         isDead = true;
 
         Debug.Log("GAME OVER");
 
-        // •¨—’â~i–\‚ê–h~j
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½~ï¿½iï¿½\ï¿½ï¿½hï¿½~ï¿½j
         //rb.velocity = Vector3.zero;
         rb.isKinematic = true;
 
@@ -241,22 +241,22 @@ public class PlayerSideSlide : MonoBehaviour
     }
 
 
-    // ƒWƒƒƒ“ƒvˆ— –{‘Ì
+    // ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½ï¿½ ï¿½{ï¿½ï¿½
     void Jump()
     {
-        Vector3 vel = rb.velocity;
+        Vector3 vel = rb.linearVelocity;
         //Vector3 vel = rb.linearVelocity;
-        vel.y = 0;                  // 2’i–Ú‚Å‰ÁZ‚ª–\‚ê‚È‚¢‚æ‚¤‚É
-        rb.velocity = vel;
+        vel.y = 0;                  // 2ï¿½iï¿½Ú‚Å‰ï¿½ï¿½Zï¿½ï¿½ï¿½\ï¿½ï¿½È‚ï¿½ï¿½æ‚¤ï¿½ï¿½
+        rb.linearVelocity = vel;
 
 rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
     }
 
     //========================================
-    //  Ú’n”»’èi’n–Ê‚É’…‚¢‚½‚çƒWƒƒƒ“ƒv‰ñ”ƒŠƒZƒbƒgj
+    //  ï¿½Ú’nï¿½ï¿½ï¿½ï¿½iï¿½nï¿½Ê‚É’ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ñ”ƒï¿½ï¿½Zï¿½bï¿½gï¿½j
     //========================================
 
-    // ‹N“®‚Éƒx[ƒXƒXƒP[ƒ‹‚ğƒLƒƒƒvƒ`ƒƒ
+    // ï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½Éƒxï¿½[ï¿½Xï¿½Xï¿½Pï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Lï¿½ï¿½ï¿½vï¿½`ï¿½ï¿½
     void Awake()
     {
         if (basket != null)
@@ -265,7 +265,7 @@ rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
         }
     }
 
-    // ƒGƒfƒBƒ^‚Å’l‚ğ•Ï‚¦‚½‚àƒx[ƒX‚ğXVi”CˆÓj
+    // ï¿½Gï¿½fï¿½Bï¿½^ï¿½Å’lï¿½ï¿½Ï‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½[ï¿½Xï¿½ï¿½ï¿½Xï¿½Vï¿½iï¿½Cï¿½Ój
     void OnValidate()
     {
         if (basket != null)
@@ -274,7 +274,7 @@ rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
         }
     }
 
-    // ‚©‚²‚Ì‚â‚Â
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚ï¿½ï¿½
     private IEnumerator TweenBasketScale(Vector3 target, float time, bool unscaled = false)
     {
         if (basket == null) yield break;
@@ -298,12 +298,12 @@ rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
         basket.localScale = target;
     }
 
-    // ---------------- Œø‰Ê’è‹`‚ğ‚Ü‚Æ‚ß‚é ----------------
+    // ---------------- ï¿½ï¿½ï¿½Ê’ï¿½`ï¿½ï¿½ï¿½Ü‚Æ‚ß‚ï¿½ ----------------
     private void BuildEffectDefinitions()
     {
         effectMap = new Dictionary<string, EffectSpec>(StringComparer.Ordinal);
 
-        // ===== Move ƒŒƒCƒ„[ =====
+        // ===== Move ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ =====
         effectMap["SpeedUp"] = new EffectSpec
         {
             tag = "SpeedUp",
@@ -324,7 +324,7 @@ rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
             cleanup = () => { speed = baseSpeed; Debug.Log($"[SpeedDown End] speed={speed}"); }
         };
 
-        // ===== Jump ƒŒƒCƒ„[ =====
+        // ===== Jump ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ =====
         effectMap["JumpUp"] = new EffectSpec
         {
             tag = "JumpUp",
@@ -345,7 +345,7 @@ rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
             cleanup = () => { jump = baseJump; Debug.Log($"[JumpDown End] jump={jump}"); }
         };
 
-        // ===== Control ƒŒƒCƒ„[ =====
+        // ===== Control ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ =====
         effectMap["Bom"] = new EffectSpec
         {
             tag = "Bom",
@@ -356,7 +356,7 @@ rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
             {
                 speed = Mathf.Max(0f, baseSpeed - 5f);
                 jump = Mathf.Max(0f, baseJump - 2f);
-                Debug.Log("[Bom] “®‚¯‚È‚¢");
+                Debug.Log("[Bom] ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½");
             },
             cleanup = () =>
             {
@@ -366,7 +366,7 @@ rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
             }
         };
 
-        // ===== Status ƒŒƒCƒ„[ =====
+        // ===== Status ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ =====
         effectMap["Invincible"] = new EffectSpec
         {
             tag = "Invincible",
@@ -376,7 +376,7 @@ rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
             apply = () =>
             {
                 isInvincible = true;
-                invincibleCharges = 2; // š 2‰ñ•ªƒ`ƒƒ[ƒW
+                invincibleCharges = 2; // ï¿½ï¿½ 2ï¿½ñ•ªƒ`ï¿½ï¿½ï¿½[ï¿½W
                 Debug.Log($"[Invincible] ON (charges={invincibleCharges})");
             },
             cleanup = () =>
@@ -387,29 +387,29 @@ rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
             }
         };
 
-        // ===== Basket ƒŒƒCƒ„[ =====
+        // ===== Basket ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ =====
         effectMap["BigBasket"] = new EffectSpec
         {
             tag = "BigBasket",
             layer = EffectLayer.Basket,
-            policy = EffectPolicy.Overwrite,   // “¯Œø‰Ê‚ª—ˆ‚½‚çã‘‚«ŠJniRefresh/Extend‚É‚µ‚½‚¢‚È‚çŒãqj
+            policy = EffectPolicy.Overwrite,   // ï¿½ï¿½ï¿½ï¿½ï¿½Ê‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã‘ï¿½ï¿½ï¿½Jï¿½nï¿½iRefresh/Extendï¿½É‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½qï¿½j
             duration = 3f,
             apply = () =>
             {
                 if (basket == null)
                 {
-                    Debug.LogWarning("[BigBasket] basket ‚ª–¢Š„‚è“–‚Ä‚Å‚·");
+                    Debug.LogWarning("[BigBasket] basket ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è“–ï¿½Ä‚Å‚ï¿½");
                     return;
                 }
 
-                // ‘½d‹N“®‘ÎôF‘O‚Ì•âŠÔ‚ğ~‚ß‚é
+                // ï¿½ï¿½ï¿½dï¿½Nï¿½ï¿½ï¿½Îï¿½Fï¿½Oï¿½Ì•ï¿½Ô‚ï¿½ï¿½~ï¿½ß‚ï¿½
                 if (basketScaleRoutine != null)
                     StopCoroutine(basketScaleRoutine);
 
-                // –Ú•WƒXƒP[ƒ‹iƒx[ƒX~”{—¦j
+                // ï¿½Ú•Wï¿½Xï¿½Pï¿½[ï¿½ï¿½ï¿½iï¿½xï¿½[ï¿½Xï¿½~ï¿½{ï¿½ï¿½ï¿½j
                 Vector3 target = basketBaseScale * basketScaleMultiplier;
 
-                // •âŠÔ‚ÅŠg‘åiTimeScale‚Ì‰e‹¿‚ğó‚¯‚½‚­‚È‚¢ê‡‚Í‘æ3ˆø” truej
+                // ï¿½ï¿½Ô‚ÅŠgï¿½ï¿½iTimeScaleï¿½Ì‰eï¿½ï¿½ï¿½ï¿½ï¿½ó‚¯‚ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½ê‡ï¿½Í‘ï¿½3ï¿½ï¿½ï¿½ï¿½ trueï¿½j
                 basketScaleRoutine = StartCoroutine(TweenBasketScale(target, basketScaleTweenTime, false));
                 Debug.Log("[BigBasket] ON");
             },
@@ -420,31 +420,31 @@ rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
                 if (basketScaleRoutine != null)
                     StopCoroutine(basketScaleRoutine);
 
-                // Œ³‚ÌƒTƒCƒY‚Ö–ß‚·
+                // ï¿½ï¿½ï¿½ÌƒTï¿½Cï¿½Yï¿½Ö–ß‚ï¿½
                 basketScaleRoutine = StartCoroutine(TweenBasketScale(basketBaseScale, basketScaleTweenTime, false));
                 Debug.Log("[BigBasket] OFF");
             }
         };
 
 
-        // ===== InstantiƒXƒƒbƒg”ñè—Lj =====
+        // ===== Instantï¿½iï¿½Xï¿½ï¿½ï¿½bï¿½gï¿½ï¿½ï¿½Lï¿½j =====
         effectMap["-Score"] = new EffectSpec
         {
             tag = "-Score",
-            layer = EffectLayer.Debafu,  // ‚Ç‚±‚Å‚àOKiQÆ‚µ‚È‚¢j
+            layer = EffectLayer.Debafu,  // ï¿½Ç‚ï¿½ï¿½Å‚ï¿½OKï¿½iï¿½Qï¿½Æ‚ï¿½ï¿½È‚ï¿½ï¿½j
             policy = EffectPolicy.Instant,
             duration = 0f,
-            apply = () => { /* ƒXƒRƒAŒ¸Z */ Debug.Log("[-Score] ‘¦ˆ—"); },
+            apply = () => { /* ï¿½Xï¿½Rï¿½Aï¿½ï¿½ï¿½Z */ Debug.Log("[-Score] ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"); },
             cleanup = null
         };
 
         effectMap["-Time"] = new EffectSpec
         {
             tag = "-Time",
-            layer = EffectLayer.Debafu,  // ‚Ç‚±‚Å‚àOKiQÆ‚µ‚È‚¢j
+            layer = EffectLayer.Debafu,  // ï¿½Ç‚ï¿½ï¿½Å‚ï¿½OKï¿½iï¿½Qï¿½Æ‚ï¿½ï¿½È‚ï¿½ï¿½j
             policy = EffectPolicy.Instant,
             duration = 0f,
-            apply = () => { /* ƒ^ƒCƒ€Œ¸­ */ Debug.Log("[-Time] ‘¦ˆ—"); },
+            apply = () => { /* ï¿½^ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */ Debug.Log("[-Time] ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"); },
             cleanup = null
         };
 
@@ -458,7 +458,7 @@ rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
             cleanup = null
         };
 
-        // ===== Control ƒŒƒCƒ„[ =====
+        // ===== Control ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ =====
         effectMap["Reverse"] = new EffectSpec
         {
             tag = "Reverse",
@@ -478,7 +478,7 @@ rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
         };
 
 
-        effectMap["‚µ‚©‚¢‚¹‚Ü‚­‚È‚é"] = new EffectSpec
+        effectMap["ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½È‚ï¿½"] = new EffectSpec
         {
             tag = "???",
             layer = EffectLayer.Status,
@@ -489,23 +489,23 @@ rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
         };
     }
 
-    // ---------------- ƒŒƒCƒ„[‚²‚Æ‚Ìã‘‚«ˆ— ----------------
+    // ---------------- ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Æ‚Ìã‘ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ----------------
     private void StartEffectByLayer(EffectSpec spec)
     {
         if (spec.policy == EffectPolicy.Instant)
         {
-            // ‘¦ŒnFƒXƒƒbƒg‚ğè—L‚¹‚¸A‚»‚Ìê‚Å“K—p‚µ‚ÄI‚í‚è
+            // ï¿½ï¿½ï¿½ï¿½ï¿½nï¿½Fï¿½Xï¿½ï¿½ï¿½bï¿½gï¿½ï¿½ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Ìï¿½Å“Kï¿½pï¿½ï¿½ï¿½ÄIï¿½ï¿½ï¿½
             try { spec.apply?.Invoke(); }
-            catch (Exception e) { Debug.LogWarning($"[Effect Instant] —áŠO: {e.Message}"); }
+            catch (Exception e) { Debug.LogWarning($"[Effect Instant] ï¿½ï¿½O: {e.Message}"); }
             return;
         }
 
-        // Overwrite ŒnF“¯‚¶ƒŒƒCƒ„[“à‚ÌŠù‘¶Œø‰Ê‚ğI—¹¨V‹KŠJn
+        // Overwrite ï¿½nï¿½Fï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÌŠï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê‚ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½Vï¿½Kï¿½Jï¿½n
         CancelLayer(spec.layer);
 
-        // V‹KŒø‰Ê“K—p
+        // ï¿½Vï¿½Kï¿½ï¿½ï¿½Ê“Kï¿½p
         try { spec.apply?.Invoke(); }
-        catch (Exception e) { Debug.LogWarning($"[Effect Apply] —áŠO: {e.Message}"); }
+        catch (Exception e) { Debug.LogWarning($"[Effect Apply] ï¿½ï¿½O: {e.Message}"); }
 
         var handle = new EffectHandle
         {
@@ -526,11 +526,11 @@ rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
         if (duration > 0f)
             yield return new WaitForSeconds(duration);
 
-        // “¯‚¶ƒnƒ“ƒhƒ‹‚ªŒ»–ğ‚È‚çI—¹
+        // ï¿½ï¿½ï¿½ï¿½ï¿½nï¿½ï¿½ï¿½hï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½Iï¿½ï¿½
         if (activeByLayer.TryGetValue(handle.layer, out var current) && current == handle)
         {
             try { handle.cleanup?.Invoke(); }
-            catch (Exception e) { Debug.LogWarning($"[Effect Cleanup] —áŠO: {e.Message}"); }
+            catch (Exception e) { Debug.LogWarning($"[Effect Cleanup] ï¿½ï¿½O: {e.Message}"); }
 
             activeByLayer.Remove(handle.layer);
             Debug.Log($"[Effect End] {handle.name} layer={handle.layer}");
@@ -541,9 +541,9 @@ rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
     {
         if (!activeByLayer.TryGetValue(layer, out var handle)) return;
 
-        // Œãn–– ¨ ƒRƒ‹[ƒ`ƒ“’â~ ¨ æ‚èÁ‚µ
+        // ï¿½ï¿½nï¿½ï¿½ ï¿½ï¿½ ï¿½Rï¿½ï¿½ï¿½[ï¿½`ï¿½ï¿½ï¿½ï¿½~ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         try { handle.cleanup?.Invoke(); }
-        catch (Exception e) { Debug.LogWarning($"[Effect Cancel Cleanup] —áŠO: {e.Message}"); }
+        catch (Exception e) { Debug.LogWarning($"[Effect Cancel Cleanup] ï¿½ï¿½O: {e.Message}"); }
 
         if (handle.routine != null)
             StopCoroutine(handle.routine);
@@ -552,22 +552,22 @@ rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
         Debug.Log($"[Effect Cancel] {handle.name} layer={layer}");
     }
 
-    // ---------------- ƒ^ƒO‚©‚çŒø‰Ê‚ğ“K—p ----------------
+    // ---------------- ï¿½^ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê‚ï¿½Kï¿½p ----------------
     private void ApplyBallEffect(string tagName)
     {
         if (!effectMap.TryGetValue(tagName, out var spec))
         {
-            Debug.LogWarning($"–¢‘Î‰‚Ìƒ^ƒO: {tagName}");
+            Debug.LogWarning($"ï¿½ï¿½ï¿½Î‰ï¿½ï¿½Ìƒ^ï¿½O: {tagName}");
             return;
         }
 
         StartEffectByLayer(spec);
     }
 
-    // ---------------- Õ“Ëˆ— ----------------
+    // ---------------- ï¿½Õ“Ëï¿½ï¿½ï¿½ ----------------
     private void OnCollisionEnter(Collision collision)
     {
-        // Ground ‚É’…’n
+        // Ground ï¿½É’ï¿½ï¿½n
         if (collision.gameObject.CompareTag("Ground"))
         {
             foreach (var c in collision.contacts)
@@ -583,7 +583,7 @@ rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
 
                     string t = collision.gameObject.tag;
 
-        // –³“Gƒ`ƒFƒbƒNiƒfƒoƒt–³Œø‰»j
+        // ï¿½ï¿½ï¿½Gï¿½`ï¿½Fï¿½bï¿½Nï¿½iï¿½fï¿½oï¿½tï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½j
         if (isInvincible && DebuffTags.Contains(t))
         {
             invincibleCharges--;
@@ -596,10 +596,10 @@ rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
             }
 
             Destroy(collision.gameObject);
-            return; // © ‚±‚±‚Åˆ—I—¹iŒø‰Ê‚Í“K—p‚µ‚È‚¢j
+            return; // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Åï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½iï¿½ï¿½ï¿½Ê‚Í“Kï¿½pï¿½ï¿½ï¿½È‚ï¿½ï¿½j
         }
 
-        // ’Êí‚ÌŒø‰Êˆ—
+        // ï¿½Êï¿½ÌŒï¿½ï¿½Êï¿½ï¿½ï¿½
         if (effectMap != null && effectMap.ContainsKey(t))
         {
             ApplyBallEffect(t);
@@ -607,5 +607,5 @@ rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
         }
     }
 
-    // ‚²‚ß‚ñ‚Ë‚Ü[‚¿‚á‚ñ‚²‚ß‚ñ‚Ë
+    // ï¿½ï¿½ï¿½ß‚ï¿½Ë‚Ü[ï¿½ï¿½ï¿½ï¿½ñ‚²‚ß‚ï¿½ï¿½
 }

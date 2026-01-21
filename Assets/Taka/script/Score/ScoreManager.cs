@@ -17,10 +17,20 @@ public class ScoreManager : MonoBehaviour
         highScore = PlayerPrefs.GetInt("HighScore", 0); // 保存されたハイスコアを読み込む
         UpdateScoreText();
     }
-    public void AddScore(int amount)
+    public void AddScore(int value)
     {
-        score += amount;
+        
+        score += value;
+
+        // 0 未満にならないようにする
+        if (score < 0)
+        {
+            score = 0;
+        }
     }
+
+   
+
     void Update()
     {
         UpdateScoreText();
@@ -43,6 +53,10 @@ public class ScoreManager : MonoBehaviour
     public static void AddGold()
     {
         goldCount++;
+    }
+
+    public static void AddMinus()
+    {
     }
     void UpdateScoreText()
     {
