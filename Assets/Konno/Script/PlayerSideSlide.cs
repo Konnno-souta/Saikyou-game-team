@@ -65,14 +65,16 @@ public class PlayerSideSlide : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D))  // 右へ
         {
             move = true;
-            targetPos += new Vector3(stepDistance, 0f, 0f);
+            targetPos += Vector3.right * stepDistance;
+            //targetPos += new Vector3(stepDistance, 0f, 0f);
             spriteRenderer.sprite = spriteRight; // 右画像
         }
 
         if (Input.GetKeyDown(KeyCode.A))  // 左へ
         {
             move = true;
-            targetPos += new Vector3(-stepDistance, 0f, 0f);
+            targetPos += Vector3.left * stepDistance;
+            //targetPos += new Vector3(-stepDistance, 0f, 0f);
             spriteRenderer.sprite = spriteLeft; // 左画像
         }
 
@@ -126,9 +128,10 @@ public class PlayerSideSlide : MonoBehaviour
     // ジャンプ処理 本体
     void Jump()
     {
-        Vector3 vel = rb.linearVelocity;
+        Vector3 vel = rb.velocity;
+        //Vector3 vel = rb.linearVelocity;
         vel.y = 0;                  // 2段目で加算が暴れないように
-        rb.linearVelocity = vel;
+        rb.velocity = vel;
 
 rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
     }
@@ -279,7 +282,12 @@ rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
             //Destroy(collision.gameObject);
         }
         if (collision.gameObject.CompareTag("Ground"))
-            //isGrounded = true;
-            jumpCount = 0;
+        {
+            if (collision.contacts[0].normal.y > 0.5f)
+            {
+                jumpCount = 0;
+            }
+        }
+
     }
 }
