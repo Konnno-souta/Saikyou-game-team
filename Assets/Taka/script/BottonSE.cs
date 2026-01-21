@@ -2,11 +2,23 @@ using UnityEngine;
 
 public class ButtonSE : MonoBehaviour
 {
-    public AudioSource audioSource;
+    private AudioSource audioSource=null;
+
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     public void PlaySE(AudioClip clip)
     {
-        Debug.Log("Button clicked");
-        audioSource.PlayOneShot(clip);
+        if (audioSource !=null)
+        {
+            audioSource.PlayOneShot(clip);
+        }
+        else
+        {
+            Debug.Log("ê›íËÇ≈Ç´ÇƒÇ‹ÇπÇÒ");
+        }
     }
 }
