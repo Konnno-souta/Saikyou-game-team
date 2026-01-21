@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 3423215380177115417}
   - component: {fileID: -124273090579736446}
   m_Layer: 0
-  m_Name: +Score Ball
-  m_TagString: MinusScore
+  m_Name: -Score Ball
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
