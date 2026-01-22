@@ -11,7 +11,7 @@ public class RankingUIController : MonoBehaviour
     public float hideY = 800f;    // 非表示位置
     public float slideTime = 0.5f;
 
-    public Button firstSelectButton; // ★ 表示後に選択させたいボタン
+    public Button firstSelectButton; //  表示後に選択させたいボタン
 
     private Coroutine slideCoroutine;
 
