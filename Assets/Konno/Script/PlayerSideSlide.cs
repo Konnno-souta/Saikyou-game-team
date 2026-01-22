@@ -552,7 +552,7 @@ rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
         Debug.Log($"[Effect Cancel] {handle.name} layer={layer}");
     }
 
-    // ---------------- �^�O������ʂ�K�p ----------------
+    // ---------------- エフェクト ----------------
     private void ApplyBallEffect(string tagName)
     {
         if (!effectMap.TryGetValue(tagName, out var spec))
@@ -564,10 +564,17 @@ rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
         StartEffectByLayer(spec);
     }
 
-    // ---------------- �Փˏ��� ----------------
+    // ---------------- 諸々 ----------------
     private void OnCollisionEnter(Collision collision)
     {
-        // Ground �ɒ��n
+        // ===== 死亡判定 =====
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            Die();
+            return;
+        }
+
+        // Ground
         if (collision.gameObject.CompareTag("Ground"))
         {
             foreach (var c in collision.contacts)

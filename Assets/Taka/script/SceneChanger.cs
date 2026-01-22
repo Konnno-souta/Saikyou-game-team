@@ -18,7 +18,7 @@ public class SceneButtonController : MonoBehaviour
 
     public void GoPlayer()
     {
-        StartCoroutine(PlaySEAndLoadScene(startSE, "Player"));
+        StartCoroutine(PlaySEAndLoadScene(startSE, "Setumei"));
     }
 
     public void GoResult()
