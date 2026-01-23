@@ -149,4 +149,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7834d0caf0a07f4ebc89a1cf3c6ba77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballType: 2
+  ballType: 5
