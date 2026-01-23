@@ -16,7 +16,7 @@ public class UvScrollTest : MonoBehaviour
     {
         sds = GameObject.Find("conveyor").GetComponent<ScrollDirectionSet>();
         st2 = GameObject.Find("Playermain").GetComponent<ScrollTest2>();
-        fivermanager = GameObject.Find("FiverManager").GetComponent<FeverManager>();
+        fivermanager = GameObject.Find("FeverManager").GetComponent<FeverManager>();
         // このオブジェクトのRendererを取得
         rend = GetComponent<Renderer>();
         scrollSpeedX = st2.stN;

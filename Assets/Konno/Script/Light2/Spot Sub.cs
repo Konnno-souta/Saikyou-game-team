@@ -13,7 +13,13 @@ public class SpotSub : MonoBehaviour
     [Header("Linked Dark Objects (Auto)")]
     public Transform targetsRoot;   // 子に追加するだけ
     public RawImage backGround;
-    // a
+
+    [Header("Spot Light Movement")]
+    public float swingAngle = 35f;
+    public float swingSpeed = 2f;
+
+    Quaternion[] defaultRotations;
+
     [Range(0f, 1f)]
     public float darkMultiplier = 0.5f;
     [Range(0f, 1f)]
@@ -35,17 +41,24 @@ public class SpotSub : MonoBehaviour
     {
         RefreshTargets();
 
-        // 初期色保存
+        // 初期状態保存
+        if (directionalLight != null)
+            defaultDirColor = directionalLight.color;
+
         if (backGround != null)
             defaultBgColor = backGround.color;
 
+        // Sprite 初期色保存
         if (spriteTargets != null)
         {
             defaultSpriteColors = new Color[spriteTargets.Length];
             for (int i = 0; i < spriteTargets.Length; i++)
+            {
                 defaultSpriteColors[i] = spriteTargets[i].color;
+            }
         }
 
+        // Mesh 初期色保存
         if (meshTargets != null)
         {
             defaultMeshColors = new Color[meshTargets.Length];
@@ -55,13 +68,22 @@ public class SpotSub : MonoBehaviour
                     defaultMeshColors[i] = meshTargets[i].material.color;
             }
         }
+        // 各ライトの初期回転を保存
+        if (lights != null)
+        {
+            defaultRotations = new Quaternion[lights.Length];
+            for (int i = 0; i < lights.Length; i++)
+            {
+                if (lights[i] != null)
+                    defaultRotations[i] = lights[i].transform.localRotation;
+            }
+        }
+
 
         // 最初はOFF
         SetSpotActive(false);
-
-        if (directionalLight != null)
-            defaultDirColor = directionalLight.color;
     }
+
 
 
     void ResetDirectionalLight()
@@ -147,6 +169,19 @@ public class SpotSub : MonoBehaviour
                     mr.material.color = linkedColor;
             }
         }
+        /* ===== スポットライトの動き ===== */
+        for (int i = 0; i < lights.Length; i++)
+        {
+            Light l = lights[i];
+            if (l == null) continue;
+
+            float offset = i * 0.7f; // 位相ずらし
+            float angle = Mathf.Sin(Time.time * swingSpeed + offset) * swingAngle;
+
+            l.transform.localRotation =
+                defaultRotations[i] * Quaternion.Euler(0f, angle, 0f);
+        }
+
     }
     public void StartSpot()
     {
@@ -163,10 +198,38 @@ public class SpotSub : MonoBehaviour
         isActive = false;
         CancelInvoke(nameof(ChangeColors));
 
-        // 色を元に戻す（任意）
+        // Directional Light を戻す
         if (directionalLight != null)
             directionalLight.color = defaultDirColor;
+
+        // 背景を戻す
+        if (backGround != null)
+            backGround.color = defaultBgColor;
+
+        // Sprite を戻す
+        if (spriteTargets != null)
+        {
+            for (int i = 0; i < spriteTargets.Length; i++)
+            {
+                if (spriteTargets[i] != null)
+                    spriteTargets[i].color = defaultSpriteColors[i];
+            }
+        }
+
+        // Mesh を戻す
+        if (meshTargets != null)
+        {
+            for (int i = 0; i < meshTargets.Length; i++)
+            {
+                if (meshTargets[i] != null &&
+                    meshTargets[i].material.HasProperty("_Color"))
+                {
+                    meshTargets[i].material.color = defaultMeshColors[i];
+                }
+            }
+        }
     }
+
 
     public void SetSpotActive(bool on)
     {
@@ -219,6 +282,17 @@ public class SpotSub : MonoBehaviour
 
             if (directionalLight != null)
                 directionalLight.color = defaultDirColor;
+
+            // ライト回転を戻す
+            if (defaultRotations != null)
+            {
+                for (int i = 0; i < lights.Length; i++)
+                {
+                    if (lights[i] != null)
+                        lights[i].transform.localRotation = defaultRotations[i];
+                }
+            }
+
         }
     }
 }
