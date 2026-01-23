@@ -354,8 +354,8 @@ rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
             duration = 2f,
             apply = () =>
             {
-                speed = Mathf.Max(0f, baseSpeed - 5f);
-                jump = Mathf.Max(0f, baseJump - 2f);
+                speed = Mathf.Max(0f, baseSpeed - 10f);
+                jump = Mathf.Max(0f, baseJump - 7f);
                 Debug.Log("[Bom] �����Ȃ�");
             },
             cleanup = () =>

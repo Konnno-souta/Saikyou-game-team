@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 488426675168303278}
   - component: {fileID: 212443144612367428}
   - component: {fileID: 6325832185459905542}
+  - component: {fileID: -1719312096126454282}
   m_Layer: 0
   m_Name: Bom
   m_TagString: Bom
@@ -136,3 +137,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-1719312096126454282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8573777519304046317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 952e06e29b29c3c4a9fef531b9a0d2c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
