@@ -59,7 +59,7 @@ public class SpawnManager : MonoBehaviour
         feverManager = FindAnyObjectByType<FeverManager>();
 
         // 念のため開始時に昇順ソート（OnValidateでも実施）
-        SortStages();
+        //SortStages();
         StartCoroutine(SpawnLoop());
     }
 
