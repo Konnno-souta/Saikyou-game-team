@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class SpotSub : MonoBehaviour
 {
@@ -34,6 +35,7 @@ public class SpotSub : MonoBehaviour
     Color defaultBgColor;
     Color[] defaultSpriteColors;
     Color[] defaultMeshColors;
+    Color[] defaultBgColors;
 
 
 
@@ -47,6 +49,17 @@ public class SpotSub : MonoBehaviour
 
         if (backGround != null)
             defaultBgColor = backGround.color;
+
+        //// RawImage ‰ŠúF•Û‘¶
+        //if (backGround != null && backGround.Length > 0)
+        //{
+        //    defaultBgColors = new Color[backGround.Length];
+        //    for (int i = 0; i < backGround.Length; i++)
+        //    {
+        //        if (backGround[i] != null)
+        //            defaultBgColors[i] = backGround[i].color;
+        //    }
+        //}
 
         // Sprite ‰ŠúF•Û‘¶
         if (spriteTargets != null)
@@ -112,6 +125,7 @@ public class SpotSub : MonoBehaviour
             if (mr == null) continue;
             mr.material = new Material(mr.material);
         }
+
     }
 
     void ChangeColors()
@@ -146,6 +160,17 @@ public class SpotSub : MonoBehaviour
         /* ===== ”wŒi ===== */
         if (backGround != null)
             backGround.color = baseDark;
+
+
+        ///* ===== ”wŒi ===== */
+        //if (backGround != null)
+        //{
+        //    foreach (RawImage bg in backGround)
+        //    {
+        //        if (bg != null)
+        //            bg.color = baseDark;
+        //    }
+        //}
 
         /* ===== SpriteRenderer ===== */
         if (spriteTargets != null)
@@ -202,9 +227,19 @@ public class SpotSub : MonoBehaviour
         if (directionalLight != null)
             directionalLight.color = defaultDirColor;
 
-        // ”wŒi‚ð–ß‚·
+        // ”wŒi‚ð–ß‚·@
         if (backGround != null)
             backGround.color = defaultBgColor;
+
+        //// ”wŒi‚ð–ß‚·i’âŽ~’†j
+        //if (backGround != null && defaultBgColors != null)
+        //{
+        //    for (int i = 0; i < backGround.Length; i++)
+        //    {
+        //        if (backGround[i] != null)
+        //            backGround[i].color = defaultBgColors[i];
+        //    }
+        //}
 
         // Sprite ‚ð–ß‚·
         if (spriteTargets != null)
