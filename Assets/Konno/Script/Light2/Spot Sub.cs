@@ -13,7 +13,7 @@ public class SpotSub : MonoBehaviour
     [Header("Linked Dark Objects (Auto)")]
     public Transform targetsRoot;   // Žq‚É’Ç‰Á‚·‚é‚¾‚¯
     public RawImage backGround;
-
+    // a
     [Range(0f, 1f)]
     public float darkMultiplier = 0.5f;
     [Range(0f, 1f)]
