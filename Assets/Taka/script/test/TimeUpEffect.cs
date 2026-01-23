@@ -6,7 +6,7 @@ using System.Collections;
 public class TimeUpCurtainEffect : MonoBehaviour
 {
     [Header("Countdown")]
-    public timetest countdown;  // タイマーからイベント受け取り
+    public Countdown60 countdown;  // タイマーからイベント受け取り
 
     [Header("UI Elements")]
     public Image timeUpImage;
@@ -31,8 +31,8 @@ public class TimeUpCurtainEffect : MonoBehaviour
 
         // 画面中央で閉じる位置を計算
         float canvasWidth = ((RectTransform)leftCurtain.parent).rect.width;
-        leftEndPos = new Vector2(-107, leftStartPos.y);
-        rightEndPos = new Vector2(-1068, rightStartPos.y);
+        leftEndPos = new Vector2(   -495, leftStartPos.y);
+        rightEndPos = new Vector2(  470, rightStartPos.y);
 
         // タイムアップイベントを購読
         countdown.OnTimeUp += StartCurtainSequence;

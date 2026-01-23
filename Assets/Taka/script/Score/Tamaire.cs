@@ -61,7 +61,7 @@ public class Tamaire : MonoBehaviour
                         break;
                     case ball.BallType.Minus:
                         score = -30;                 // ← マイナス30点
-                                                     // 必要ならカウントしない／別処理も可能
+                        ScoreManager.AddMinus();                         // 必要ならカウントしない／別処理も可能
                         break;
 
 

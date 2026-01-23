@@ -1,8 +1,8 @@
 ﻿
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using UnityEngine.SceneManagement;
 
 public class Countdown60 : MonoBehaviour
 {
@@ -22,6 +22,7 @@ public class Countdown60 : MonoBehaviour
 
     //internal static bool isPaused;
 
+    public event Action OnTimeUp;
     void Start()
     {
         countdownCoroutine = StartCoroutine(Countdown());
@@ -54,10 +55,7 @@ public class Countdown60 : MonoBehaviour
 
         Debug.Log("Time up!");
 
-        RankingManager.Instance.AddScore(ScoreManager.score);
-
-
-        GoToResultScene();
+        OnTimeUp?.Invoke();
     }
 
     void UpdateNumberImages(int number)
@@ -77,7 +75,6 @@ public class Countdown60 : MonoBehaviour
             tensImage.enabled = false;
             onesImage.enabled = false;
             yield return new WaitForSeconds(0.3f);
-
             tensImage.enabled = true;
             onesImage.enabled = true;
             yield return new WaitForSeconds(0.3f);
@@ -86,12 +83,10 @@ public class Countdown60 : MonoBehaviour
         isBlinking = false;
     }
 
-    
     public void AddTime(int addSeconds)
     {
         timeLeft += addSeconds;
 
-        // 追加後に 10秒以上になったら点滅を止める
         if (timeLeft > 10 && isBlinking)
         {
             isBlinking = false;
@@ -99,14 +94,6 @@ public class Countdown60 : MonoBehaviour
             onesImage.enabled = true;
         }
 
-        // 表示を即更新
         UpdateNumberImages(timeLeft);
-    }
-
-void GoToResultScene()
-{
-        RankingManager.Instance.AddScore(ScoreManager.score);
-    SceneManager.LoadScene("ResultScene"); // ← リザルトシーン名
-        
     }
 }
