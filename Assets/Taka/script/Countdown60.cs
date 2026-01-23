@@ -86,7 +86,30 @@ public class Countdown60 : MonoBehaviour
     public void AddTime(int addSeconds)
     {
         timeLeft += addSeconds;
+        timeLeft = Mathf.Clamp(timeLeft, 0, 99);
+        UpdateNumberImages(timeLeft);
 
+        timeLeft += addSeconds;
+
+        // 0未満にならないようにする
+        if (timeLeft < 0)
+        {
+            timeLeft = 0;
+        }
+
+        // 99以上にならないようにする（画像が2桁前提なら）
+        if (timeLeft > 99)
+        {
+            timeLeft = 99;
+        }
+
+        // 10秒以下に「減った」場合、点滅開始
+        if (timeLeft <= 10 && !isBlinking && timeLeft > 0)
+        {
+            StartCoroutine(BlinkNumbers());
+        }
+
+        // 10秒を超えたら点滅解除
         if (timeLeft > 10 && isBlinking)
         {
             isBlinking = false;
@@ -96,4 +119,6 @@ public class Countdown60 : MonoBehaviour
 
         UpdateNumberImages(timeLeft);
     }
+
+
 }
