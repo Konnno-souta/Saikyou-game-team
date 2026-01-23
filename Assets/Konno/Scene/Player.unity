@@ -4345,7 +4345,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
       propertyPath: normalBalls.Array.data[4].probability
-      value: 0
+      value: 17.1
       objectReference: {fileID: 0}
     - target: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
       propertyPath: normalBalls.Array.data[5].probability
@@ -4365,7 +4365,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
       propertyPath: normalBalls.Array.data[9].probability
-      value: 50.9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
       propertyPath: normalBalls.Array.data[10].probability

@@ -63,7 +63,13 @@ public class Tamaire : MonoBehaviour
                         score = -30;                 // ← マイナス30点
                         ScoreManager.AddMinus();                         // 必要ならカウントしない／別処理も可能
                         break;
+                    case ball.BallType.Minustime:       // ← 追加！！
+                   
+                        FindObjectOfType<Countdown60>().AddTime(-5);
+                        break;
 
+                           
+                        
 
                 }
 
