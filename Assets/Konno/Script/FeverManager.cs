@@ -15,8 +15,11 @@ public class FeverManager : MonoBehaviour
     public GameObject feverYokoPrefab;
     public Canvas canvas;
 
-    bool isPaused;
+    [Header("Spot Fever Effect")]
+    public SpotSub spotSub;
 
+
+    bool isPaused;
     public bool IsP { get { return isPaused; } }
 
     bool isFever;
@@ -60,15 +63,19 @@ public class FeverManager : MonoBehaviour
     // ==============================
     void StartFever()
     {
-        // í èÌê∂ê¨í‚é~
         isPaused = true;
-        
+
+        if (spotSub != null)
+            spotSub.SetSpotActive(true);
     }
+
 
     void EndFever()
     {
         isFever = false;
-
         isPaused = false;
+
+        if (spotSub != null)
+            spotSub.SetSpotActive(false);
     }
 }

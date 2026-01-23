@@ -22,11 +22,54 @@ public class SpotSub : MonoBehaviour
     SpriteRenderer[] spriteTargets;
     MeshRenderer[] meshTargets;
 
+    bool isActive = false;
+    Color defaultDirColor;
+
+    Color defaultBgColor;
+    Color[] defaultSpriteColors;
+    Color[] defaultMeshColors;
+
+
+
     void Start()
     {
         RefreshTargets();
-        InvokeRepeating(nameof(ChangeColors), 0f, colorChangeSpeed);
+
+        // 初期色保存
+        if (backGround != null)
+            defaultBgColor = backGround.color;
+
+        if (spriteTargets != null)
+        {
+            defaultSpriteColors = new Color[spriteTargets.Length];
+            for (int i = 0; i < spriteTargets.Length; i++)
+                defaultSpriteColors[i] = spriteTargets[i].color;
+        }
+
+        if (meshTargets != null)
+        {
+            defaultMeshColors = new Color[meshTargets.Length];
+            for (int i = 0; i < meshTargets.Length; i++)
+            {
+                if (meshTargets[i].material.HasProperty("_Color"))
+                    defaultMeshColors[i] = meshTargets[i].material.color;
+            }
+        }
+
+        // 最初はOFF
+        SetSpotActive(false);
+
+        if (directionalLight != null)
+            defaultDirColor = directionalLight.color;
     }
+
+
+    void ResetDirectionalLight()
+    {
+        if (directionalLight != null)
+            directionalLight.color = defaultDirColor;
+    }
+
 
     // 子が増えたとき用（任意）
     void OnTransformChildrenChanged()
@@ -51,6 +94,7 @@ public class SpotSub : MonoBehaviour
 
     void ChangeColors()
     {
+        if (!isActive) return;
         /* ===== スポットライト ===== */
         Color sparkleColor = Random.ColorHSV(
             0f, 1f,
@@ -102,6 +146,79 @@ public class SpotSub : MonoBehaviour
                 if (mr.material.HasProperty("_Color"))
                     mr.material.color = linkedColor;
             }
+        }
+    }
+    public void StartSpot()
+    {
+        if (isActive) return;
+
+        isActive = true;
+        InvokeRepeating(nameof(ChangeColors), 0f, colorChangeSpeed);
+    }
+
+    public void StopSpot()
+    {
+        if (!isActive) return;
+
+        isActive = false;
+        CancelInvoke(nameof(ChangeColors));
+
+        // 色を元に戻す（任意）
+        if (directionalLight != null)
+            directionalLight.color = defaultDirColor;
+    }
+
+    public void SetSpotActive(bool on)
+    {
+        isActive = on;
+
+        if (on)
+        {
+            foreach (Light l in lights)
+            {
+                if (l == null) continue;
+                l.enabled = true;
+                l.type = LightType.Spot;
+            }
+
+            InvokeRepeating(nameof(ChangeColors), 0f, colorChangeSpeed);
+        }
+        else
+        {
+            CancelInvoke(nameof(ChangeColors));
+
+            // ライトOFF
+            foreach (Light l in lights)
+            {
+                if (l == null) continue;
+                l.enabled = false;
+            }
+
+            // ===== 色を元に戻す =====
+
+            if (backGround != null)
+                backGround.color = defaultBgColor;
+
+            if (spriteTargets != null)
+            {
+                for (int i = 0; i < spriteTargets.Length; i++)
+                {
+                    if (spriteTargets[i] != null)
+                        spriteTargets[i].color = defaultSpriteColors[i];
+                }
+            }
+
+            if (meshTargets != null)
+            {
+                for (int i = 0; i < meshTargets.Length; i++)
+                {
+                    if (meshTargets[i] != null && meshTargets[i].material.HasProperty("_Color"))
+                        meshTargets[i].material.color = defaultMeshColors[i];
+                }
+            }
+
+            if (directionalLight != null)
+                directionalLight.color = defaultDirColor;
         }
     }
 }
