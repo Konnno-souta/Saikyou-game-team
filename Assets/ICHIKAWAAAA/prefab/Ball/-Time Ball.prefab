@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3979047754754018060}
   - component: {fileID: 3423215380177115417}
   - component: {fileID: -8600467170645883035}
+  - component: {fileID: -3780487929770770243}
   m_Layer: 0
   m_Name: -Time Ball
   m_TagString: Ball
@@ -66,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: e8cc53b05ee29a741a2172c1c60d8e08, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -136,3 +137,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-3780487929770770243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3325127841765246281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03e84379b195ff845b2f147bb998b85e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

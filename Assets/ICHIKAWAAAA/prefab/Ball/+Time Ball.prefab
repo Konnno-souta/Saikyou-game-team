@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 46276210107898831}
   - component: {fileID: -4757818537687627034}
   - component: {fileID: 8276291551578467967}
+  - component: {fileID: 6703604503848645025}
   m_Layer: 0
   m_Name: +Time Ball
   m_TagString: Ball
@@ -150,3 +151,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballType: 2
+--- !u!114 &6703604503848645025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6042448594525399487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03e84379b195ff845b2f147bb998b85e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
