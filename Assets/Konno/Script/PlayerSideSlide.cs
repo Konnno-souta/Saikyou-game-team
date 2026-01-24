@@ -73,6 +73,11 @@ public class PlayerSideSlide : MonoBehaviour
     [Header("Control Effects")]
     [SerializeField] private bool reverseControls = false; // デバフとみなすタグ
 
+    [Header("Bom Effect Image")]
+    [SerializeField] private GameObject bomImage; // Image or Spriteを入れる
+    [SerializeField] private float bomImageTime = 0.3f;
+
+
     private bool isGrounded = false;
 
     // ====== 無敵の状態管理 ======
@@ -118,6 +123,17 @@ public class PlayerSideSlide : MonoBehaviour
         public float duration;
         public Action apply;
         public Action cleanup;
+    }
+
+    private Coroutine bomImageRoutine;
+
+    private IEnumerator ShowBomImage()
+    {
+        if (bomImage == null) yield break;
+
+        bomImage.SetActive(true);
+        yield return new WaitForSeconds(bomImageTime);
+        bomImage.SetActive(false);
     }
 
 
@@ -356,15 +372,23 @@ rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
             {
                 speed = Mathf.Max(0f, baseSpeed - 10f);
                 jump = Mathf.Max(0f, baseJump - 7f);
-                Debug.Log("[Bom] �����Ȃ�");
+
+                // ここで画像表示
+                if (bomImageRoutine != null)
+                    StopCoroutine(bomImageRoutine);
+
+                bomImageRoutine = StartCoroutine(ShowBomImage());
+
+                Debug.Log("[Bom] 発動");
             },
             cleanup = () =>
             {
                 speed = baseSpeed;
                 jump = baseJump;
-                Debug.Log($"[Bom End] speed={speed}, jump={jump}");
+                Debug.Log("[Bom End]");
             }
         };
+
 
         // ===== Status ���C���[ =====
         effectMap["Invincible"] = new EffectSpec
