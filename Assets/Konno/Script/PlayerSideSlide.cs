@@ -27,11 +27,11 @@ public class PlayerSideSlide : MonoBehaviour
     [Header("ステータス")]
     public float baseSpeed = 10f;
     public float speed = 5f;
-    public float baseJump = 5f;
-    public float jump = 10f;
+    public float baseJump = 10f;
+    public float jump = 5f;
     //public float airControl = 0.4f;   // �󒆉��ړ��̌����
 
-    [Header("�キャラ画像設定")]
+    [Header("キャラ画像設定")]
     public Sprite spriteLeft;
     public Sprite spriteRight;
     private SpriteRenderer spriteRenderer;
@@ -73,9 +73,19 @@ public class PlayerSideSlide : MonoBehaviour
     [Header("Control Effects")]
     [SerializeField] private bool reverseControls = false; // デバフとみなすタグ
 
-    [Header("Bom Effect Image")]
-    [SerializeField] private GameObject bomImage; // Image or Spriteを入れる
-    [SerializeField] private float bomImageTime = 0.3f;
+    [Header("Bom Effect")]
+    [SerializeField] private GameObject bomEffectPrefab;
+    [SerializeField] private Vector3 bomOffset = Vector3.zero; // 少し上に出したい場合
+
+    public class AutoDestroy : MonoBehaviour
+    {
+        public float lifeTime = 0.5f;
+
+        void Start()
+        {
+            Destroy(gameObject, lifeTime);
+        }
+    }
 
 
     private bool isGrounded = false;
@@ -127,14 +137,14 @@ public class PlayerSideSlide : MonoBehaviour
 
     private Coroutine bomImageRoutine;
 
-    private IEnumerator ShowBomImage()
-    {
-        if (bomImage == null) yield break;
+    //private IEnumerator ShowBomImage()
+    //{
+    //    if (bomImage == null) yield break;
 
-        bomImage.SetActive(true);
-        yield return new WaitForSeconds(bomImageTime);
-        bomImage.SetActive(false);
-    }
+    //    bomImage.SetActive(true);
+    //    yield return new WaitForSeconds(bomImageTime);
+    //    bomImage.SetActive(false);
+    //}
 
 
     // �f�o�t�Ƃ݂Ȃ��^�O
@@ -181,12 +191,12 @@ public class PlayerSideSlide : MonoBehaviour
             if (Input.GetKey(KeyCode.D))
             {
                 transform.position += inv * speed * transform.right * Time.deltaTime;
-                spriteRenderer.sprite = spriteRight; // �E�摜
+                spriteRenderer.sprite = spriteRight; // 右画像
             }
             if (Input.GetKey(KeyCode.A))
             {
                 transform.position -= inv * speed * transform.right * Time.deltaTime;
-                spriteRenderer.sprite = spriteLeft; // ���摜
+                spriteRenderer.sprite = spriteLeft; // 左画像
             }
             //// --- ���͎�t ---
             //if (Input.GetKeyDown(KeyCode.D))  // �E��
@@ -235,7 +245,7 @@ public class PlayerSideSlide : MonoBehaviour
 
         Debug.Log("GAME OVER");
 
-        // ������~�i�\��h�~�j
+        // 
         //rb.velocity = Vector3.zero;
         rb.isKinematic = true;
 
@@ -249,9 +259,11 @@ public class PlayerSideSlide : MonoBehaviour
         {
             if (isGrounded || jumpCount < maxJumps)
             {
+                Debug.Log("ジャンプしてる");
                 Jump();
                 jumpCount++;
                 isGrounded = false;
+
             }
         }
     }
@@ -262,10 +274,10 @@ public class PlayerSideSlide : MonoBehaviour
     {
         Vector3 vel = rb.linearVelocity;
         //Vector3 vel = rb.linearVelocity;
-        vel.y = 0;                  // 2�i�ڂŉ��Z���\��Ȃ��悤��
+        vel.y = 1;                   // 上方向の速度をリセット
         rb.linearVelocity = vel;
 
-rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
+        rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
     }
 
     //========================================
@@ -373,11 +385,15 @@ rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
                 speed = Mathf.Max(0f, baseSpeed - 10f);
                 jump = Mathf.Max(0f, baseJump - 7f);
 
-                // ここで画像表示
-                if (bomImageRoutine != null)
-                    StopCoroutine(bomImageRoutine);
-
-                bomImageRoutine = StartCoroutine(ShowBomImage());
+                // ▼ プレイヤー位置にBom出現
+                if (bomEffectPrefab != null)
+                {
+                    Instantiate(
+                        bomEffectPrefab,
+                        transform.position + bomOffset,
+                        Quaternion.identity
+                    );
+                }
 
                 Debug.Log("[Bom] 発動");
             },
@@ -388,6 +404,7 @@ rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
                 Debug.Log("[Bom End]");
             }
         };
+
 
 
         // ===== Status ���C���[ =====
