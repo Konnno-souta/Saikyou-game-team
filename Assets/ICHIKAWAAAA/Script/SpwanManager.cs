@@ -66,7 +66,7 @@ public class SpawnManager : MonoBehaviour
     void Update()
     {
         // デバッグ用：Fキーでフィーバー発動
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.I))
         {
             if (feverManager != null)
             {

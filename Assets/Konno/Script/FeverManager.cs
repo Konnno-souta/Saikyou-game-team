@@ -4,7 +4,7 @@ using System.Collections;
 public class FeverManager : MonoBehaviour
 {
     [Header("Fever Condition")]
-    public int feverNeedScoreBall = 10; // 変更可能
+    public int feverNeedScoreBall = 7; // 変更可能
     public static int scoreBallCount = 0;
 
     [Header("Fever Time")]

@@ -1327,8 +1327,8 @@ Transform:
   m_GameObject: {fileID: 177859053}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.499, y: 0.75, z: -7.6}
-  m_LocalScale: {x: 1, y: 5, z: 1.5}
+  m_LocalPosition: {x: -15.499, y: 7.72, z: -7.6}
+  m_LocalScale: {x: 1, y: 15, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2077,8 +2077,8 @@ Transform:
   m_GameObject: {fileID: 342866472}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.606, y: 0.75, z: -7.6}
-  m_LocalScale: {x: 1, y: 5, z: 1.5}
+  m_LocalPosition: {x: 6.61, y: 7.08, z: -7.6}
+  m_LocalScale: {x: 1, y: 15, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2979,8 +2979,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e34197e5fa2013e46864e9829f6a3fd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  feverNeedScoreBall: 10
-  feverDuration: 7
+  feverNeedScoreBall: 3
+  feverDuration: 8
   feverTextPrefab: {fileID: 7097441575106013543, guid: 72cf0781be51b8241aa401e776d7d4be, type: 3}
   feverYokoPrefab: {fileID: 960954534}
   canvas: {fileID: 968769735}
@@ -3751,6 +3751,7 @@ RectTransform:
   - {fileID: 434144207}
   - {fileID: 58208197}
   - {fileID: 804145842}
+  - {fileID: 1652998417}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4827,7 +4828,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
       propertyPath: feverBalls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
       propertyPath: normalBalls.Array.size
@@ -4947,11 +4948,11 @@ PrefabInstance:
       objectReference: {fileID: 8573777519304046317, guid: 81ffe4094f05476498a83f0c0c474880, type: 3}
     - target: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
       propertyPath: feverBalls.Array.data[0].probability
-      value: 90
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
       propertyPath: feverBalls.Array.data[1].probability
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
       propertyPath: normalBalls.Array.data[0].probability
@@ -4971,7 +4972,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
       propertyPath: normalBalls.Array.data[4].probability
-      value: 17.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
       propertyPath: normalBalls.Array.data[5].probability
@@ -6262,6 +6263,81 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1440075031749386299, guid: 01da1d659b2c14445b3afc3d9f86f60b, type: 3}
   m_PrefabInstance: {fileID: 1885712649}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1652998416
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1652998417}
+  - component: {fileID: 1652998419}
+  - component: {fileID: 1652998418}
+  m_Layer: 5
+  m_Name: Bom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1652998417
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652998416}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 968769736}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -228}
+  m_SizeDelta: {x: 500, y: 500}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1652998418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652998416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 7516a4b144227b04db793d99de712957, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1652998419
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652998416}
+  m_CullTransparentMesh: 1
 --- !u!4 &1657474871 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5052476549158068130, guid: 1285a49274a62024695adeeba3196f80, type: 3}
@@ -6964,6 +7040,8 @@ MonoBehaviour:
   basketScaleMultiplier: 1.5
   basketScaleTweenTime: 0.2
   reverseControls: 0
+  bomImage: {fileID: 0}
+  bomImageTime: 0.3
 --- !u!1 &1742551232
 GameObject:
   m_ObjectHideFlags: 0
@@ -8087,6 +8165,8 @@ MonoBehaviour:
   basketScaleMultiplier: 1.5
   basketScaleTweenTime: 0.2
   reverseControls: 1
+  bomImage: {fileID: 1652998416}
+  bomImageTime: 0.5
 --- !u!65 &2143083868
 BoxCollider:
   m_ObjectHideFlags: 0
