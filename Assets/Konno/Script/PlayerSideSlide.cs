@@ -5,6 +5,8 @@ using NUnit;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static UnityEngine.GraphicsBuffer;
+using UnityEngine.UI;
+
 
 public class PlayerSideSlide : MonoBehaviour
 {
@@ -43,11 +45,22 @@ public class PlayerSideSlide : MonoBehaviour
     private Rigidbody rb;
     bool move;
     private float sideMoveSmooth;
-
     public bool Move{ get { return move; } }
 
-    //public float baseSp { get { return baseSpeed; } }
 
+
+    //public float baseSp { get { return baseSpeed; } }[Header("Ball Effect UI")]
+    [SerializeField] private Image ballEffectImage;
+
+    [System.Serializable]
+    public class BallImagePair
+    {
+        public string tag;
+        public Sprite sprite;
+    }
+
+    [SerializeField] private BallImagePair[] ballImages;
+    private Dictionary<string, Sprite> ballImageDict;
     //void Start()
     //{
     //    stepDistance = pTR.baseSp;
@@ -175,8 +188,51 @@ public class PlayerSideSlide : MonoBehaviour
         speed = baseSpeed;
         jump = baseJump;
 
-       BuildEffectDefinitions();
+        BuildEffectDefinitions();
+        BuildBallImageDict();
     }
+
+    private void BuildBallImageDict()
+    {
+        ballImageDict = new Dictionary<string, Sprite>(StringComparer.Ordinal);
+
+        foreach (var pair in ballImages)
+        {
+            if (!ballImageDict.ContainsKey(pair.tag))
+            {
+                ballImageDict.Add(pair.tag, pair.sprite);
+            }
+        }
+
+        if (ballEffectImage != null)
+            ballEffectImage.enabled = false;
+    }
+
+    // ===============================
+    // ★ 画像切り替え
+    // ===============================
+    private void ChangeBallImage(string tag)
+    {
+        if (ballEffectImage == null) return;
+
+        if (ballImageDict.TryGetValue(tag, out var sprite))
+        {
+            ballEffectImage.sprite = sprite;
+            ballEffectImage.enabled = true;
+        }
+    }
+    private void ApplyBallEffect(string tagName)
+    {
+        if (!effectMap.TryGetValue(tagName, out var spec))
+        {
+            Debug.LogWarning($"未対応のタグ: {tagName}");
+            return;
+        }
+
+        ChangeBallImage(tagName);   // ★ここで画像変更
+        StartEffectByLayer(spec);
+    }
+   
     void Update()
     {
         bool locked = lockCount > 0;
@@ -593,67 +649,5 @@ public class PlayerSideSlide : MonoBehaviour
         Debug.Log($"[Effect Cancel] {handle.name} layer={layer}");
     }
 
-    // ---------------- エフェクト ----------------
-    private void ApplyBallEffect(string tagName)
-    {
-        if (!effectMap.TryGetValue(tagName, out var spec))
-        {
-            Debug.LogWarning($"���Ή��̃^�O: {tagName}");
-            return;
-        }
-
-        StartEffectByLayer(spec);
-    }
-
-    // ---------------- 諸々 ----------------
-    private void OnCollisionEnter(Collision collision)
-    {
-        // ===== 死亡判定 =====
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            Die();
-            return;
-        }
-
-        // Ground
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            foreach (var c in collision.contacts)
-            {
-                if (c.normal.y > 0.5f)
-                {
-                    jumpCount = 0;
-                    isGrounded = true;
-                    break;
-                }
-            }
-        }
-
-                    string t = collision.gameObject.tag;
-
-        // ���G�`�F�b�N�i�f�o�t�������j
-        if (isInvincible && DebuffTags.Contains(t))
-        {
-            invincibleCharges--;
-            Debug.Log($"[Invincible] Block {t} (remain={invincibleCharges})");
-
-            if (invincibleCharges <= 0)
-            {
-                isInvincible = false;
-                Debug.Log("[Invincible] Charges exhausted");
-            }
-
-            Destroy(collision.gameObject);
-            return; // �� �����ŏ����I���i���ʂ͓K�p���Ȃ��j
-        }
-
-        // �ʏ�̌��ʏ���
-        if (effectMap != null && effectMap.ContainsKey(t))
-        {
-            ApplyBallEffect(t);
-            Destroy(collision.gameObject);
-        }
-    }
-
-    // ���߂�˂܁[����񂲂߂��
+   
 }
