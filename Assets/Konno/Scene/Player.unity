@@ -923,7 +923,10 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: f051c185c26030e4eba7d1c5a162fca6, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 397975223514979601, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 128334495}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1127896448862422694, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
       insertIndex: -1
@@ -1080,12 +1083,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 128334494}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 18.7, z: -2.5}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalRotation: {x: -0, y: 0.99939084, z: 0.034899585, w: 0}
+  m_LocalPosition: {x: -0.0052630617, y: 0.050117444, z: 1.0752006}
+  m_LocalScale: {x: 0.078947365, y: 0.12439471, z: 0.041768283}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2143083863}
+  m_Father: {fileID: 608814094}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &128334496
 SpriteRenderer:
@@ -2943,56 +2946,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce928c5fd6e26ff4697145a9ba807d3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &575618536
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 575618537}
-  - component: {fileID: 575618538}
-  m_Layer: 0
-  m_Name: FeverManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &575618537
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 575618536}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.7006395, y: 4.692915, z: -7.8611717}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &575618538
+--- !u!114 &575618538 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 6358398079315771918, guid: 37d95cc418169424493030f40e8e4470, type: 3}
+  m_PrefabInstance: {fileID: 7313721456718777168}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 575618536}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e34197e5fa2013e46864e9829f6a3fd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  feverNeedScoreBall: 5
-  feverDuration: 7
-  feverTextPrefab: {fileID: 7097441575106013543, guid: 72cf0781be51b8241aa401e776d7d4be, type: 3}
-  feverYokoPrefab: {fileID: 960954534}
-  canvas: {fileID: 968769735}
-  spotSub: {fileID: 1860584294}
 --- !u!1 &588832479
 GameObject:
   m_ObjectHideFlags: 0
@@ -7177,7 +7141,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5, y: -1.7547, z: -7.6}
-  m_LocalScale: {x: 20, y: 4.5093, z: 1}
+  m_LocalScale: {x: 22, y: 4.5093, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -8078,7 +8042,7 @@ GameObject:
   - component: {fileID: 2143083870}
   - component: {fileID: 2143083869}
   - component: {fileID: 2143083868}
-  - component: {fileID: 2143083872}
+  - component: {fileID: 2143083871}
   m_Layer: 6
   m_Name: Playermain
   m_TagString: Player
@@ -8155,7 +8119,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 608814094}
-  - {fileID: 128334495}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2143083864
@@ -8262,22 +8225,91 @@ MonoBehaviour:
   fhc: {fileID: 2143083864}
   sds: {fileID: 289754741}
   fivermanager: {fileID: 575618538}
---- !u!114 &2143083872
-MonoBehaviour:
+--- !u!111 &2143083871
+Animation:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2143083861}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce928c5fd6e26ff4697145a9ba807d3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scoreManager: {fileID: 1594703002}
-  countdown60: {fileID: 1417337271}
-  scrollDirectionSet: {fileID: 0}
-  feverManager: {fileID: 0}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0
+--- !u!1001 &7313721456718777168
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 659749113288461159, guid: 37d95cc418169424493030f40e8e4470, type: 3}
+      propertyPath: m_Name
+      value: FeverManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3162031740652814266, guid: 37d95cc418169424493030f40e8e4470, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.7006395
+      objectReference: {fileID: 0}
+    - target: {fileID: 3162031740652814266, guid: 37d95cc418169424493030f40e8e4470, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.692915
+      objectReference: {fileID: 0}
+    - target: {fileID: 3162031740652814266, guid: 37d95cc418169424493030f40e8e4470, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7.8611717
+      objectReference: {fileID: 0}
+    - target: {fileID: 3162031740652814266, guid: 37d95cc418169424493030f40e8e4470, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3162031740652814266, guid: 37d95cc418169424493030f40e8e4470, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3162031740652814266, guid: 37d95cc418169424493030f40e8e4470, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3162031740652814266, guid: 37d95cc418169424493030f40e8e4470, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3162031740652814266, guid: 37d95cc418169424493030f40e8e4470, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3162031740652814266, guid: 37d95cc418169424493030f40e8e4470, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3162031740652814266, guid: 37d95cc418169424493030f40e8e4470, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6358398079315771918, guid: 37d95cc418169424493030f40e8e4470, type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 968769735}
+    - target: {fileID: 6358398079315771918, guid: 37d95cc418169424493030f40e8e4470, type: 3}
+      propertyPath: spotSub
+      value: 
+      objectReference: {fileID: 1860584294}
+    - target: {fileID: 6358398079315771918, guid: 37d95cc418169424493030f40e8e4470, type: 3}
+      propertyPath: feverYokoPrefab
+      value: 
+      objectReference: {fileID: 960954534}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 37d95cc418169424493030f40e8e4470, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -8295,7 +8327,7 @@ SceneRoots:
   - {fileID: 686141715}
   - {fileID: 1297096958}
   - {fileID: 289754739}
-  - {fileID: 575618537}
+  - {fileID: 7313721456718777168}
   - {fileID: 1860584292}
   - {fileID: 342866477}
   - {fileID: 177859058}
