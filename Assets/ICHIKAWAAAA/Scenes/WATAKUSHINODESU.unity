@@ -575,35 +575,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4739139410353432654, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
   m_PrefabInstance: {fileID: 416152777233152186}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &501973018
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 501973015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e34197e5fa2013e46864e9829f6a3fd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  feverNeedScoreBall: 10
-  feverDuration: 7
-  feverTextPrefab: {fileID: 0}
-  feverYokoPrefab: {fileID: 0}
-  canvas: {fileID: 0}
-  spotSub: {fileID: 0}
---- !u!114 &501973020 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
-  m_PrefabInstance: {fileID: 416152777233152186}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 501973015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1972c94279672b9459eb246e4d620f9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &501973021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -616,7 +587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 641214d1e9f6d4c4c89fddd8f5b2b6d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  feverManager: {fileID: 501973020}
+  feverManager: {fileID: 6358398079315771918, guid: 37d95cc418169424493030f40e8e4470, type: 3}
   commandTimeout: 1.2
   stepGapMax: 0.5
   minHoldAdvance: 0.035
@@ -2322,9 +2293,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1250418249}
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4739139410353432654, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 501973018}
     - targetCorrespondingSourceObject: {fileID: 4739139410353432654, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
       insertIndex: -1
       addedObject: {fileID: 501973021}
