@@ -25,6 +25,9 @@ public class Player : MonoBehaviour
     [Header("Control Effects")]
     [SerializeField] private bool reverseControls = false; // 操作反転フラグ
 
+    [Header("Invincible Barrier")]
+    [SerializeField] private GameObject invincibleBarrier;
+
     private Rigidbody rb;
     private bool isGrounded = false;
 
@@ -252,16 +255,25 @@ public class Player : MonoBehaviour
             apply = () =>
             {
                 isInvincible = true;
-                invincibleCharges = 2; // ★ 2回分チャージ
+                invincibleCharges = 2;
+
+                if (invincibleBarrier != null)
+                    invincibleBarrier.SetActive(true);
+
                 Debug.Log($"[Invincible] ON (charges={invincibleCharges})");
             },
             cleanup = () =>
             {
                 isInvincible = false;
                 invincibleCharges = 0;
+
+                if (invincibleBarrier != null)
+                    invincibleBarrier.SetActive(false);
+
                 Debug.Log("[Invincible] OFF");
             }
         };
+
 
         // ===== Basket レイヤー =====
         effectMap["BigBasket"] = new EffectSpec
@@ -460,8 +472,13 @@ public class Player : MonoBehaviour
             if (invincibleCharges <= 0)
             {
                 isInvincible = false;
+
+                if (invincibleBarrier != null)
+                    invincibleBarrier.SetActive(false);
+
                 Debug.Log("[Invincible] Charges exhausted");
             }
+
 
             Destroy(collision.gameObject);
             return; // ← ここで処理終了（効果は適用しない）

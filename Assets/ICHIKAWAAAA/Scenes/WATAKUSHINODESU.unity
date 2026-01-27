@@ -1676,6 +1676,7 @@ MonoBehaviour:
   basketScaleMultiplier: 1.5
   basketScaleTweenTime: 0.2
   reverseControls: 0
+  invincibleBarrier: {fileID: 2978711822824391443, guid: 7d1db5f75ec988046aabd3eb4e44d34c, type: 3}
 --- !u!54 &1454215614
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2152,7 +2153,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
       propertyPath: normalBalls.Array.data[7].probability
-      value: 25
+      value: 28.4
       objectReference: {fileID: 0}
     - target: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
       propertyPath: normalBalls.Array.data[8].probability
@@ -2212,11 +2213,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
       propertyPath: 'normalStages.Array.data[0].weights.Array.data[5]'
-      value: 50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
       propertyPath: 'normalStages.Array.data[0].weights.Array.data[6]'
-      value: 50
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
+      propertyPath: 'normalStages.Array.data[0].weights.Array.data[7]'
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1701050410886294323, guid: a65cb0b1b1b81eb4097e18f61cbfb184, type: 3}
       propertyPath: 'normalStages.Array.data[1].weights.Array.data[0]'
