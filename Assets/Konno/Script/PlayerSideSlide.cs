@@ -90,6 +90,10 @@ public class PlayerSideSlide : MonoBehaviour
     [SerializeField] private GameObject bomEffectPrefab;
     [SerializeField] private Vector3 bomOffset = Vector3.zero; // 少し上に出したい場合
 
+    [Header("SE")]
+    [SerializeField] private AudioSource jumpSE;
+
+
     public class AutoDestroy : MonoBehaviour
     {
         public float lifeTime = 0.5f;
@@ -305,7 +309,7 @@ public class PlayerSideSlide : MonoBehaviour
         //rb.velocity = Vector3.zero;
         rb.isKinematic = true;
 
-        SceneManager.LoadScene(gameOverSceneName);
+        SceneManager.LoadScene("ResultScene");
     }
 
 
@@ -328,6 +332,11 @@ public class PlayerSideSlide : MonoBehaviour
     // �W�����v���� �{��
     void Jump()
     {
+        // ▼ ジャンプSE
+        if (jumpSE != null)
+            jumpSE.PlayOneShot(jumpSE.clip);
+
+
         Vector3 vel = rb.linearVelocity;
         //Vector3 vel = rb.linearVelocity;
         vel.y = 1;                   // 上方向の速度をリセット
@@ -355,6 +364,14 @@ public class PlayerSideSlide : MonoBehaviour
         if (basket != null)
         {
             basketBaseScale = basket.localScale;
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("DeadWall"))
+        {
+            Die();
         }
     }
 

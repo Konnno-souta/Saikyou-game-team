@@ -53,6 +53,7 @@ public class FeverManager : MonoBehaviour
     // ==============================
     public IEnumerator FeverSequence()
     {
+        if (isFever) yield break;
         isFever = true;
         scoreBallCount = 0;
 
@@ -71,10 +72,8 @@ public class FeverManager : MonoBehaviour
         if (spotSub != null)
             spotSub.SetSpotActive(true);
 
-        if(feverBGM != null)
-        {
-            feverBGM.Play();
-        }
+        StartCoroutine(BGMFade(normalBGM, 1f, 0f, 0.5f));
+        StartCoroutine(BGMFade(feverBGM, 0f, 1f, 0.5f));
     }
 
 
@@ -91,4 +90,28 @@ public class FeverManager : MonoBehaviour
             feverBGM.Stop();
         }
     }
+
+    IEnumerator BGMFade(AudioSource bgm, float from, float to, float time)
+    {
+        if (bgm == null) yield break;
+
+        if (!bgm.isPlaying)
+            bgm.Play();
+
+        float t = 0f;
+        bgm.volume = from;
+
+        while (t < time)
+        {
+            t += Time.deltaTime;
+            bgm.volume = Mathf.Lerp(from, to, t / time);
+            yield return null;
+        }
+
+        bgm.volume = to;
+
+        if (to == 0f)
+            bgm.Pause(); // Stop‚æ‚èˆÀ‘S
+    }
+
 }
