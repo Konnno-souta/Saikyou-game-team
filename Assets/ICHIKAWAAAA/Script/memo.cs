@@ -105,6 +105,9 @@ public class Player : MonoBehaviour
         Jump = baseJump;
 
         BuildEffectDefinitions();
+
+        if (invincibleBarrier != null)
+            invincibleBarrier.SetActive(false);
     }
 
     void Update()
@@ -259,6 +262,10 @@ public class Player : MonoBehaviour
 
                 if (invincibleBarrier != null)
                     invincibleBarrier.SetActive(true);
+
+                Debug.Log($"Barrier activeSelf={invincibleBarrier.activeSelf}");
+                Debug.Log($"Barrier activeInHierarchy={invincibleBarrier.activeInHierarchy}");
+
 
                 Debug.Log($"[Invincible] ON (charges={invincibleCharges})");
             },
