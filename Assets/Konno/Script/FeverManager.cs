@@ -18,6 +18,9 @@ public class FeverManager : MonoBehaviour
     [Header("Spot Fever Effect")]
     public SpotSub spotSub;
 
+    [Header("BGM")]
+    public AudioSource normalBGM;
+    public AudioSource feverBGM;
 
     bool isPaused;
     public bool IsP { get { return isPaused; } }
@@ -67,6 +70,11 @@ public class FeverManager : MonoBehaviour
 
         if (spotSub != null)
             spotSub.SetSpotActive(true);
+
+        if(feverBGM != null)
+        {
+            feverBGM.Play();
+        }
     }
 
 
@@ -77,5 +85,10 @@ public class FeverManager : MonoBehaviour
 
         if (spotSub != null)
             spotSub.SetSpotActive(false);
+
+        if(feverBGM != null)
+        {
+            feverBGM.Stop();
+        }
     }
 }
