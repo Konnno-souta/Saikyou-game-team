@@ -1855,7 +1855,7 @@ MonoBehaviour:
   barrierSpawnLeft: {fileID: 304047831}
   barrierSpawnRight: {fileID: 691534456}
   sds: {fileID: 289754741}
-  fevermanager: {fileID: 0}
+  fevermanager: {fileID: 575618538}
 --- !u!114 &289754741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1869,7 +1869,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tamaire: {fileID: 538305422}
-  fevermanager: {fileID: 0}
+  fevermanager: {fileID: 575618538}
 --- !u!1 &304047831
 GameObject:
   m_ObjectHideFlags: 0

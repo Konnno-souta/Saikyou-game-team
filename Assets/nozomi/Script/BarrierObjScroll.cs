@@ -10,7 +10,7 @@ public class BarrierObjScroll : MonoBehaviour
     {
         sds= GameObject.Find("conveyor").GetComponent<ScrollDirectionSet>();
         st2=GameObject.Find("Playermain").GetComponent<ScrollTest2>();
-        fivermanager=GameObject.Find("FiverManager").GetComponent<FeverManager>();
+        fivermanager=GameObject.Find("FeverManager").GetComponent<FeverManager>();
     }
 
     // Update is called once per frame
