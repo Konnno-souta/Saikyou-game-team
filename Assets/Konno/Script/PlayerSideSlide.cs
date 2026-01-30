@@ -250,11 +250,13 @@ public class PlayerSideSlide : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.D))
             {
+                //rb.MovePosition(rb.position + inv * speed * transform.right * Time.deltaTime);
                 transform.position += inv * speed * transform.right * Time.deltaTime;
                 spriteRenderer.sprite = spriteRight; // 右画像
             }
             if (Input.GetKey(KeyCode.A))
             {
+                //rb.MovePosition(rb.position + inv * speed * transform.right * Time.deltaTime);
                 transform.position -= inv * speed * transform.right * Time.deltaTime;
                 spriteRenderer.sprite = spriteLeft; // 左画像
             }
