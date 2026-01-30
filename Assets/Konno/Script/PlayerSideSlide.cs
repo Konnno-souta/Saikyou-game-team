@@ -30,7 +30,7 @@ public class PlayerSideSlide : MonoBehaviour
     public float baseSpeed = 10f;
     public float speed = 5f;
     public float baseJump = 10f;
-    public float jump = 5f;
+    public float jump = 6f;
     //public float airControl = 0.4f;   // �󒆉��ړ��̌����
 
     [Header("キャラ画像設定")]
@@ -331,7 +331,7 @@ public class PlayerSideSlide : MonoBehaviour
     }
 
 
-    // �W�����v���� �{��
+    // ジャンプ
     void Jump()
     {
         // ▼ ジャンプSE
@@ -341,7 +341,7 @@ public class PlayerSideSlide : MonoBehaviour
 
         Vector3 vel = rb.linearVelocity;
         //Vector3 vel = rb.linearVelocity;
-        vel.y = 1;                   // 上方向の速度をリセット
+        vel.y = 0;                   // 上方向の速度をリセット
         rb.linearVelocity = vel;
 
         rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
@@ -371,7 +371,7 @@ public class PlayerSideSlide : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("DeadWall"))
+        if (other.CompareTag("Wall"))
         {
             Die();
         }
@@ -668,5 +668,13 @@ public class PlayerSideSlide : MonoBehaviour
         Debug.Log($"[Effect Cancel] {handle.name} layer={layer}");
     }
 
-   
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+            jumpCount = 0;
+        }
+    }
+
 }

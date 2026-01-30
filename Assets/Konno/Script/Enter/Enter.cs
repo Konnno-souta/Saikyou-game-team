@@ -3,8 +3,16 @@ using UnityEngine.SceneManagement;
 
 public class Enter : MonoBehaviour
 {
-    // ボタンから呼ばれる関数
-    public void ChangeScene(string sceneName)
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            ChangeScene();
+        }
+    }
+
+    // ボタンからも呼べる
+    public void ChangeScene()
     {
         SceneManager.LoadScene("Player");
     }
