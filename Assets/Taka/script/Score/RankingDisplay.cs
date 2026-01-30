@@ -44,7 +44,7 @@ public class RankingDisplay : MonoBehaviour
             else
             {
                 rankingTexts[i].text =
-                    $"<color={colorHex}>{i + 1} : {scoreText} pts</color>";
+                    $"<color={colorHex}> {scoreText} pts</color>";
             }
 
         }
