@@ -65,19 +65,7 @@ public class SpawnManager : MonoBehaviour
 
     void Update()
     {
-        // デバッグ用：Fキーでフィーバー発動
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            if (feverManager != null)
-            {
-                StartCoroutine(feverManager.FeverSequence());
-                Debug.Log("フィーバー強制発動");
-            }
-            else
-            {
-                Debug.LogError("feverManager が見つかりません！");
-            }
-        }
+       
     }
 
     private IEnumerator SpawnLoop()
