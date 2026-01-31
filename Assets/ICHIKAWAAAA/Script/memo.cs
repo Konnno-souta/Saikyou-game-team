@@ -1,10 +1,11 @@
 ﻿
+using NUnit;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using NUnit;
 using UnityEngine.UI;
 
 
@@ -133,8 +134,22 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        //bool locked = lockCount > 0;
-        //float inv = (reverseCount % 2 == 1) ? -1f : 1f;
+        bool locked = lockCount > 0;
+        float inv = (reverseCount % 2 == 1) ? -1f : 1f;
+
+        if (!locked)
+        {
+            if (Input.GetKey(KeyCode.D))
+            {
+                rb.MovePosition(rb.position + inv * speed * transform.right * Time.deltaTime);
+                transform.position += inv * speed * transform.right * Time.deltaTime;
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                rb.MovePosition(rb.position + inv * speed * transform.right * Time.deltaTime);
+                transform.position -= inv * speed * transform.right * Time.deltaTime;
+            }
+        }
     }
 
     // 起動時にベーススケールをキャプチャ
@@ -193,7 +208,7 @@ public class Player : MonoBehaviour
             layer = EffectLayer.Speed,
             policy = EffectPolicy.Overwrite,
             duration = 5f,
-            apply = () => { speed = baseSpeed + 2f; Debug.Log($"[SpeedUp] speed={speed}"); },
+            apply = () => { speed = baseSpeed + 5f; Debug.Log($"[SpeedUp] speed={speed}"); },
             cleanup = () => { speed = baseSpeed; Debug.Log($"[SpeedUp End] speed={speed}"); }
         };
 
@@ -203,7 +218,7 @@ public class Player : MonoBehaviour
             layer = EffectLayer.Speed,
             policy = EffectPolicy.Overwrite,
             duration = 5f,
-            apply = () => { speed = Mathf.Max(0f, baseSpeed - 2f); Debug.Log($"[SpeedDown] speed={speed}"); },
+            apply = () => { speed = Mathf.Max(0f, baseSpeed - 5f); Debug.Log($"[SpeedDown] speed={speed}"); },
             cleanup = () => { speed = baseSpeed; Debug.Log($"[SpeedDown End] speed={speed}"); }
         };
 
@@ -214,7 +229,7 @@ public class Player : MonoBehaviour
             layer = EffectLayer.Jump,
             policy = EffectPolicy.Overwrite,
             duration = 3f,
-            apply = () => { jump = baseJump + 2f; Debug.Log($"[JumpUp] jump={jump}"); },
+            apply = () => { jump = baseJump + 4f; Debug.Log($"[JumpUp] jump={jump}"); },
             cleanup = () => { jump = baseJump; Debug.Log($"[JumpUp End] jump={jump}"); }
         };
 
@@ -224,7 +239,7 @@ public class Player : MonoBehaviour
             layer = EffectLayer.Jump,
             policy = EffectPolicy.Overwrite,
             duration = 3f,
-            apply = () => { jump = Mathf.Max(0f, baseJump - 2f); Debug.Log($"[JumpDown] jump={jump}"); },
+            apply = () => { jump = Mathf.Max(0f, baseJump - 4f); Debug.Log($"[JumpDown] jump={jump}"); },
             cleanup = () => { jump = baseJump; Debug.Log($"[JumpDown End] jump={jump}"); }
         };
 
@@ -237,8 +252,8 @@ public class Player : MonoBehaviour
             duration = 2f,
             apply = () =>
             {
-                speed = Mathf.Max(0f, baseSpeed - 10f);
-                jump = Mathf.Max(0f, baseJump - 7f);
+                speed = Mathf.Max(0f, baseSpeed - 5f);
+                jump = Mathf.Max(0f, baseJump - 8f);
                 Debug.Log("[Bom] 動けない");
             },
             cleanup = () =>
@@ -463,11 +478,11 @@ public class Player : MonoBehaviour
     // ---------------- 衝突処理 ----------------
     private void OnCollisionEnter(Collision collision)
     {
-        // Ground に着地
-        //if (collision.gameObject.CompareTag("Ground"))
-        //{
-        //    isGrounded = true;
-        //}
+    //    Ground に着地
+    //    if (collision.gameObject.CompareTag("Ground"))
+    //    {
+    //        isGrounded = true;
+    //    }
 
         string t = collision.gameObject.tag;
 
