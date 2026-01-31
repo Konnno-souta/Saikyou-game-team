@@ -13,8 +13,8 @@ public class PlayerSideSlide : MonoBehaviour
     //[SerializeField] PlayerMovement pTR;
     //[SerializeField] FloorHitCheck fhc;
 
-    private float stepDistance;   // 1��̃T�C�h�X�e�b�v��
-    public float moveSpeed;      // �ړ����x�i�傫���قǑ������炩�ɓ��B�j
+   // private float stepDistance;   // 1��̃T�C�h�X�e�b�v��
+    //public float moveSpeed;      // �ړ����x�i�傫���قǑ������炩�ɓ��B�j
     private float msFirst;
 
     private Vector3 targetPos;
@@ -188,15 +188,15 @@ public class PlayerSideSlide : MonoBehaviour
             return;
         }
 
-        // ボール取得
-        if (ballImageDict.ContainsKey(other.tag))
-        {
-            Debug.Log("ボール取得 : " + other.tag);
+    //    // ボール取得
+    //    if (ballImageDict.ContainsKey(other.tag))
+    //    {
+    //        Debug.Log("ボール取得 : " + other.tag);
 
-            ChangeBallImage(other.tag);
+    //        ChangeBallImage(other.tag);
 
-            Destroy(other.gameObject); // ボール消す
-        }
+    //        Destroy(other.gameObject); // ボール消す
+    //    }
     }
 
     [SerializeField] private float ballImageShowTime = 0.3f;
@@ -379,7 +379,7 @@ public class PlayerSideSlide : MonoBehaviour
         if (distance < 0.05f)
         {
             move = false;
-            moveSpeed = msFirst;
+            baseSpeed = msFirst;
         }
     }
 

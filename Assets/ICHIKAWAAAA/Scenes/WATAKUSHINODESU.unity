@@ -1730,15 +1730,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1454215607}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4600c56e99bfda744b8e0622c8c55107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
-  maxJumps: 2
-  spriteLeft: {fileID: 0}
-  spriteRight: {fileID: 0}
   baseSpeed: 5
   speed: 5
   baseJump: 2
@@ -1749,7 +1745,6 @@ MonoBehaviour:
   gameOverSceneName: ResultScene
   reverseControls: 0
   invincibleBarrier: {fileID: 1241721088}
-  jumpSE: {fileID: 0}
 --- !u!54 &1454215614
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1789,7 +1784,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1454215607}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1e9680e214cbb744ab3bb63b324a8bc, type: 3}
   m_Name: 
