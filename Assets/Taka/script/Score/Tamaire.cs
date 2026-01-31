@@ -67,9 +67,17 @@ public class Tamaire : MonoBehaviour
                    
                         FindObjectOfType<Countdown60>().AddTime(-5);
                         break;
+                    //case ball.BallType.Bom:
+                    //    // ¥ ƒvƒŒƒCƒ„[‚ğ’T‚µ‚Ä Bom Œø‰Ê”­“®
+                    //    PlayerSideSlide player = FindObjectOfType<PlayerSideSlide>();
+                    //    if (player != null)
+                    //    {
+                    //        player.ApplyBallEffect("Bom");
+                    //    }
+                    //    break;
 
-                           
-                        
+
+
 
                 }
 

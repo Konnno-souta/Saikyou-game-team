@@ -1,22 +1,30 @@
 ﻿
-using System.Collections;
-using UnityEngine;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using NUnit;
+using UnityEngine.UI;
+
 
 public class Player : MonoBehaviour
 {
     [Header("ステータス")]
-    public float baseSpeed = 5f;
+    public float baseSpeed = 10f;
     public float speed = 5f;
-    public float baseJump = 2f;
-    public float Jump = 2f;
+    public float baseJump = 8f;
+    public float jump = 7f;
 
     // かご（スケールを変える対象）
     [Header("Basket (Goal)")]
     [SerializeField] private Transform basket;              // ここに拡大したいオブジェクトの Transform を割り当て
     [SerializeField] private float basketScaleMultiplier = 1.5f; // 拡大倍率
     [SerializeField] private float basketScaleTweenTime = 0.2f;  // 拡大・縮小の補間時間
+
+    [Header("壁死亡")]
+    public string gameOverSceneName = "ResultScene";
+    private bool isDead = false;
 
     // 籠の元スケール
     private Vector3 basketBaseScale;
@@ -28,8 +36,7 @@ public class Player : MonoBehaviour
     [Header("Invincible Barrier")]
     [SerializeField] private GameObject invincibleBarrier;
 
-    private Rigidbody rb;
-    private bool isGrounded = false;
+
 
     // ====== 効果のレイヤー（系統）分類 ======
     private enum EffectLayer
@@ -95,6 +102,20 @@ public class Player : MonoBehaviour
     // タグ→定義 の辞書
     private Dictionary<string, EffectSpec> effectMap;
 
+    private Rigidbody rb;
+    bool move;
+    private float sideMoveSmooth;
+    public bool Move { get { return move; } }
+
+    public class AutoDestroy : MonoBehaviour
+    {
+        public float lifeTime = 0.5f;
+
+        void Start()
+        {
+            Destroy(gameObject, lifeTime);
+        }
+    }
 
     void Start()
     {
@@ -102,41 +123,19 @@ public class Player : MonoBehaviour
         rb.freezeRotation = true;
 
         speed = baseSpeed;
-        Jump = baseJump;
+        jump = baseJump;
 
         BuildEffectDefinitions();
-
+        //BuildBallImageDict();
         if (invincibleBarrier != null)
             invincibleBarrier.SetActive(false);
     }
 
     void Update()
     {
-        bool locked = lockCount > 0;
-        float inv = (reverseCount % 2 == 1) ? -1f : 1f;
-
-        if (!locked)
-        {
-            if (Input.GetKey(KeyCode.W))
-                transform.position += inv * speed * transform.forward * Time.deltaTime;
-
-            if (Input.GetKey(KeyCode.S))
-                transform.position -= inv * speed * transform.forward * Time.deltaTime;
-
-            if (Input.GetKey(KeyCode.D))
-                transform.position += inv * speed * transform.right * Time.deltaTime;
-
-            if (Input.GetKey(KeyCode.A))
-                transform.position -= inv * speed * transform.right * Time.deltaTime;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !locked)
-        {
-            rb.AddForce(Vector3.up * Jump, ForceMode.Impulse);
-            isGrounded = false;
-        }
+        //bool locked = lockCount > 0;
+        //float inv = (reverseCount % 2 == 1) ? -1f : 1f;
     }
-
 
     // 起動時にベーススケールをキャプチャ
     void Awake()
@@ -156,6 +155,8 @@ public class Player : MonoBehaviour
         }
     }
 
+
+ 
     // かごのやつ
     private IEnumerator TweenBasketScale(Vector3 target, float time, bool unscaled = false)
     {
@@ -213,8 +214,8 @@ public class Player : MonoBehaviour
             layer = EffectLayer.Jump,
             policy = EffectPolicy.Overwrite,
             duration = 3f,
-            apply = () => { Jump = baseJump + 2f; Debug.Log($"[JumpUp] jump={Jump}"); },
-            cleanup = () => { Jump = baseJump; Debug.Log($"[JumpUp End] jump={Jump}"); }
+            apply = () => { jump = baseJump + 2f; Debug.Log($"[JumpUp] jump={jump}"); },
+            cleanup = () => { jump = baseJump; Debug.Log($"[JumpUp End] jump={jump}"); }
         };
 
         effectMap["JumpDown"] = new EffectSpec
@@ -223,8 +224,8 @@ public class Player : MonoBehaviour
             layer = EffectLayer.Jump,
             policy = EffectPolicy.Overwrite,
             duration = 3f,
-            apply = () => { Jump = Mathf.Max(0f, baseJump - 2f); Debug.Log($"[JumpDown] jump={Jump}"); },
-            cleanup = () => { Jump = baseJump; Debug.Log($"[JumpDown End] jump={Jump}"); }
+            apply = () => { jump = Mathf.Max(0f, baseJump - 2f); Debug.Log($"[JumpDown] jump={jump}"); },
+            cleanup = () => { jump = baseJump; Debug.Log($"[JumpDown End] jump={jump}"); }
         };
 
         // ===== Control レイヤー =====
@@ -236,15 +237,15 @@ public class Player : MonoBehaviour
             duration = 2f,
             apply = () =>
             {
-                speed = Mathf.Max(0f, baseSpeed - 5f);
-                Jump = Mathf.Max(0f, baseJump - 2f);
+                speed = Mathf.Max(0f, baseSpeed - 10f);
+                jump = Mathf.Max(0f, baseJump - 7f);
                 Debug.Log("[Bom] 動けない");
             },
             cleanup = () =>
             {
                 speed = baseSpeed;
-                Jump = baseJump;
-                Debug.Log($"[Bom End] speed={speed}, jump={Jump}");
+                jump = baseJump;
+                Debug.Log($"[Bom End] speed={speed}, jump={jump}");
             }
         };
 
@@ -463,10 +464,10 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         // Ground に着地
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = true;
-        }
+        //if (collision.gameObject.CompareTag("Ground"))
+        //{
+        //    isGrounded = true;
+        //}
 
         string t = collision.gameObject.tag;
 
