@@ -1,5 +1,4 @@
-﻿
-using NUnit;
+﻿using NUnit;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,6 +10,16 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    private float msFirst;
+    private Vector3 targetPos;
+
+    [Header("ジャンプ")]
+    public int maxJumps = 2;
+    private int jumpCount = 0;
+
+    [Header("SE")]
+    [SerializeField] private AudioSource jumpSE;
+
     [Header("ステータス")]
     public float baseSpeed = 10f;
     public float speed = 5f;
@@ -37,7 +46,31 @@ public class Player : MonoBehaviour
     [Header("Invincible Barrier")]
     [SerializeField] private GameObject invincibleBarrier;
 
+    [Header("キャラ画像設定")]
+    public Sprite spriteLeft;
+    public Sprite spriteRight;
+    private SpriteRenderer spriteRenderer;
 
+    [Header("Bom Effect")]
+    [SerializeField] private GameObject bomEffectPrefab;
+    [SerializeField] private Vector3 bomOffset = Vector3.zero; // 少し上に出したい場合
+
+
+    private bool isGrounded = false;
+
+    [SerializeField] private Image ballEffectImage;
+    [System.Serializable]
+    public class BallImagePair
+    {
+        public string tag;
+        public Sprite sprite;
+    }
+
+    [SerializeField] private BallImagePair[] ballImages;
+    private Dictionary<string, Sprite> ballImageDict;
+
+    [SerializeField] private float ballImageShowTime = 0.3f;
+    private Coroutine ballImageRoutine;
 
     // ====== 効果のレイヤー（系統）分類 ======
     private enum EffectLayer
@@ -121,13 +154,13 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         rb.freezeRotation = true;
 
         speed = baseSpeed;
         jump = baseJump;
 
         BuildEffectDefinitions();
-        //BuildBallImageDict();
         if (invincibleBarrier != null)
             invincibleBarrier.SetActive(false);
     }
@@ -136,22 +169,86 @@ public class Player : MonoBehaviour
     {
         bool locked = lockCount > 0;
         float inv = (reverseCount % 2 == 1) ? -1f : 1f;
+        HandleJumpInput();
+        Vector3 move = Vector3.zero;
 
         if (!locked)
         {
             if (Input.GetKey(KeyCode.D))
             {
-                rb.MovePosition(rb.position + inv * speed * transform.right * Time.deltaTime);
                 transform.position += inv * speed * transform.right * Time.deltaTime;
+                spriteRenderer.sprite = spriteRight; // 右画像
             }
             if (Input.GetKey(KeyCode.A))
             {
-                rb.MovePosition(rb.position + inv * speed * transform.right * Time.deltaTime);
                 transform.position -= inv * speed * transform.right * Time.deltaTime;
+                spriteRenderer.sprite = spriteLeft; // 左画像
+            }
+        }
+       
+        Check();
+    }
+    void Check()
+    {
+        float distance = Vector3.Distance(transform.position, targetPos);
+
+        if (distance < 0.05f)
+        {
+            move = false;
+            baseSpeed = msFirst;
+        }
+    }
+    void HandleJumpInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (isGrounded || jumpCount < maxJumps)
+            {
+                Debug.Log("ジャンプしてる");
+                Jump();
+                jumpCount++;
+                isGrounded = false;
             }
         }
     }
 
+    // ジャンプ
+    void Jump()
+    {
+        // ▼ ジャンプSE
+        if (jumpSE != null)
+            jumpSE.PlayOneShot(jumpSE.clip);
+
+        Vector3 vel = rb.velocity;
+        //Vector3 vel = rb.linearVelocity;
+        vel.y = 0;                   // 上方向の速度をリセット
+        rb.velocity = vel;
+
+        rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        // 壁
+        if (other.CompareTag("Wall"))
+        {
+            Die();
+            return;
+        }
+    }
+        void Die()
+    {
+        if (isDead) return;   
+        isDead = true;
+
+        Debug.Log("GAME OVER");
+
+        // 
+        //rb.velocity = Vector3.zero;
+        rb.isKinematic = true;
+
+        SceneManager.LoadScene("ResultScene");
+    }
     // 起動時にベーススケールをキャプチャ
     void Awake()
     {
@@ -252,7 +349,7 @@ public class Player : MonoBehaviour
             duration = 2f,
             apply = () =>
             {
-                speed = Mathf.Max(0f, baseSpeed - 5f);
+                speed = Mathf.Max(0f, baseSpeed - 10f);
                 jump = Mathf.Max(0f, baseJump - 8f);
                 Debug.Log("[Bom] 動けない");
             },
@@ -478,11 +575,11 @@ public class Player : MonoBehaviour
     // ---------------- 衝突処理 ----------------
     private void OnCollisionEnter(Collision collision)
     {
-    //    Ground に着地
-    //    if (collision.gameObject.CompareTag("Ground"))
-    //    {
-    //        isGrounded = true;
-    //    }
+       //Ground に着地
+      if (collision.gameObject.CompareTag("Ground"))
+     {
+          isGrounded = true;
+       }
 
         string t = collision.gameObject.tag;
 
@@ -515,5 +612,99 @@ public class Player : MonoBehaviour
         }
     }
 
+    private IEnumerator ShowBallImageBom(Sprite sprite)
+    {
+        ballEffectImage.sprite = sprite;
+        ballEffectImage.enabled = true;
+
+        RectTransform rect = ballEffectImage.rectTransform;
+        CanvasGroup cg = ballEffectImage.GetComponent<CanvasGroup>();
+        if (cg == null) cg = ballEffectImage.gameObject.AddComponent<CanvasGroup>();
+
+        // 初期状態
+        rect.localScale = Vector3.zero;
+        cg.alpha = 1f;
+
+        // ① ポン！と出る
+        float t = 0f;
+        float popTime = 0.15f;
+        while (t < popTime)
+        {
+            t += Time.deltaTime;
+            float s = Mathf.Lerp(0f, 1.2f, t / popTime);
+            rect.localScale = Vector3.one * s;
+            yield return null;
+        }
+
+        // ② 少し戻す（弾み）
+        t = 0f;
+        float settleTime = 0.1f;
+        Vector3 start = rect.localScale;
+        while (t < settleTime)
+        {
+            t += Time.deltaTime;
+            rect.localScale = Vector3.Lerp(start, Vector3.one, t / settleTime);
+            yield return null;
+        }
+
+        // ③ フェードアウト
+        t = 0f;
+        float fadeTime = 0.4f;
+        while (t < fadeTime)
+        {
+            t += Time.deltaTime;
+            cg.alpha = Mathf.Lerp(1f, 0f, t / fadeTime);
+            rect.localScale = Vector3.Lerp(Vector3.one, Vector3.one * 0.8f, t / fadeTime);
+            yield return null;
+        }
+
+        ballEffectImage.enabled = false;
+    }
+
+    private void BuildBallImageDict()
+    {
+        ballImageDict = new Dictionary<string, Sprite>(StringComparer.Ordinal);
+
+        foreach (var pair in ballImages)
+        {
+            if (!ballImageDict.ContainsKey(pair.tag))
+            {
+                ballImageDict.Add(pair.tag, pair.sprite);
+            }
+        }
+
+        if (ballEffectImage != null)
+            ballEffectImage.enabled = false;
+    }
+
+    private void ChangeBallImage(string tag)
+    {
+        if (ballEffectImage == null) return;
+
+        if (ballImageDict.TryGetValue(tag, out var sprite))
+        {
+            if (ballImageRoutine != null)
+                StopCoroutine(ballImageRoutine);
+
+            if (tag == "Bom")
+            {
+                ballImageRoutine = StartCoroutine(ShowBallImageBom(sprite));
+            }
+            else
+            {
+                ballImageRoutine = StartCoroutine(ShowBallImageOnce(sprite));
+            }
+        }
+    }
+
+    private IEnumerator ShowBallImageOnce(Sprite sprite)
+    {
+        ballEffectImage.sprite = sprite;
+        ballEffectImage.enabled = true;
+
+        yield return new WaitForSeconds(ballImageShowTime);
+
+        ballEffectImage.enabled = false;
+    }
     // ごめんねまーちゃんごめんね
 }
