@@ -153,7 +153,7 @@ public class PlayerSideSlide : MonoBehaviour
     }
 
     private Coroutine bomImageRoutine;
-
+    
     //private IEnumerator ShowBomImage()
     //{
     //    if (bomImage == null) yield break;
@@ -182,6 +182,7 @@ public class PlayerSideSlide : MonoBehaviour
     // �^�O����` �̎���
     private Dictionary<string, EffectSpec> effectMap;
 
+   
 
     void Start()
     {
@@ -223,6 +224,7 @@ public class PlayerSideSlide : MonoBehaviour
         {
             ballEffectImage.sprite = sprite;
             ballEffectImage.enabled = true;
+
         }
     }
     private void ApplyBallEffect(string tagName)
