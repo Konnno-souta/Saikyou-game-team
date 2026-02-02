@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     public float baseSpeed = 10f;
     public float speed = 5f;
     public float baseJump = 8f;
-    public float jump = 7f;
+    public float jump = 8f;
 
     // かご（スケールを変える対象）
     [Header("Basket (Goal)")]
@@ -579,7 +579,8 @@ public class Player : MonoBehaviour
       if (collision.gameObject.CompareTag("Ground"))
      {
           isGrounded = true;
-       }
+          jumpCount = 0;
+        }
 
         string t = collision.gameObject.tag;
 
