@@ -942,6 +942,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 596395139}
   m_SourcePrefab: {fileID: 100100000, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
+--- !u!114 &107215842 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4178756001378171542, guid: df0d66ee8d68f7a49bad6437f70cee94, type: 3}
+  m_PrefabInstance: {fileID: 107215841}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 596395134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce928c5fd6e26ff4697145a9ba807d3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &111286658 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5793024104898263060, guid: c5e8c5e2637325e499fe07cd3c38b49f, type: 3}
@@ -1810,7 +1821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2ad935e577323498a1621afb3115c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tamaire: {fileID: 0}
+  tamaire: {fileID: 107215842}
   fevermanager: {fileID: 575618538}
 --- !u!1 &304047831
 GameObject:
