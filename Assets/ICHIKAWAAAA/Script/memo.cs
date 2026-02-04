@@ -219,10 +219,10 @@ public class Player : MonoBehaviour
         if (jumpSE != null)
             jumpSE.PlayOneShot(jumpSE.clip);
 
-        Vector3 vel = rb.velocity;
+        Vector3 vel = rb.linearVelocity;
         //Vector3 vel = rb.linearVelocity;
         vel.y = 0;                   // 上方向の速度をリセット
-        rb.velocity = vel;
+        rb.linearVelocity = vel;
 
         rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
     }
