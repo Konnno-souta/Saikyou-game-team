@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     public float baseSpeed = 10f;
     public float speed = 5f;
     public float baseJump = 8f;
-    public float jump = 8f;
+    public float jump = 9f;
 
     // かご（スケールを変える対象）
     [Header("Basket (Goal)")]
@@ -159,6 +159,8 @@ public class Player : MonoBehaviour
 
         speed = baseSpeed;
         jump = baseJump;
+
+        BuildBallImageDict();
 
         BuildEffectDefinitions();
         if (invincibleBarrier != null)
@@ -575,8 +577,10 @@ public class Player : MonoBehaviour
     // ---------------- 衝突処理 ----------------
     private void OnCollisionEnter(Collision collision)
     {
-       //Ground に着地
-      if (collision.gameObject.CompareTag("Ground"))
+        Debug.Log("HIT : " + collision.gameObject.tag);
+
+        //Ground に着地
+        if (collision.gameObject.CompareTag("Ground"))
      {
           isGrounded = true;
           jumpCount = 0;
@@ -608,6 +612,7 @@ public class Player : MonoBehaviour
         // 通常の効果処理
         if (effectMap != null && effectMap.ContainsKey(t))
         {
+            ChangeBallImage(t);//  Bom
             ApplyBallEffect(t);
             Destroy(collision.gameObject);
         }

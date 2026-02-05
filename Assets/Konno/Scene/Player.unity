@@ -3741,12 +3741,12 @@ RectTransform:
   - {fileID: 1942996958}
   - {fileID: 216156559}
   - {fileID: 224343949}
-  - {fileID: 1652998417}
   - {fileID: 407922177}
   - {fileID: 1633879031}
   - {fileID: 434144207}
   - {fileID: 58208197}
   - {fileID: 804145842}
+  - {fileID: 1652998417}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6569,11 +6569,11 @@ GameObject:
   - component: {fileID: 1652998418}
   m_Layer: 5
   m_Name: Bom
-  m_TagString: Untagged
+  m_TagString: Bom
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1652998417
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8780,7 +8780,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2143083863}
   - component: {fileID: 2143083862}
-  - component: {fileID: 2143083867}
   - component: {fileID: 2143083872}
   - component: {fileID: 2143083864}
   - component: {fileID: 2143083870}
@@ -8881,45 +8880,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8227430ca4205494ba7c46dbe9967b76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2143083867
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2143083861}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e17c46f14b8e210439dbbdb61ab47464, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxJumps: 2
-  baseSpeed: 5
-  speed: 5
-  baseJump: 8
-  jump: 8
-  spriteLeft: {fileID: 21300000, guid: 5736000d5cc8b4b4fa120f2ef1e0c169, type: 3}
-  spriteRight: {fileID: 21300000, guid: 40a0fecb1263b00438c9862484848f35, type: 3}
-  gameOverSceneName: ResultScene
-  ballEffectImage: {fileID: 0}
-  ballImages:
-  - tag: SpeedUp
-    sprite: {fileID: 21300000, guid: 30e4bf2fa2ea7a04fa108b54b5879c73, type: 3}
-  - tag: JumpUp
-    sprite: {fileID: 21300000, guid: dcadaf3620cfeae40bf06f857aabef6f, type: 3}
-  - tag: SpeedDown
-    sprite: {fileID: 21300000, guid: 5f09d6dd740cba247946e1c46854927e, type: 3}
-  - tag: JumpDown
-    sprite: {fileID: 21300000, guid: 5020adf8c8d90a545a98c5c75e31c337, type: 3}
-  basket: {fileID: 608814094}
-  basketScaleMultiplier: 1.5
-  basketScaleTweenTime: 0.2
-  reverseControls: 1
-  bomEffectPrefab: {fileID: 1652998416}
-  bomOffset: {x: 0, y: 1.6, z: 0}
-  jumpSE: {fileID: 1679784991}
-  invincibleBarrier: {fileID: 79417937}
-  ballImageShowTime: 0.3
 --- !u!65 &2143083868
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9025,9 +8985,9 @@ MonoBehaviour:
   invincibleBarrier: {fileID: 79417937}
   spriteLeft: {fileID: 21300000, guid: 5736000d5cc8b4b4fa120f2ef1e0c169, type: 3}
   spriteRight: {fileID: 21300000, guid: 40a0fecb1263b00438c9862484848f35, type: 3}
-  bomEffectPrefab: {fileID: 0}
-  bomOffset: {x: 0, y: 0, z: 0}
-  ballEffectImage: {fileID: 0}
+  bomEffectPrefab: {fileID: 1652998416}
+  bomOffset: {x: -4, y: 1.5, z: 0}
+  ballEffectImage: {fileID: 1652998418}
   ballImages:
   - tag: JumpDown
     sprite: {fileID: 21300000, guid: 5020adf8c8d90a545a98c5c75e31c337, type: 3}
