@@ -6,12 +6,15 @@ public class Tamaire : MonoBehaviour
 {
 
     public ScoreManager scoreManager;
+    public ScoreDisplay scoreDisplay;
     //[SerializeField] Playermain playermain;
     [SerializeField] Countdown60 countdown60;
     public ScrollDirectionSet scrollDirectionSet;//スクロール管理のスクリプトを持ってくる
     public FeverManager feverManager;
     //[SerializeField] private GameObject obj;
    
+
+
 
 
     private void OnCollisionEnter(Collision collision)
@@ -42,6 +45,7 @@ public class Tamaire : MonoBehaviour
                         ScrollDirectionSet.ballCount++;
                         ScrollDirectionSet.ballCount2++; //スクロールで準備してある変数に＋１する
                         FeverManager.scoreBallCount++;
+                       
                         break;
                     case ball.BallType.Red:
                         score = 30;
@@ -49,15 +53,19 @@ public class Tamaire : MonoBehaviour
                         ScrollDirectionSet.ballCount++;
                         ScrollDirectionSet.ballCount2++;
                         FeverManager.scoreBallCount++;
+                        
                         break;
                     case ball.BallType.Gold:
                         score = 50;
                         ScoreManager.AddGold();
                         ScrollDirectionSet.ballCount++;
                         ScrollDirectionSet.ballCount2++;//同上
+                       
                         break;
                     case ball.BallType.Time:       // ← 追加！！
                         countdown60.AddTime(5);      // 5 秒追加
+                        if (scoreDisplay != null)
+                            scoreDisplay.ShowTime(5);
                         break;
                     case ball.BallType.Minus:
                         score = -30;                 // ← マイナス30点
@@ -66,6 +74,7 @@ public class Tamaire : MonoBehaviour
                     case ball.BallType.Minustime:       // ← 追加！！
                    
                         FindObjectOfType<Countdown60>().AddTime(-5);
+
                         break;
                     //case ball.BallType.Bom:
                     //    // ▼ プレイヤーを探して Bom 効果発動
@@ -84,7 +93,10 @@ public class Tamaire : MonoBehaviour
                 // スコアを追加
                 scoreManager.AddScore(score);
 
-                
+                // 2秒表示用に呼び出し
+                if (scoreDisplay != null && score != 0)
+                    scoreDisplay.ShowScore(score);
+
                 // ボールを削除
                 Destroy(collision.gameObject.gameObject);
             }
