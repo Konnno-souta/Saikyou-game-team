@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
 
     private bool isGrounded = false;
 
-    [SerializeField] private Image ballEffectImage;
+    //[SerializeField] private Image ballEffectImage;
     [System.Serializable]
     public class BallImagePair
     {
@@ -66,8 +66,8 @@ public class Player : MonoBehaviour
         public Sprite sprite;
     }
 
-    [SerializeField] private BallImagePair[] ballImages;
-    private Dictionary<string, Sprite> ballImageDict;
+    //[SerializeField] private BallImagePair[] ballImages;
+    //private Dictionary<string, Sprite> ballImageDict;
 
     [SerializeField] private float ballImageShowTime = 0.3f;
     private Coroutine ballImageRoutine;
@@ -160,7 +160,7 @@ public class Player : MonoBehaviour
         speed = baseSpeed;
         jump = baseJump;
 
-        BuildBallImageDict();
+        //BuildBallImageDict();
 
         BuildEffectDefinitions();
         if (invincibleBarrier != null)
@@ -351,12 +351,14 @@ public class Player : MonoBehaviour
             duration = 2f,
             apply = () =>
             {
+                lockCount++; // ★ 操作ロック
                 speed = Mathf.Max(0f, baseSpeed - 10f);
                 jump = Mathf.Max(0f, baseJump - 8f);
                 Debug.Log("[Bom] 動けない");
             },
             cleanup = () =>
             {
+                lockCount = Mathf.Max(0, lockCount - 1);
                 speed = baseSpeed;
                 jump = baseJump;
                 Debug.Log($"[Bom End] speed={speed}, jump={jump}");
@@ -581,7 +583,7 @@ public class Player : MonoBehaviour
 
         //Ground に着地
         if (collision.gameObject.CompareTag("Ground"))
-     {
+        {
           isGrounded = true;
           jumpCount = 0;
         }
@@ -612,105 +614,130 @@ public class Player : MonoBehaviour
         // 通常の効果処理
         if (effectMap != null && effectMap.ContainsKey(t))
         {
-            ChangeBallImage(t);//  Bom
+            if (t == "Bom")
+            {
+                ShowBomEffect();     // ★ 表示だけ
+                //ApplyBallEffect(t); // 状態異常（動けない等）
+                //Destroy(collision.gameObject);
+            }
+            //ChangeBallImage(t);//  Bom
             ApplyBallEffect(t);
             Destroy(collision.gameObject);
         }
     }
 
-    private IEnumerator ShowBallImageBom(Sprite sprite)
+    private void ShowBomEffect()
     {
-        ballEffectImage.sprite = sprite;
-        ballEffectImage.enabled = true;
+        Debug.Log("ShowBomEffect");
 
-        RectTransform rect = ballEffectImage.rectTransform;
-        CanvasGroup cg = ballEffectImage.GetComponent<CanvasGroup>();
-        if (cg == null) cg = ballEffectImage.gameObject.AddComponent<CanvasGroup>();
+        GameObject effect = Instantiate(bomEffectPrefab);
+        effect.transform.SetParent(transform, false);
 
-        // 初期状態
-        rect.localScale = Vector3.zero;
-        cg.alpha = 1f;
+        effect.transform.localPosition = new Vector3(0f, 1.5f, 0f);
+        effect.transform.localScale = Vector3.one;
 
-        // ① ポン！と出る
-        float t = 0f;
-        float popTime = 0.15f;
-        while (t < popTime)
+        var sr = effect.GetComponent<SpriteRenderer>();
+        if (sr != null)
         {
-            t += Time.deltaTime;
-            float s = Mathf.Lerp(0f, 1.2f, t / popTime);
-            rect.localScale = Vector3.one * s;
-            yield return null;
+            sr.sortingOrder = 100;
         }
-
-        // ② 少し戻す（弾み）
-        t = 0f;
-        float settleTime = 0.1f;
-        Vector3 start = rect.localScale;
-        while (t < settleTime)
-        {
-            t += Time.deltaTime;
-            rect.localScale = Vector3.Lerp(start, Vector3.one, t / settleTime);
-            yield return null;
-        }
-
-        // ③ フェードアウト
-        t = 0f;
-        float fadeTime = 0.4f;
-        while (t < fadeTime)
-        {
-            t += Time.deltaTime;
-            cg.alpha = Mathf.Lerp(1f, 0f, t / fadeTime);
-            rect.localScale = Vector3.Lerp(Vector3.one, Vector3.one * 0.8f, t / fadeTime);
-            yield return null;
-        }
-
-        ballEffectImage.enabled = false;
+        Destroy(effect, 1f); // ★ 0.5秒後に消える
     }
 
-    private void BuildBallImageDict()
-    {
-        ballImageDict = new Dictionary<string, Sprite>(StringComparer.Ordinal);
 
-        foreach (var pair in ballImages)
-        {
-            if (!ballImageDict.ContainsKey(pair.tag))
-            {
-                ballImageDict.Add(pair.tag, pair.sprite);
-            }
-        }
+    //private IEnumerator ShowBallImageBom(Sprite sprite)
+    //{
+    //    ballEffectImage.sprite = sprite;
+    //    ballEffectImage.enabled = true;
 
-        if (ballEffectImage != null)
-            ballEffectImage.enabled = false;
-    }
+    //    RectTransform rect = ballEffectImage.rectTransform;
+    //    CanvasGroup cg = ballEffectImage.GetComponent<CanvasGroup>();
+    //    if (cg == null) cg = ballEffectImage.gameObject.AddComponent<CanvasGroup>();
 
-    private void ChangeBallImage(string tag)
-    {
-        if (ballEffectImage == null) return;
+    //    // 初期状態
+    //    rect.localScale = Vector3.zero;
+    //    cg.alpha = 1f;
 
-        if (ballImageDict.TryGetValue(tag, out var sprite))
-        {
-            if (ballImageRoutine != null)
-                StopCoroutine(ballImageRoutine);
+    //    // ① ポン！と出る
+    //    float t = 0f;
+    //    float popTime = 0.15f;
+    //    while (t < popTime)
+    //    {
+    //        t += Time.deltaTime;
+    //        float s = Mathf.Lerp(0f, 1.2f, t / popTime);
+    //        rect.localScale = Vector3.one * s;
+    //        yield return null;
+    //    }
 
-            if (tag == "Bom")
-            {
-                ballImageRoutine = StartCoroutine(ShowBallImageBom(sprite));
-            }
-            else
-            {
-                ballImageRoutine = StartCoroutine(ShowBallImageOnce(sprite));
-            }
-        }
-    }
+    //    // ② 少し戻す（弾み）
+    //    t = 0f;
+    //    float settleTime = 0.1f;
+    //    Vector3 start = rect.localScale;
+    //    while (t < settleTime)
+    //    {
+    //        t += Time.deltaTime;
+    //        rect.localScale = Vector3.Lerp(start, Vector3.one, t / settleTime);
+    //        yield return null;
+    //    }
 
-    private IEnumerator ShowBallImageOnce(Sprite sprite)
-    {
-        ballEffectImage.sprite = sprite;
-        ballEffectImage.enabled = true;
+    //    // ③ フェードアウト
+    //    t = 0f;
+    //    float fadeTime = 0.4f;
+    //    while (t < fadeTime)
+    //    {
+    //        t += Time.deltaTime;
+    //        cg.alpha = Mathf.Lerp(1f, 0f, t / fadeTime);
+    //        rect.localScale = Vector3.Lerp(Vector3.one, Vector3.one * 0.8f, t / fadeTime);
+    //        yield return null;
+    //    }
 
-        yield return new WaitForSeconds(ballImageShowTime);
+    //    ballEffectImage.enabled = false;
+    //}
 
-        ballEffectImage.enabled = false;
-    }
+    //private void BuildBallImageDict()
+    //{
+    //    ballImageDict = new Dictionary<string, Sprite>(StringComparer.Ordinal);
+
+    //    foreach (var pair in ballImages)
+    //    {
+    //        if (!ballImageDict.ContainsKey(pair.tag))
+    //        {
+    //            ballImageDict.Add(pair.tag, pair.sprite);
+    //        }
+    //    }
+
+    //    if (ballEffectImage != null)
+    //        ballEffectImage.enabled = false;
+    //}
+
+    //private void ChangeBallImage(string tag)
+    //{
+    //    if (ballEffectImage == null) return;
+
+    //    if (ballImageDict.TryGetValue(tag, out var sprite))
+    //    {
+    //        if (ballImageRoutine != null)
+    //            StopCoroutine(ballImageRoutine);
+
+    //        if (tag == "Bom")
+    //        {
+    //            ballImageRoutine = StartCoroutine(ShowBallImageBom(sprite));
+    //        }
+    //        else
+    //        {
+    //            ballImageRoutine = StartCoroutine(ShowBallImageOnce(sprite));
+    //        }
+    //    }
+    //}
+
+    //private IEnumerator ShowBallImageOnce(Sprite sprite)
+    //{
+    //    ballEffectImage.sprite = sprite;
+    //    ballEffectImage.enabled = true;
+
+    //    yield return new WaitForSeconds(ballImageShowTime);
+
+    //    ballEffectImage.enabled = false;
+    //}
     // ごめんねまーちゃんごめんね
 }
