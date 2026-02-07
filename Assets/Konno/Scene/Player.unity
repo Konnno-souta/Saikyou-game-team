@@ -3433,7 +3433,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 68, y: -161}
+  m_AnchoredPosition: {x: 20, y: -161}
   m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &770123130
@@ -3503,8 +3503,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -8815,11 +8815,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4941590627110939292, guid: dbada25dab024d74dbd33f554bebe215, type: 3}
       propertyPath: m_LocalScale.x
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4941590627110939292, guid: dbada25dab024d74dbd33f554bebe215, type: 3}
       propertyPath: m_LocalScale.y
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4941590627110939292, guid: dbada25dab024d74dbd33f554bebe215, type: 3}
       propertyPath: m_LocalScale.z
@@ -9237,7 +9237,7 @@ MonoBehaviour:
   baseSpeed: 10
   speed: 5
   baseJump: 7
-  jump: 9
+  jump: 6
   basket: {fileID: 608814094}
   basketScaleMultiplier: 1.5
   basketScaleTweenTime: 0.2
