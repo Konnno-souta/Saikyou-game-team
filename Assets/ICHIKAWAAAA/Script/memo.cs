@@ -23,8 +23,8 @@ public class Player : MonoBehaviour
     [Header("ステータス")]
     public float baseSpeed = 10f;
     public float speed = 5f;
-    public float baseJump = 8f;
-    public float jump = 9f;
+    public float baseJump = 7.5f;
+    public float jump = 6f;
 
     // かご（スケールを変える対象）
     [Header("Basket (Goal)")]
